@@ -1,0 +1,16 @@
+# Seuls mes consignes, mes réglages et mes skills maison sont versionnés.
+# Tout le reste reste local : sessions, historique, caches, plans, mémoire des projets,
+# skills synchronisées depuis claude.ai, skills externes (voir THIRD_PARTY.md).
+/*
+!/.gitignore
+!/README.md
+!/CLAUDE.md
+!/settings.json
+!/THIRD_PARTY.md
+!/scripts/
+!/skills/
+/skills/*
+!/skills/verifier/
+!/skills/mise-en-ligne/
+!/skills/nouveau-projet/
+!/skills/pwa/
