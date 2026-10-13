@@ -16,7 +16,7 @@ s'arrêter au commit et le dire. Un projet non web n'a pas d'étape Vercel.
 - `git status` : relire ce qui part. Aucun `.env*`, aucune clé, aucun fichier lourd
   inattendu. Si des modifications **sans rapport avec ce travail** traînent (travail en
   cours de l'utilisateur), ne committer que mes fichiers et le signaler.
-- Sinon `git add -A`, puis un message en français qui dit ce que l'utilisateur gagne
+- Sinon `git add -A`, puis un message (dans la langue des commits existants du repo) qui dit ce que l'utilisateur gagne
   (titre court, puis 1 à 3 lignes), terminé par les lignes d'attribution en vigueur.
 - Directement sur `main`, pas de branche.
 
@@ -61,7 +61,7 @@ Sur l'adresse de production (alias stable affiché par `vercel inspect`) :
 
 ## 5. Rendre compte
 
-Court, en français :
+Court, dans la langue de la conversation :
 - l'adresse ;
 - ce qui a changé pour l'utilisateur ;
 - ce qui est vérifié (local + en ligne) ;

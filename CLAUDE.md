@@ -6,7 +6,7 @@ sur un point précis, c'est lui qui l'emporte.
 ## Qui je suis
 
 Amine (GitHub `AmineBen01`). Je développe seul, surtout des sites et apps web en Next.js,
-utilisés sur téléphone. Réponds-moi en français et tutoie-moi.
+utilisés sur téléphone.
 
 Quand plusieurs options se valent, recommande celle qui me demande **le moins d'effort
 répété** : une mise en place unique que tu fais toi-même vaut mieux qu'un geste à refaire
