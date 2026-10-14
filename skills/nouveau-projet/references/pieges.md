@@ -19,6 +19,10 @@
   dans l'initialiseur de `useState`.
 - Après une action serveur qui modifie la page courante : `refresh()` de `next/cache`.
 - Les route handlers `GET` qui lisent la base sont dynamiques d'office : rien à faire.
+- **Cache de build Turbopack** (`.next/cache/turbopack`, activé par défaut, conservé par
+  Vercel) : il a déjà resservi un ancien `globals.css` (variables du thème absentes du CSS
+  produit). Mettre `experimental.turbopackFileSystemCacheForBuild: false` et, après un
+  changement de thème, vérifier le CSS produit (`grep <nouvelle variable> .next/static/chunks/*.css`).
 - `create-next-app` refuse un dossier non vide : générer dans le scratchpad, puis
   `rsync -a --exclude node_modules --exclude .next --exclude .git`.
 
@@ -33,6 +37,8 @@
 - Fenêtre de choix sur téléphone : ne pas donner le focus au champ de recherche quand
   elle s'ouvre au doigt (le clavier masque la liste) — Base UI :
   `initialFocus={(type) => (type === "touch" ? listRef.current : true)}`.
+- **Nombres décimaux** : `Intl.NumberFormat("fr-CH")` donne « 6,5 » dans Node mais « 6.5 »
+  dans Safari. Écrire la virgule à la main (`toFixed(1).replace(".", ",")`).
 - Tri alphabétique français : `Intl.Collator("fr-CH")` en JS ; Postgres classe les
   lettres accentuées après « z ».
 - Textes cachés des composants shadcn (« Close »…) : les traduire.

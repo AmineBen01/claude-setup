@@ -31,6 +31,9 @@ proportionnée habituelle (tests, puis le contrôle le plus proche du vrai usage
 Dans cet ordre, en s'arrêtant au premier échec pour corriger :
 `pnpm test` (s'il existe) → `pnpm lint` → `pnpm build`.
 Le build vérifie aussi les types et le prérendu (erreurs `<Suspense>` de Next 16).
+Après un changement de `globals.css` ou de thème : vérifier que le CSS produit contient les
+nouvelles variables (`grep … .next/static/chunks/*.css`) — un cache de build a déjà resservi
+un vieux CSS.
 
 ## 2. Le vrai parcours, dans le navigateur
 
