@@ -57,6 +57,27 @@ Pour chaque parcours :
 5. Rechargement en plein milieu si l'état doit survivre ; double clic sur une action
    qui écrit (pas de doublon).
 
+**Ce qui s'affiche ne prouve rien** : après chaque action qui écrit, relire la base. Sur
+ciao, une correction s'affichait à l'écran alors que le serveur l'avait refusée.
+
+### Astuces Playwright MCP (apprises sur un vrai projet)
+
+- Captures et instantanés doivent rester dans le projet : `filename: ".playwright-mcp/…"`
+  (ignoré par git globalement, `~/.config/git/ignore`). Regarder chaque capture avec Read.
+- Un bouton dont le nom accessible change (compteur, état) invalide sa référence : cibler
+  par sélecteur, ex. `button[aria-label^="TikTok"]`, `button:has-text("Voir le résultat")`.
+- Les écrans rendus seulement côté navigateur (lecture de `localStorage`) arrivent après
+  un squelette, surtout au premier lancement d'un navigateur : attendre un élément
+  (`browser_wait_for`) avant de cliquer.
+- Pour enchaîner un parcours ou simuler le doigt (`locator.tap()`, focus, ordre d'une
+  liste, export téléchargé via `page.request`), `browser_run_code_unsafe` avec une
+  fonction `async (page) => { … }` qui renvoie un objet de résultats.
+- **Cookies `Secure` en local** : WebKit les refuse sur `http://localhost` (Chromium les
+  accepte). Si un parcours dépend d'un cookie et échoue seulement en WebKit, vérifier
+  l'en-tête `Set-Cookie` (`browser_network_request`) et la présence du cookie dans la
+  requête suivante. Le code doit marquer ses cookies `secure` selon l'hébergement
+  (`process.env.VERCEL === "1"`), pas selon `NODE_ENV`.
+
 Si Playwright MCP n'est pas disponible dans la session : utiliser le paquet `playwright`
 en script (mêmes appareils : `devices["iPhone 15"]` sur `webkit`, `devices["Pixel 7"]`
 sur `chromium`), et le signaler.

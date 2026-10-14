@@ -22,6 +22,21 @@
 - `create-next-app` refuse un dossier non vide : générer dans le scratchpad, puis
   `rsync -a --exclude node_modules --exclude .next --exclude .git`.
 
+## États d'enregistrement et cookies
+
+- **« Enregistré » doit vouloir dire « ce qui est affiché est en base »**, pas « l'objet
+  existe en base ». Après une modification qui échoue puis un rechargement, l'écran ne
+  doit pas prétendre le contraire : garder un indicateur séparé (ex. `synced`), remis à
+  faux à chaque nouvel envoi.
+- Cookies : `secure: process.env.VERCEL === "1"` (et non `NODE_ENV === "production"`),
+  sinon Safari les refuse quand on teste le build de production en `http://localhost`.
+- Fenêtre de choix sur téléphone : ne pas donner le focus au champ de recherche quand
+  elle s'ouvre au doigt (le clavier masque la liste) — Base UI :
+  `initialFocus={(type) => (type === "touch" ? listRef.current : true)}`.
+- Tri alphabétique français : `Intl.Collator("fr-CH")` en JS ; Postgres classe les
+  lettres accentuées après « z ».
+- Textes cachés des composants shadcn (« Close »…) : les traduire.
+
 ## shadcn/ui (style par défaut « base-nova »)
 
 - Construit sur **Base UI**, pas Radix : composer avec la prop `render={<Button />}`, pas
