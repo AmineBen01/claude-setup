@@ -12,6 +12,16 @@ Quand plusieurs options se valent, recommande celle qui me demande **le moins d'
 répété** : une mise en place unique que tu fais toi-même vaut mieux qu'un geste à refaire
 chaque semaine.
 
+## Mes captures d'écran
+
+Quand je parle d'une capture d'écran (« je t'ai mis une capture », « regarde le screenshot »),
+elle est sur le Mac dans
+`~/Library/Mobile Documents/com~apple~CloudDocs/Capture d'écran/`, nommée
+`Screenshot AAAA-MM-JJ at HH.MM.SS.png`. Ce sont en général la ou les dernières : liste le
+dossier par date (`ls -t`), prends celles qui correspondent au moment de mon message, et
+ouvre-les avec Read. Dans une session cloud ce dossier n'existe pas : dis-le et demande-moi
+de coller l'image.
+
 ## Nouvelle fonctionnalité ou changement : poser des questions jusqu'à accord
 
 Quand je demande une nouvelle fonctionnalité, ou un changement à une fonctionnalité
