@@ -3,6 +3,7 @@
 # Run once by the cloud environment's setup script, then at every session start by the SessionStart
 # hook it installs, so a push here reaches new sessions within minutes (raw.githubusercontent.com
 # caches about 5 minutes). Never fails a session: on any error it leaves what was there.
+# Checked end to end on 2026-10-15 (setup script + SessionStart hook in a real cloud session).
 # With --hook, prints the global instructions when they changed after the session had loaded them.
 
 base="https://raw.githubusercontent.com/AmineBen01/claude-setup/main"
