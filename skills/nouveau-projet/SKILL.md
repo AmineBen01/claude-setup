@@ -23,6 +23,12 @@ trouve. Puis, par tours d'AskUserQuestion, en langage simple, avec une recommand
   actions (lire, écrire, modifier, supprimer).
 - **Nom** du projet : il donne le repo et l'adresse `<nom>.vercel.app`.
 - **Installation sur téléphone** souhaitée ? Si oui, skill `pwa` dans le plan.
+- **Contenus ou fonctionnalités que je relirai ?** Si oui (cas par défaut), l'app a un
+  canal de corrections : dire qu'une routine cloud sera créée et que je générerai son jeton
+  API une fois (les clics sont dans `canal-corrections`).
+- **Identité visuelle** : couleurs et police de la marque, et sa **palette sombre** (ou la
+  dériver de la claire) pour le mode sombre. Proposer une direction visuelle avec la skill
+  `frontend-design` et la faire valider.
 - **Échéance** et première version testable.
 - **Autorisations dont j'aurai besoin** : envoyer les secrets à Vercel, créer repo, base
   et projet Vercel. Les demander maintenant, pas à la fin.
@@ -50,16 +56,25 @@ Puis le plan avec la liste **Décisions validées** ; attendre le feu vert.
      dans Vercel ;
    - Drizzle : `db/schema.ts`, `db/index.ts`, `drizzle.config.ts`, `db/seed.ts`,
      scripts `db:generate`, `db:migrate`, `db:seed` ; migrer et seeder dev **et** main.
-5. **Tests** : `vitest` pour la logique pure (règles métier, calculs), script `test`.
-6. **GitHub** : `gh repo create AmineBen01/<nom> --private --source . --push`.
-7. **Vercel** :
+5. **Interface (toute app avec un écran)**, avec la skill `frontend-design` :
+   - `next-themes` avec `defaultTheme="system"`, les couleurs sombres, un choix
+     Clair / Sombre / Auto dans l'en-tête et dans les réglages, `themeColor` par schéma ;
+   - le cadre du tableau de bord : `sidebar` shadcn (repliable en icônes, compteurs sur les
+     entrées) à partir de `md`, en-tête et onglets en bas en dessous ; la barre latérale ne
+     s'ouvre jamais en panneau mobile, et son encart est une `<div>` parce que chaque page
+     rend son propre `<main>` ;
+   - des pages pensées aussi pour 1440 px : colonne latérale, grilles, scène avec panneau ;
+   - le canal de corrections : lancer `canal-corrections`.
+6. **Tests** : `vitest` pour la logique pure (règles métier, calculs), script `test`.
+7. **GitHub** : `gh repo create AmineBen01/<nom> --private --source . --push`.
+8. **Vercel** :
    - `vercel link --yes --project <nom>` (crée le projet) ;
    - variables de production sans les afficher :
      `vercel env add NOM production < <(commande)` ;
    - `vercel.json` avec `"regions": ["fra1"]` si base à Francfort ;
    - `vercel git connect --yes` (chaque push redéploie) ;
    - première mise en ligne : `vercel deploy --prod --yes`.
-8. **Mémoire du projet** : noter les ids (projet Neon, branches, projet Vercel, adresse).
+9. **Mémoire du projet** : noter les ids (projet Neon, branches, projet Vercel, adresse).
 
 ## 3. Construire, vérifier, livrer
 

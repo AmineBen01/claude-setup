@@ -5,7 +5,10 @@ que ce qui suit) :
 
 - `CLAUDE.md` — mes consignes pour tous les projets.
 - `settings.json` — réglages et permissions.
-- `skills/` — mes skills maison : `nouveau-projet`, `verifier`, `mise-en-ligne`, `pwa`.
+- `skills/` — mes skills maison : `nouveau-projet`, `verifier`, `mise-en-ligne`, `pwa`,
+  `canal-corrections`.
+- `hooks/` — `stop-session-processes.sh` (SessionEnd) : arrête ce qu'une session a laissé
+  tourner dans son dossier.
 - `THIRD_PARTY.md` + `scripts/install-third-party-skills.sh` — skills externes (non
   versionnées ici), plugins et serveurs MCP, avec leurs versions relues.
 

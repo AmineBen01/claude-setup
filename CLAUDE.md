@@ -84,11 +84,51 @@ prêt, contrôle du site en ligne, puis l'adresse et ce que je dois tester sur t
 
 Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 
+## Design par défaut
+
+Toute app avec un écran, sauf avis contraire :
+- **Charge la skill `frontend-design` avant d'écrire la moindre interface**, nouvelle ou
+  remaniée : une direction visuelle choisie (typographie, couleurs, densité), pas les
+  réglages par défaut. Viser un outil professionnel et sobre, jamais « mignon ».
+- **Mode sombre** qui suit l'appareil, avec un choix Clair / Sombre / Auto dans l'en-tête et
+  dans les réglages : `next-themes` (`attribute="class"`, `defaultTheme="system"`), des
+  couleurs sombres tirées de la palette de la marque (jamais un gris standard),
+  `themeColor` par schéma de couleurs.
+- **Un tableau de bord shadcn professionnel** : barre latérale repliable sur l'ordinateur,
+  en-tête et onglets en bas sur le téléphone ; cartes, tableaux et graphiques là où les
+  données le méritent, dans l'identité de la marque.
+- **La largeur des grands écrans sert** : une colonne principale et une colonne latérale,
+  des grilles, une scène avec un panneau à partir de `lg`. Jamais une colonne étroite seule
+  au milieu d'un écran de 1440 px. Toujours **mobile d'abord** : le téléphone, puis
+  l'élargissement.
+- `verifier` contrôle le clair **et** le sombre, sur iPhone, Android et 1440 px, avec une
+  console sans erreur d'hydratation.
+
+## Canal de corrections
+
+Chaque app que je construis avec toi a un canal de corrections, mis en place avec la skill
+`canal-corrections` :
+- un bouton dans l'app où je dis ce qui ne va pas et pourquoi ;
+- il lance une routine Claude dans le cloud (déclencheur API), qui me pose ses questions
+  dans l'app Claude si besoin, applique le correctif (réécriture d'un contenu, ou code :
+  build, `verifier`, `mise-en-ligne`) et me prévient ;
+- les leçons que je garde deviennent des règles que Claude suit ensuite.
+
+## Fin de session
+
+Avant ton dernier message d'une tâche, arrête chaque processus que tu as lancé et qui tourne
+encore : serveurs de dev, `next dev`, navigateurs sans fenêtre, bases locales, watchers.
+Trouve-les par port ou par PID (`lsof -iTCP -sTCP:LISTEN`, `ps`), jamais avec `pkill -f` sur
+un motif, qui tue aussi le shell qui le lance. N'en garde un que si je l'ai demandé. Le hook
+SessionEnd `~/.claude/hooks/stop-session-processes.sh` est un filet de sécurité, pas la
+règle.
+
 ## Mes skills
 
 - `nouveau-projet` : d'une idée à une adresse en ligne (cadrage, puis tout d'un coup).
 - `verifier` : la preuve que ça marche, par le vrai chemin.
 - `mise-en-ligne` : commit, push, Vercel, contrôle en ligne.
 - `pwa` : rendre un site installable sur téléphone.
+- `canal-corrections` : le bouton « Corriger Claude » et sa routine dans le cloud.
 - Sur appel seulement : `/transitions-dev`, `/transitions-polish`,
   `/transitions-ui-generation` (animations), `/anatomy` (illustrations isométriques).

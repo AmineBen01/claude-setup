@@ -1,36 +1,88 @@
 {
-    "permissions": {
+  "permissions": {
     "allow": [
-      "Edit", "Write", "NotebookEdit",
-      "mcp__claude_ai_Neon", "mcp__claude_ai_Notion",
-      "mcp__playwright-iphone", "mcp__playwright-android",
-      "WebSearch", "WebFetch",
-      "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git show:*)",
-      "Bash(git add:*)", "Bash(git commit:*)", "Bash(git push:*)", "Bash(git pull:*)",
-      "Bash(git fetch:*)", "Bash(git rebase:*)", "Bash(git checkout:*)", "Bash(git switch:*)",
-      "Bash(git branch:*)", "Bash(git stash:*)", "Bash(git restore:*)", "Bash(git rev-parse:*)",
-      "Bash(git rev-list:*)", "Bash(git ls-files:*)", "Bash(git remote:*)", "Bash(git init:*)",
+      "Edit",
+      "Write",
+      "NotebookEdit",
+      "mcp__claude_ai_Neon",
+      "mcp__claude_ai_Notion",
+      "mcp__playwright-iphone",
+      "mcp__playwright-android",
+      "WebSearch",
+      "WebFetch",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rebase:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git branch:*)",
+      "Bash(git stash:*)",
+      "Bash(git restore:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git rev-list:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git remote:*)",
+      "Bash(git init:*)",
       "Bash(git tag:*)",
-      "Bash(gh repo create:*)", "Bash(gh repo view:*)", "Bash(gh pr:*)", "Bash(gh run:*)",
-      "Bash(pnpm:*)", "Bash(npx:*)", "Bash(node:*)", "Bash(npm view:*)", "Bash(python3:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh run:*)",
+      "Bash(pnpm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(npm view:*)",
+      "Bash(python3:*)",
       "Bash(vercel:*)",
-      "Bash(curl:*)", "Bash(lsof:*)", "Bash(pkill -f next:*)", "Bash(sleep:*)",
-      "Bash(ls:*)", "Bash(cat:*)", "Bash(head:*)", "Bash(tail:*)", "Bash(grep:*)",
-      "Bash(find:*)", "Bash(wc:*)", "Bash(du:*)", "Bash(which:*)"
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(pkill -f next:*)",
+      "Bash(sleep:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(du:*)",
+      "Bash(which:*)"
     ],
     "deny": [
-      "Bash(git push --force:*)", "Bash(git push -f:*)", "Bash(git reset --hard:*)", "Bash(git clean:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
       "Bash(gh repo delete:*)",
-      "Bash(vercel remove:*)", "Bash(vercel rm:*)", "Bash(vercel project rm:*)",
-      "Bash(vercel project remove:*)", "Bash(vercel env rm:*)", "Bash(vercel domains rm:*)",
-      "mcp__claude_ai_Neon__delete_project", "mcp__claude_ai_Neon__delete_branch",
-      "mcp__claude_ai_Neon__delete_postgres_database", "mcp__claude_ai_Neon__delete_postgres_role",
-      "mcp__claude_ai_Neon__delete_postgres_endpoint", "mcp__claude_ai_Neon__delete_snapshot",
-      "mcp__claude_ai_Neon__delete_storage_bucket", "mcp__claude_ai_Neon__delete_storage_object",
-      "mcp__claude_ai_Neon__delete_storage_objects_by_prefix", "mcp__claude_ai_Neon__restore_snapshot",
-      "mcp__claude_ai_Neon__finalize_branch_restore", "mcp__claude_ai_Neon__set_default_branch",
-      "mcp__claude_ai_Neon__disable_auth", "mcp__claude_ai_Neon__delete_auth_user",
-      "mcp__claude_ai_Notion__notion-delete-pages", "mcp__claude_ai_Notion__notion-delete-databases",
+      "Bash(vercel remove:*)",
+      "Bash(vercel rm:*)",
+      "Bash(vercel project rm:*)",
+      "Bash(vercel project remove:*)",
+      "Bash(vercel env rm:*)",
+      "Bash(vercel domains rm:*)",
+      "mcp__claude_ai_Neon__delete_project",
+      "mcp__claude_ai_Neon__delete_branch",
+      "mcp__claude_ai_Neon__delete_postgres_database",
+      "mcp__claude_ai_Neon__delete_postgres_role",
+      "mcp__claude_ai_Neon__delete_postgres_endpoint",
+      "mcp__claude_ai_Neon__delete_snapshot",
+      "mcp__claude_ai_Neon__delete_storage_bucket",
+      "mcp__claude_ai_Neon__delete_storage_object",
+      "mcp__claude_ai_Neon__delete_storage_objects_by_prefix",
+      "mcp__claude_ai_Neon__restore_snapshot",
+      "mcp__claude_ai_Neon__finalize_branch_restore",
+      "mcp__claude_ai_Neon__set_default_branch",
+      "mcp__claude_ai_Neon__disable_auth",
+      "mcp__claude_ai_Neon__delete_auth_user",
+      "mcp__claude_ai_Notion__notion-delete-pages",
+      "mcp__claude_ai_Notion__notion-delete-databases",
       "mcp__claude_ai_Notion__notion-delete-comment"
     ]
   },
@@ -47,9 +99,22 @@
       "effortLevel": "xhigh"
     },
     "claude-opus-5-5": {
-      "effortLevel": "xhigh"
+      "effortLevel": "high"
     }
   },
   "tui": "fullscreen",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/stop-session-processes.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -23,6 +23,8 @@
   Vercel) : il a déjà resservi un ancien `globals.css` (variables du thème absentes du CSS
   produit). Mettre `experimental.turbopackFileSystemCacheForBuild: false` et, après un
   changement de thème, vérifier le CSS produit (`grep <nouvelle variable> .next/static/chunks/*.css`).
+- **La règle Turbopack de Tailwind sur `*.css` casse les modules CSS** : pour ce qui sort de
+  Tailwind (diapositives, impression), du CSS global simple avec un préfixe.
 - `create-next-app` refuse un dossier non vide : générer dans le scratchpad, puis
   `rsync -a --exclude node_modules --exclude .next --exclude .git`.
 
@@ -36,7 +38,12 @@
   sinon Safari les refuse quand on teste le build de production en `http://localhost`.
 - Fenêtre de choix sur téléphone : ne pas donner le focus au champ de recherche quand
   elle s'ouvre au doigt (le clavier masque la liste) — Base UI :
-  `initialFocus={(type) => (type === "touch" ? listRef.current : true)}`.
+  `initialFocus={(type) => (type === "touch" ? listRef.current : true)}`. Même chose pour
+  toute fenêtre ou panneau qui contient un champ (sinon le clavier de l'iPhone le couvre) :
+  `initialFocus={(type) => type === "keyboard" || type === "mouse"}`.
+- **Dates dans un composant client** : jamais `toLocaleDateString` (Node écrit « Fri 16 Oct »,
+  les navigateurs « Fri, 16 Oct » : l'hydratation échoue). Formater avec des noms de mois et
+  de jours écrits à la main.
 - **Nombres décimaux** : `Intl.NumberFormat("fr-CH")` donne « 6,5 » dans Node mais « 6.5 »
   dans Safari. Écrire la virgule à la main (`toFixed(1).replace(".", ",")`).
 - Tri alphabétique français : `Intl.Collator("fr-CH")` en JS ; Postgres classe les
@@ -52,6 +59,10 @@
 - Le composant `command` (cmdk) est pensé pour le bureau ; pour un choix dans une liste
   sur téléphone, une fenêtre (`Dialog`) avec recherche et grandes lignes marche mieux.
 - `AlertDialogAction` ne ferme pas la fenêtre tout seul : piloter `open`.
+- **`Button` Base UI rendu en lien** (`render={<Link />}`) : ajouter `nativeButton={false}`.
+- **`sidebar` shadcn** : son panneau mobile, décidé dans le navigateur, casse l'hydratation
+  d'une barre latérale streamée (ne jamais l'utiliser, le téléphone a des onglets) ; son
+  `SidebarInset` est un `<main>`, imbriqué dans celui de chaque page : en faire une `<div>`.
 
 ## Safari iOS
 
@@ -93,3 +104,11 @@ Les ids d'actions sont dans `.next/server/server-reference-manifest.json`. Appel
 `Content-Type: text/plain;charset=UTF-8`, corps = tableau JSON des arguments. Le
 résultat est la ligne qui commence par `1:`. Écrire ce genre de test en Node (`fetch`),
 pas en bash (guillemets).
+
+## Routines cloud et processus
+
+- **Une routine cloud n'atteint que les domaines autorisés** : un run échoue avec
+  `fetch failed` ou un `403` du proxy (`CONNECT tunnel failed`) tant que l'accès réseau de
+  l'environnement n'autorise pas le domaine de l'app. Ce n'est pas le jeton.
+- **Arrêter un serveur de dev** : par port ou PID (`lsof -t -iTCP:3000 -sTCP:LISTEN`).
+  `pkill -f "next dev"` tue aussi le shell qui le lance.

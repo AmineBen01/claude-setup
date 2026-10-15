@@ -45,6 +45,10 @@ Deux profils Playwright MCP sont configurés :
   parcours complets. Il attrape les bugs propres à Safari (champs date, `100vh`…).
 - `playwright-android` : Chromium, Pixel 7 — mise en page et parcours principal.
 
+Chaque écran se regarde en **clair et en sombre** (`browser_emulate_media` avec
+`colorScheme`, ou `colorScheme` dans le contexte en script), à trois tailles :
+iPhone 390×844, Android 412×915 et **ordinateur 1440×900** (`browser_resize`).
+
 Pour chaque parcours :
 1. Naviguer, puis agir comme l'utilisateur : taper, remplir, choisir, valider.
    Préférer l'instantané d'accessibilité (`browser_snapshot`) pour trouver les éléments ;
@@ -54,11 +58,16 @@ Pour chaque parcours :
    textes coupés, chevauchements, éléments sous l'encoche ou sous la barre du bas,
    zones tactiles trop petites, contraste.
 3. Lire la console (`browser_console_messages`) et les requêtes réseau en échec : zéro
-   erreur attendue.
+   erreur attendue. **Échec** sur toute erreur de console : hydratation, avertissements
+   Base UI (`nativeButton`), erreurs non rattrapées.
 4. Vérifier les effets réels : en base (lecture SQL sur la branche dev via le MCP Neon),
    fichiers produits (ouvrir un export), cookies posés…
 5. Rechargement en plein milieu si l'état doit survivre ; double clic sur une action
    qui écrit (pas de doublon).
+
+**Si l'app a un canal de corrections** : ouvrir la fenêtre au doigt (le clavier ne doit pas
+s'ouvrir tout seul), envoyer une correction, puis contrôler le statut de l'élément et la
+page des règles.
 
 **Ce qui s'affiche ne prouve rien** : après chaque action qui écrit, relire la base. Sur
 ciao, une correction s'affichait à l'écran alors que le serveur l'avait refusée.
@@ -97,7 +106,8 @@ Corriger ce qui est réel, puis ne relancer que les contrôles touchés par la c
 
 ## 4. Ranger et rendre compte
 
-- Arrêter le serveur lancé, fermer les navigateurs.
+- Arrêter le serveur lancé (par port ou PID : `lsof -t -iTCP:<port> -sTCP:LISTEN`), fermer
+  les navigateurs.
 - Données de test : elles sont sur la branche dev ; les laisser ou les nettoyer par id,
   jamais de suppression en masse.
 - Rendre compte en quelques lignes : ce qui est **prouvé** (avec 1 ou 2 captures

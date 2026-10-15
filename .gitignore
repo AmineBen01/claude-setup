@@ -8,9 +8,11 @@
 !/settings.json
 !/THIRD_PARTY.md
 !/scripts/
+!/hooks/
 !/skills/
 /skills/*
 !/skills/verifier/
 !/skills/mise-en-ligne/
 !/skills/nouveau-projet/
 !/skills/pwa/
+!/skills/canal-corrections/
