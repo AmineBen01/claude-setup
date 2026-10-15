@@ -32,4 +32,7 @@ d'installation de l'environnement cloud (claude.ai/code → environnement **Defa
 dans `~/.claude` et pose un hook SessionStart qui refait la synchro à chaque session. Un push
 ici arrive dans les nouvelles sessions en quelques minutes. `cloud/manifest.txt` (la liste des
 fichiers copiés) est régénéré par le hook git `pre-commit` de ce Mac.
+Limite : chaque session repart de l'instantané de l'environnement (refait environ chaque semaine,
+ou quand on modifie le script d'installation). Une modification de la **logique** de `cloud/sync.sh`
+ne s'applique donc qu'après cette reconstruction ; les fichiers qu'il copie, eux, sont à jour.
 
