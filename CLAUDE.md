@@ -41,6 +41,9 @@ les trous avec un choix par défaut raisonnable.
 Exceptions : la correction d'un bug évident qui ne change pas le comportement voulu, et
 une tâche que j'ai déjà entièrement spécifiée.
 
+Dans une routine (exécution dans le cloud, sans moi), suis son prompt : pas de questions ni
+de mise en ligne qu'il ne prévoit pas.
+
 ## Bugs : la cause d'abord
 
 Avant de corriger un bug, trouve sa cause et prouve-la (reproduction, log, test qui
