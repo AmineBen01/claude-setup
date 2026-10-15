@@ -23,3 +23,13 @@ bash scripts/install-third-party-skills.sh
 ```
 
 Puis les commandes « Plugins et serveurs MCP » de `THIRD_PARTY.md`.
+
+## Dans les sessions cloud
+
+Ce repo est **public** (rien de secret dedans) pour que les sessions cloud le lisent. Le script
+d'installation de l'environnement cloud (claude.ai/code → environnement **Default** →
+**Setup script**) télécharge `cloud/sync.sh` et le lance : il copie `CLAUDE.md` et `skills/`
+dans `~/.claude` et pose un hook SessionStart qui refait la synchro à chaque session. Un push
+ici arrive dans les nouvelles sessions en quelques minutes. `cloud/manifest.txt` (la liste des
+fichiers copiés) est régénéré par le hook git `pre-commit` de ce Mac.
+

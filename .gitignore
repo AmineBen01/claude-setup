@@ -9,6 +9,7 @@
 !/THIRD_PARTY.md
 !/scripts/
 !/hooks/
+!/cloud/
 !/skills/
 /skills/*
 !/skills/verifier/
