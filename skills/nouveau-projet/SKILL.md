@@ -9,6 +9,7 @@ Deux temps : d'abord on se met d'accord, ensuite je fais tout d'un coup, jusqu'�
 adresse en ligne. L'utilisateur n'a aucune étape technique à faire.
 
 Lire `references/pieges.md` **avant d'écrire du code** : tous les pièges déjà rencontrés.
+Lire `references/design.md` **avant toute interface** : le style que je veux.
 
 ## 1. Cadrage (règle globale : questions jusqu'à accord)
 
@@ -27,8 +28,8 @@ trouve. Puis, par tours d'AskUserQuestion, en langage simple, avec une recommand
   canal de corrections : dire qu'une routine cloud sera créée et que je générerai son jeton
   API une fois (les clics sont dans `canal-corrections`).
 - **Identité visuelle** : couleurs et police de la marque, et sa **palette sombre** (ou la
-  dériver de la claire) pour le mode sombre. Proposer une direction visuelle avec la skill
-  `frontend-design` et la faire valider.
+  dériver de la claire) pour le mode sombre. Partir du style de `references/design.md` (déjà
+  validé) et ne demander que ce qui change pour ce projet.
 - **Échéance** et première version testable.
 - **Autorisations dont j'aurai besoin** : envoyer les secrets à Vercel, créer repo, base
   et projet Vercel. Les demander maintenant, pas à la fin.
@@ -56,7 +57,8 @@ Puis le plan avec la liste **Décisions validées** ; attendre le feu vert.
      dans Vercel ;
    - Drizzle : `db/schema.ts`, `db/index.ts`, `drizzle.config.ts`, `db/seed.ts`,
      scripts `db:generate`, `db:migrate`, `db:seed` ; migrer et seeder dev **et** main.
-5. **Interface (toute app avec un écran)**, avec la skill `frontend-design` :
+5. **Interface (toute app avec un écran)**, avec la skill `frontend-design` et le style de
+   `references/design.md` (jetons de couleur, Geist, tailles de boutons, statuts) :
    - `next-themes` avec `defaultTheme="system"`, les couleurs sombres, un choix
      Clair / Sombre / Auto dans l'en-tête et dans les réglages, `themeColor` par schéma ;
    - le cadre du tableau de bord : `sidebar` shadcn (repliable en icônes, compteurs sur les

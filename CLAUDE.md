@@ -91,8 +91,12 @@ Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 
 Toute app avec un écran, sauf avis contraire :
 - **Charge la skill `frontend-design` avant d'écrire la moindre interface**, nouvelle ou
-  remaniée : une direction visuelle choisie (typographie, couleurs, densité), pas les
-  réglages par défaut. Viser un outil professionnel et sobre, jamais « mignon ».
+  remaniée, **et suis mon style : `~/.claude/skills/nouveau-projet/references/design.md`**.
+  En bref : un outil précis et sobre (Linear, Vercel, Notion), Geist, surfaces neutres, une
+  seule couleur d'action, le contenu porte la couleur ; des listes à filets plutôt que des
+  cartes, statuts en point + mot, coins de 6 à 8 px, pas d'ombres ni de blocs de couleur
+  pleine, boutons de 44 px sur téléphone et 36 px sur ordinateur. Jamais de pilules ni de
+  look « mignon » : je l'ai jugé enfantin.
 - **Mode sombre** qui suit l'appareil, avec un choix Clair / Sombre / Auto dans l'en-tête et
   dans les réglages : `next-themes` (`attribute="class"`, `defaultTheme="system"`), des
   couleurs sombres tirées de la palette de la marque (jamais un gris standard),
