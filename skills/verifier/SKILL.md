@@ -1,6 +1,6 @@
 ---
 name: verifier
-description: Prouver, en autonomie et par le vrai chemin, qu'une fonctionnalité d'un site ou d'une app web marche avant de la livrer — tests, puis parcours réel dans un navigateur piloté (Playwright, iPhone/Safari et Android), captures regardées, effets en base contrôlés, relecture pour les grosses fonctionnalités. À utiliser à la fin de chaque fonctionnalité construite (sauf tout petit changement), avant `mise-en-ligne`, ou quand l'utilisateur demande « vérifie », « teste », « est-ce que ça marche ».
+description: Prouver, en autonomie et par le vrai chemin, qu'une fonctionnalité d'un site, d'une app web ou d'une app des stores (Expo) marche avant de la livrer — tests, puis parcours réel dans un navigateur piloté (Playwright, iPhone/Safari et Android) ou sur le simulateur (Maestro), captures regardées, effets en base contrôlés, relecture pour les grosses fonctionnalités. À utiliser à la fin de chaque fonctionnalité construite (sauf tout petit changement), avant `mise-en-ligne`, ou quand l'utilisateur demande « vérifie », « teste », « est-ce que ça marche ».
 ---
 
 # Vérifier : la preuve que ça marche
@@ -8,9 +8,9 @@ description: Prouver, en autonomie et par le vrai chemin, qu'une fonctionnalité
 But : que l'utilisateur n'ait jamais à découvrir lui-même un bug que j'aurais pu voir.
 Aucune annonce de réussite sans preuve. Une seule passe, à la fin, proportionnée au risque.
 
-**Périmètre** : sites et apps web. Pour un autre type de projet (app iOS, Expo, scripts),
-suivre la section « Vérifier » du CLAUDE.md du projet ; à défaut, la vérification
-proportionnée habituelle (tests, puis le contrôle le plus proche du vrai usage).
+**Périmètre** : sites, apps web et apps des stores faites avec Expo (section 2 bis). Pour un
+autre type de projet (scripts…), la vérification proportionnée habituelle (tests, puis le
+contrôle le plus proche du vrai usage).
 
 **Tout petit changement** (texte, couleur, marge) : une capture de l'écran concerné suffit.
 
@@ -97,6 +97,32 @@ Si Playwright MCP n'est pas disponible dans la session : utiliser le paquet `pla
 en script (mêmes appareils : `devices["iPhone 15"]` sur `webkit`, `devices["Pixel 7"]`
 sur `chromium`), et le signaler.
 
+## 2 bis. App des stores (Expo) : le simulateur, au plus juste
+
+Décidé le 19 octobre 2026 (Ironmile) : **les tests d'abord, le moins cher d'abord**. Les tests
+unitaires et d'API couvrent la logique ; le simulateur coûte des minutes par passage, il ne prouve
+que le parcours visible de **ce qui a changé** : un passage sur iOS, Android seulement si le
+changement dépend de la plateforme, pas de rejeu du parcours complet pour un petit correctif, pas
+de nouveau passage une fois réussi. Lire avant : la section « Vérifier » du CLAUDE.md du projet
+et les pièges « App native » et « Maestro » de `nouveau-projet/references/pieges.md`.
+
+1. **Serveurs, en tâches de fond de l'outil** (jamais `&`, jamais `CI=1`) : l'API (`pnpm dev`
+   dans `apps/web`, port 3010, base dev) et Metro (`npx expo start --dev-client`). Attendre qu'ils
+   répondent.
+2. **Le build de dev** sur le simulateur principal (iPhone 17 Pro, iOS 26) : déjà installé, il
+   suffit de l'ouvrir sur Metro (`xcrun simctl openurl booted "<scheme>://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8081"`).
+   Un changement natif (plugin, paquet natif, `app.json`) demande `npx expo prebuild --clean` puis
+   `pnpm ios` ; après un archive de release, le build de dev est à refaire (piège).
+3. **Le parcours** : un flow Maestro du projet (`apps/mobile/.maestro/`), ou un nouveau pour ce qui
+   change, lancé depuis `.screens/` (`maestro test --device <udid> …`). Pour un écran seul, une
+   capture suffit : `xcrun simctl io booted screenshot <fichier>`.
+4. **Regarder chaque capture** (Read), en **clair et en sombre** (`xcrun simctl ui booted
+   appearance dark`) : texte coupé, éléments sous l'encoche ou sous la barre d'onglets flottante,
+   zones tactiles, contraste. Les effets en base se relisent comme pour le web.
+5. **Ce que le simulateur ne prouve pas** (notifications push reçues, vraies données de santé,
+   achat réel, ouverture d'un lien depuis Mail) : le dire dans le compte rendu, c'est pour le
+   téléphone d'Amine via TestFlight.
+
 ## 3. Relecture (grosses fonctionnalités seulement)
 
 Nouvel écran, données, sécurité, argent, authentification :
@@ -110,7 +136,7 @@ Corriger ce qui est réel, puis ne relancer que les contrôles touchés par la c
 ## 4. Ranger et rendre compte
 
 - Arrêter le serveur lancé (par port ou PID : `lsof -t -iTCP:<port> -sTCP:LISTEN`), fermer
-  les navigateurs.
+  les navigateurs ; pour une app native, arrêter Metro et l'API aussi (le simulateur peut rester).
 - Données de test : elles sont sur la branche dev ; les laisser ou les nettoyer par id,
   jamais de suppression en masse.
 - Rendre compte en quelques lignes : ce qui est **prouvé** (avec 1 ou 2 captures
