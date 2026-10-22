@@ -1,6 +1,6 @@
 ---
 name: mise-en-ligne
-description: Livrer jusqu'au bout une fonctionnalité vérifiée d'un projet web — commit sur main, push GitHub, attente du déploiement Vercel (et migration de la base de production si le schéma a changé), contrôle en lecture seule du site en ligne, puis l'adresse et la courte liste de tests à faire sur téléphone. À utiliser après `verifier`, ou quand l'utilisateur dit « mets en ligne », « déploie », « pousse », « livre ».
+description: Livrer jusqu'au bout une fonctionnalité vérifiée d'un projet web ou d'une app des stores — commit sur main, push GitHub, attente du déploiement Vercel (et migration de la base de production si le schéma a changé), contrôle en lecture seule du site en ligne ; pour une app Expo, le build TestFlight, la fiche App Store, la soumission à la revue et le jour du lancement. Puis l'adresse et la courte liste de tests à faire sur téléphone. À utiliser après `verifier`, ou quand l'utilisateur dit « mets en ligne », « déploie », « pousse », « livre », « TestFlight », « soumets ».
 ---
 
 # Mise en ligne
@@ -61,9 +61,44 @@ Sur l'adresse de production (alias stable affiché par `vercel inspect`) :
 
 ## 4 bis. Aligner (une app qui a une liste de faits)
 
-Dans `ironmile` ou `qiyam-app`, si le changement se remarque (ce que l'utilisateur voit ou ce que
+Dans `ironmile`, `qiyam-app` ou toute app faite depuis le starter, si le changement se remarque (ce que l'utilisateur voit ou ce que
 fait l'app) : la liste de faits est à jour dans le commit, puis **utiliser la skill `aligner`**
 (site, fiches des stores, notes de HQ). Ses corrections et ses demandes vont dans le compte rendu.
+
+## 4 ter. App des stores (Expo) : du build au lancement
+
+Le serveur part comme d'habitude (étapes 1 à 4) : **il part toujours avant l'app**, et ses
+réponses ne font que grandir (piège). Ce qui suit vaut pour un projet fait depuis le starter
+(`~/Projects/starter`, scripts dans `scripts/`) ; Ironmile est l'exemple complet.
+
+**Un nouveau build pour le téléphone** (changement dans `apps/mobile`) :
+- commit d'abord (le numéro de build = nombre de commits), puis `scripts/release-ios.sh` depuis
+  la racine : archive, signature, envoi ; le build arrive dans TestFlight (groupe interne) en 5 à
+  15 minutes. Jamais d'archive sans le script (l'app viserait localhost).
+- Ensuite le build de dev est cassé sur ce Mac : `npx expo prebuild --clean --platform ios` avant
+  le prochain `pnpm ios`.
+- Dire à Amine quoi tester sur son iPhone une fois le build dans TestFlight.
+
+**La première fois (une app pas encore sur l'App Store)**, dans l'ordre, en demandant à Amine ce
+qui exige son compte :
+1. App Store Connect, interface web (Amine ou moi avec lui) : l'app (nom, bundle id, SKU), puis
+   catégories, classement d'âge (16+, comme les conditions), étiquettes de confidentialité,
+   déclaration de dispositif médical. Noter l'id de l'app dans `scripts/store.json`.
+2. Module payments : les abonnements et leur groupe dans App Store Connect, l'app et les produits
+   dans RevenueCat (clés `EXPO_PUBLIC_REVENUECAT_*` pour l'app, `REVENUECAT_SECRET_KEY` et
+   `REVENUECAT_WEBHOOK_SECRET` dans Vercel, webhook vers `/api/webhooks/revenuecat`).
+3. La fiche : `docs/store/listing.md` (chaque phrase adossée à `facts.ts`), captures réelles du
+   simulateur dans `store/screenshots/raw/`, `node scripts/store-shots.mjs`, puis
+   `node scripts/asc-listing.mjs` (lecture) et `--write`.
+4. La revue : `node scripts/asc-submit.mjs` vérifie (contact, compte de démo saisis par Amine,
+   build traité, abonnements) ; `--submit` soumet avec une sortie **manuelle**. **Les premiers
+   abonnements passent par l'interface web** (piège « App Store et RevenueCat »).
+5. Approuvée : Amine choisit le jour. Ce jour-là : « Release » dans App Store Connect,
+   `APP_STORE_URL` et `APP_STORE_ID` dans `apps/web/lib/launch.ts` (le site et le blog passent de la
+   liste d'attente à l'App Store), puis l'e-mail à la liste d'attente.
+
+**Pas encore écrit** (à faire depuis la vraie première fois d'Ironmile, et à reporter ici et dans
+le starter) : la sortie **Google Play** (script et fiche) ; **Se connecter avec Apple et Google**.
 
 ## 5. Rendre compte
 
