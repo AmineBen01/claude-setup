@@ -117,7 +117,8 @@
   arrivent avec des heures de retard ou sautent (Qiyam HQ : « toutes les heures » → 5 exécutions
   en 13 h). Planifier deux essais par heure si l'endpoint ignore un doublon, et rafraîchir aussi à
   l'ouverture de l'app quand la donnée est vieille (`after()` dans le layout).
-- Vercel Hobby : une seule cron par jour.
+- Équipe Vercel sur Pro (depuis le 20 octobre 2026) : les crons Vercel (`vercel.json`, `CRON_SECRET`)
+  n'ont plus la limite d'une par jour ; les préférer à GitHub Actions dans un nouveau projet.
 
 ## Actions serveur : tester sans navigateur (secours)
 
@@ -134,3 +135,96 @@ pas en bash (guillemets).
   l'environnement n'autorise pas le domaine de l'app. Ce n'est pas le jeton.
 - **Arrêter un serveur de dev** : par port ou PID (`lsof -t -iTCP:3000 -sTCP:LISTEN`).
   `pkill -f "next dev"` tue aussi le shell qui le lance.
+
+## Better Auth
+
+- Sur le driver HTTP de Neon : pas de transaction interactive, donc l'adaptateur tourne avec
+  `transaction: false` (son défaut). Nos écritures sur plusieurs tables passent par `db.batch([...])`.
+- Ses tables sont générées : `pnpm dlx auth@<version> generate --config lib/auth.ts --output
+  db/auth-schema.ts --yes`, avec `import "server-only"` commenté dans `db/index.ts` pendant
+  l'exécution (le CLI ne sait pas le charger) et `DATABASE_URL` exportée.
+- `after()` lève une erreur hors requête : les tests qui appellent les handlers directement la
+  font échouer. Le travail en arrière-plan passe par un `later()` qui l'ignore sous Vitest (starter :
+  `apps/web/lib/later.ts`).
+
+## App native (Expo) : serveurs et build
+
+- **Lancer les serveurs de dev en tâche de fond de l'outil, jamais avec `&`** dans une commande :
+  ils meurent avec elle au bout d'un moment (Metro et l'API disparus en plein test : « No script
+  URL provided », puis « Can't load your account »).
+- **Jamais Metro avec `CI=1`** : la surveillance des fichiers est coupée et l'app tourne en silence
+  avec du vieux code.
+- **Port 3000 souvent pris par un autre projet** : l'API d'une app tourne sur 3010 et l'app vise ce
+  port par défaut. Ne jamais tuer un serveur qu'on n'a pas lancé.
+- **Tester sur un vrai iPhone : `pnpm phone` (`next start --keepAliveTimeout 120000`), pas `next
+  dev`.** `next dev` ferme les connexions inactives après 5 s ; l'iPhone les réutilise, iOS
+  relance les lectures mais pas les écritures, donc la première écriture après une pause pendait.
+  Metro avec `EXPO_PUBLIC_API_URL=http://<IP Wi-Fi du Mac>:3010`.
+- **Après un archive de release (`release-ios.sh`), le build de dev casse** : l'archive tourne en
+  Release dans le même `ios/` et laisse les parties précompilées en version release. Symptômes :
+  `Undefined symbols … Sealable::Sealable()` au lien, puis des plantages au lancement. Ne pas
+  bricoler pièce par pièce : `npx expo prebuild --clean --platform ios` puis `expo run:ios`
+  (~15 min). DerivedData n'y est pour rien.
+- **Santé et notifications sont natives** : tout changement de leurs plugins dans `app.json`
+  demande `npx expo prebuild --clean` et un nouveau build de dev, sur les deux plateformes.
+- **Ne pas descendre le `compileSdk` d'Android sous celui d'Expo** (SDK 58 : 37). Health Connect
+  n'a besoin que de `minSdkVersion: 26` (`expo-build-properties`).
+- `npx expo install <paquet>` toujours (versions accordées au SDK).
+- **Builds sur appareil** : HealthKit et les notifications ne passent pas par un profil wildcard ;
+  la première fois `xcodebuild … -allowProvisioningUpdates`, installation avec `xcrun devicectl
+  device install app`. `expo run:ios --device` veut l'UDID matériel (`xcrun xctrace list devices`).
+- Le numéro de build d'une release vient du script (`EXPO_PUBLIC_BUILD`, nombre de commits), pas
+  d'un module natif : l'écran « Mettre à jour » marche sans reconstruire le client de dev.
+
+## App native : écrans et navigation
+
+- **Le navigateur racine doit s'afficher dès la première image** (l'écran de lancement le couvre).
+  Ne rien afficher pendant le chargement de la session perd le lien d'un démarrage à froid : le
+  lien de réinitialisation ouvrait l'écran de connexion.
+- **`/` a besoin d'une route hors de toute garde** (`src/app/index.tsx` redirige selon la
+  session). Sans elle, un lancement déconnecté montre « Unmatched route ».
+- **iOS 26 : la barre d'onglets flotte sur le contenu** ; `contentInsetAdjustmentBehavior=
+  "automatic"` sur les `ScrollView`. Simulateur principal : iPhone 17 Pro sur iOS 26 (iOS 17 cache
+  ces bugs).
+- **Le React Compiler refuse la lecture d'une ref pendant le rendu** (`react-hooks/refs`) : retenir
+  ce qu'un rendu précédent a vu avec un état posé pendant le rendu.
+- **Les réponses de l'API ne font que grandir** : le serveur se déploie tout de suite, les apps se
+  mettent à jour des jours plus tard (le build 1.0.0 (1) d'Ironmile plantait au lancement après la
+  disparition d'un champ). Garder les anciens champs, avec un test qui les épingle ; sinon relever
+  `MIN_BUILD` (écran « Mettre à jour »).
+- **Une tâche longue lancée par une requête est enregistrée avant la réponse** : l'app qui
+  interroge s'arrête sur tout autre état que « en cours ».
+- iOS demande « Ouvrir dans <app> ? » quand un lien ouvre l'app par son schéma (`acme://`), sur un
+  vrai téléphone aussi. Les liens universels (`apple-app-site-association`) l'enlèvent une fois le
+  domaine en place.
+- **Icône iOS = fichier Icon Composer** (généré par `scripts/brand-assets.mjs`) : la couche liste
+  son SVG par apparence (`image-name-specializations` pour sombre et teinté) et ne doit **pas**
+  avoir aussi un `image-name` simple, qui les écrase. Le simulateur ne change pas de style
+  d'icône : vérifier avec `ictool <fichier>.icon --export-image --rendition Dark|TintedDark|ClearLight`.
+- Le simulateur n'a ni notifications push ni vraies données de montre : il prouve la demande
+  d'autorisation et une synchro propre, pas plus. Health Connect montre d'abord son propre écran
+  « Get started ».
+
+## Maestro (tests de l'app native)
+
+- `hideKeyboard` échoue sur iOS : taper sur un titre à la place.
+- Avec un émulateur Android allumé, passer `--device <udid>`, sinon Maestro prend Android.
+- iOS cache les champs de mot de passe sur les captures : un champ vide n'est pas un bug.
+- La feuille « Enregistrer le mot de passe ? » d'iOS 26 arrive après l'inscription ou la connexion,
+  à des moments variables, et cache tout l'écran : `tapOn: { text: "Not Now", optional: true }`.
+  Android propose aussi d'enregistrer (Google Password Manager) : « Not now ».
+- Les flows tournent depuis un dossier `.screens/` (ignoré) ; les captures sont dans
+  `~/.maestro/tests/<run>/…`, à regarder une par une.
+
+## App Store et RevenueCat
+
+- **Le formulaire web d'App Store Connect perd les valeurs posées par automatisation** (vu le
+  20 octobre 2026) ; l'API non : la fiche passe par `scripts/asc-listing.mjs`.
+- **Les premiers abonnements d'une app ne passent pas par l'API** : dans l'interface web, « Add for
+  Review » sur le **groupe** d'abonnements, puis sur **chaque** abonnement, puis sur la version,
+  tous dans le même brouillon, puis « Submit for Review ». Un brouillon ouvert par le script doit
+  d'abord perdre sa version, sinon la page de la version ne propose rien.
+- Le Test Store de RevenueCat raccourcit l'essai d'une semaine à 5 minutes : « Gratuit jusqu'au »
+  affiche la date du jour, ce n'est pas un bug.
+- Nom, sous-titre, catégories, classement d'âge, étiquettes de confidentialité et déclaration de
+  dispositif médical se règlent une fois dans l'interface web.
