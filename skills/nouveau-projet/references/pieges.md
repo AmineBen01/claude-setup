@@ -170,6 +170,11 @@ pas en bash (guillemets).
 - **Ne pas descendre le `compileSdk` d'Android sous celui d'Expo** (SDK 58 : 37). Health Connect
   n'a besoin que de `minSdkVersion: 26` (`expo-build-properties`).
 - `npx expo install <paquet>` toujours (versions accordées au SDK).
+- **`expo lint` garde en cache les imports non résolus** : après l'ajout d'un paquet, il peut
+  encore dire « Unable to resolve path to module » alors que `tsc` et `npx eslint` passent.
+  `npx expo lint --no-cache` une fois (vu le 22 octobre 2026 sur Ironmile).
+- **`expo-background-task` affiche un bandeau d'avertissement sur le simulateur iOS**, par-dessus
+  la barre d'onglets : il gêne les taps de Maestro, ce n'est pas un bug de l'app.
 - **Builds sur appareil** : HealthKit et les notifications ne passent pas par un profil wildcard ;
   la première fois `xcodebuild … -allowProvisioningUpdates`, installation avec `xcrun devicectl
   device install app`. `expo run:ios --device` veut l'UDID matériel (`xcrun xctrace list devices`).
@@ -213,6 +218,11 @@ pas en bash (guillemets).
 - La feuille « Enregistrer le mot de passe ? » d'iOS 26 arrive après l'inscription ou la connexion,
   à des moments variables, et cache tout l'écran : `tapOn: { text: "Not Now", optional: true }`.
   Android propose aussi d'enregistrer (Google Password Manager) : « Not now ».
+- **`tapOn: "Not Now"` touche aussi le « Not now » de l'app** (la recherche de texte ignore la
+  casse) : donner un `testID` aux boutons de l'app et viser la feuille système par son texte exact
+  seulement quand l'app n'a rien de semblable à l'écran.
+- **Health Connect demande l'historique (plus de 30 jours) et la lecture en arrière-plan sur une
+  deuxième page**, après les types de données : le flow doit la passer aussi.
 - Les flows tournent depuis un dossier `.screens/` (ignoré) ; les captures sont dans
   `~/.maestro/tests/<run>/…`, à regarder une par une.
 
@@ -228,3 +238,34 @@ pas en bash (guillemets).
   affiche la date du jour, ce n'est pas un bug.
 - Nom, sous-titre, catégories, classement d'âge, étiquettes de confidentialité et déclaration de
   dispositif médical se règlent une fois dans l'interface web.
+
+## IA (Claude) dans une app
+
+- **En local, le modèle tourne sur l'abonnement Max, pas sur l'API** (Ironmile, 22 octobre 2026 :
+  `coachEngine()` et `viaClaudeCode()` dans `apps/api/lib/coach/generate.ts`). `claude -p
+  --model … --effort … --system-prompt <le prompt de l'app> --json-schema <le schéma>
+  --tools "" --setting-sources "" --strict-mcp-config --no-session-persistence --output-format
+  json`, lancé depuis le dossier temporaire, avec un environnement sans `ANTHROPIC_*` (sinon il
+  facture la clé) ni `CLAUDE*` (sinon il se croit enfant de la session). Le résultat est dans
+  `structured_output`, `stop_reason` vaut `tool_use` ; `usage` donne les vrais jetons, donc le
+  prix API équivalent. Jamais sur Vercel (`VERCEL` force l'API), jamais pour d'autres
+  utilisateurs. Les évals payantes (Sonnet/Opus sur l'API) exigent `--confirm-cost`.
+- **La sortie, réflexion comprise, fait ~90 % de la facture** : mesurer l'effort (`low`,
+  `medium`) sur des cas de test avant de le monter ; Ironmile est passé à `low` pour les plans
+  hebdomadaires (−42 % de jetons, plans aussi bons).
+- **Ce qui n'est pas urgent passe par l'API Batches (−50 %)** : le run reste « en file » (pas
+  « en cours », sinon l'app tourne en rond), une tâche planifiée récupère les résultats.
+- **Réparer plutôt que réécrire** : quand un contrôle échoue, ne renvoyer que les parties fautives
+  et fusionner. Le schéma de la réparation doit être celui du plan (un schéma à part rate le
+  cache : 11k jetons réécrits, la réparation coûtait plus que la réécriture).
+
+## Travail en parallèle (agents dans des worktrees)
+
+- **`.claude/worktrees/` dans `.gitignore`** : sinon `git status` du dépôt principal les montre.
+- **Un worktree peut partir d'un commit plus ancien que `main`** (vu le 22 octobre 2026) :
+  vérifier `git worktree list` et faire `git merge main` dans le worktree avant tout travail qui
+  dépend du dernier commit.
+- Chaque agent ses ports (API, Metro) et son simulateur ; la base de dev partagée ne reçoit que
+  des migrations additives écrites pour tourner deux fois (`IF NOT EXISTS`), renumérotées à la
+  fusion (régénérer avec `drizzle-kit generate` pour un instantané juste, puis remettre le SQL
+  idempotent).
