@@ -24,17 +24,35 @@ trouve. Puis, par tours d'AskUserQuestion, en langage simple, avec une recommand
   actions (lire, écrire, modifier, supprimer).
 - **Nom** du projet : il donne le repo et l'adresse `<nom>.vercel.app`.
 - **Installation sur téléphone** souhaitée ? Si oui, skill `pwa` dans le plan.
-- **Contenus ou fonctionnalités que je relirai ?** Si oui (cas par défaut), l'app a un
-  canal de corrections : dire qu'une routine cloud sera créée et que je générerai son jeton
-  API une fois (les clics sont dans `canal-corrections`).
-- **Identité visuelle** : couleurs et police de la marque, et sa **palette sombre** (ou la
-  dériver de la claire) pour le mode sombre. Partir du style de `references/design.md` (déjà
-  validé) et ne demander que ce qui change pour ce projet.
+- **Outil ou app grand public ?** Un outil suit `references/design.md` tel quel ; une app
+  grand public y ajoute un système d'identité (voir « Outil ou app grand public » dans
+  `references/design.md`).
+- **Identité visuelle** : si la marque existe, ses couleurs, sa police et sa **palette
+  sombre** ; sinon, l'étape « Identité » ci-dessous, avant toute interface.
 - **Échéance** et première version testable.
 - **Autorisations dont j'aurai besoin** : envoyer les secrets à Vercel, créer repo, base
   et projet Vercel. Les demander maintenant, pas à la fin.
 
 Puis le plan avec la liste **Décisions validées** ; attendre le feu vert.
+
+## 1 bis. Identité (marque à créer, ou app grand public)
+
+Fait pour Ironmile le 20 octobre 2026 ; Amine : « c'est le niveau de travail et d'attention au
+détail que j'attends ». Toujours avec la skill `frontend-design`, en planches HTML rendues par
+Chrome sans fenêtre et ouvertes dans Aperçu :
+
+1. **La marque : 3 directions** tirées du monde du sujet (jamais les looks génériques : crème
+   et serif, néon sur noir, dégradés, éclairs). Chaque planche : l'icône en grand et sur un
+   écran d'accueil, le mot-symbole, la couleur d'action en clair et en sombre sur un vrai
+   écran, l'en-tête de la boutique. **Se critiquer et redessiner avant de montrer.**
+2. **Variantes et mélanges des favorites**, testées à 60 et 29 px, en mode sombre, les
+   mots-symboles côte à côte ; puis le choix.
+3. **App grand public : 3 directions d'interface** sur les mêmes écrans principaux, avec du vrai
+   contenu ; le choix peut se faire écran par écran ; une planche combinée pour vérifier que
+   l'ensemble tient ; puis seulement le code.
+4. **Tout dans le repo** : `brand/README.md` (les règles), les sources SVG et un script qui
+   génère toutes les icônes (iOS : un fichier Icon Composer avec ses variantes sombre et
+   teintée, vérifiées avec `ictool` ; Android ; favicon ; site).
 
 ## 2. Socle (après le feu vert)
 
@@ -65,8 +83,10 @@ Puis le plan avec la liste **Décisions validées** ; attendre le feu vert.
      entrées) à partir de `md`, en-tête et onglets en bas en dessous ; la barre latérale ne
      s'ouvre jamais en panneau mobile, et son encart est une `<div>` parce que chaque page
      rend son propre `<main>` ;
-   - des pages pensées aussi pour 1440 px : colonne latérale, grilles, scène avec panneau ;
-   - le canal de corrections : lancer `canal-corrections`.
+   - **le haut de la barre latérale vient du modèle** `references/modeles/sidebar-top.tsx`
+     (bouton de repli dans la barre, logo carré qui devient le bouton d'ouverture au survol) et
+     `SidebarMenu` en `gap-0.5` : voir « Barre latérale » dans `references/design.md` ;
+   - des pages pensées aussi pour 1440 px : colonne latérale, grilles, scène avec panneau.
 6. **Tests** : `vitest` pour la logique pure (règles métier, calculs), script `test`.
 7. **GitHub** : `gh repo create AmineBen01/<nom> --private --source . --push`.
 8. **Vercel** :

@@ -53,7 +53,8 @@
       "Bash(find:*)",
       "Bash(wc:*)",
       "Bash(du:*)",
-      "Bash(which:*)"
+      "Bash(which:*)",
+      "mcp__claude-in-chrome"
     ],
     "deny": [
       "Bash(git push --force:*)",
@@ -86,24 +87,6 @@
       "mcp__claude_ai_Notion__notion-delete-comment"
     ]
   },
-  "model": "opus",
-  "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true
-  },
-  "modelSettings": {
-    "claude-sonnet-5": {
-      "effortLevel": "xhigh"
-    },
-    "claude-opus-5": {
-      "effortLevel": "xhigh"
-    },
-    "claude-opus-5-5": {
-      "effortLevel": "high"
-    }
-  },
-  "tui": "fullscreen",
-  "agentPushNotifEnabled": true,
   "hooks": {
     "SessionEnd": [
       {
@@ -116,5 +99,23 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "modelSettings": {
+    "claude-sonnet-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-opus-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "tui": "fullscreen",
+  "agentPushNotifEnabled": true
 }

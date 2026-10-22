@@ -50,14 +50,13 @@ Les autres sections s'appliquent telles quelles.
 
 ### Animation
 
-- Honor `prefers-reduced-motion` (provide reduced variant or disable)
+- No `prefers-reduced-motion` variant: Amine decided (2026-10-21) the one orchestrated movement plays for everyone; don't flag its absence
 - Animate `transform`/`opacity` only (compositor-friendly)
 - Never `transition: all`—list properties explicitly
 - Set correct `transform-origin`
 - SVG: transforms on `<g>` wrapper with `transform-box: fill-box; transform-origin: center`
 - Animations interruptible—respond to user input mid-animation
 - Autoplay motion >5 seconds alongside other content needs pause, stop, or hide controls
-- Muted decorative loops must stop under `prefers-reduced-motion`
 
 ### Typography
 
@@ -90,7 +89,7 @@ Les autres sections s'appliquent telles quelles.
 - Add `<link rel="preconnect">` for CDN/asset domains
 - Critical fonts: `<link rel="preload" as="font">` with `font-display: swap`
 - Prefer `<video autoplay muted loop playsinline>` over animated GIF; provide a still alternative
-- Short non-essential loops: Safari H.264 MP4 `<picture>` source, `prefers-reduced-motion` media condition, and still fallback
+- Short non-essential loops: Safari H.264 MP4 `<picture>` source and a still fallback
 
 ### Navigation & State
 
@@ -175,7 +174,6 @@ Group by file. Use `file:line` format (VS Code clickable). Terse findings.
 
 src/Button.tsx:42 - icon button missing aria-label
 src/Button.tsx:18 - input lacks label
-src/Button.tsx:55 - animation missing prefers-reduced-motion
 src/Button.tsx:67 - transition: all → list properties
 
 ## src/Modal.tsx

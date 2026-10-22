@@ -60,6 +60,11 @@
   sur téléphone, une fenêtre (`Dialog`) avec recherche et grandes lignes marche mieux.
 - `AlertDialogAction` ne ferme pas la fenêtre tout seul : piloter `open`.
 - **`Button` Base UI rendu en lien** (`render={<Link />}`) : ajouter `nativeButton={false}`.
+- **Haut de la `sidebar` shadcn** (défaut répété sur deux projets) : le `SidebarTrigger` mis dans
+  l'en-tête de la page laisse un trait (`Separator`) bizarre et sort le bouton de la barre ; un
+  logo `img` dans un `SidebarMenuButton` est écrasé en largeur une fois replié (`size-8! p-2!`) ;
+  `SidebarMenu` en `gap-0` colle le gris du survol à celui de l'entrée active. Utiliser
+  `references/modeles/sidebar-top.tsx` et `gap-0.5`.
 - **`sidebar` shadcn** : son panneau mobile, décidé dans le navigateur, casse l'hydratation
   d'une barre latérale streamée (ne jamais l'utiliser, le téléphone a des onglets) ; son
   `SidebarInset` est un `<main>`, imbriqué dans celui de chaque page : en faire une `<div>`.
@@ -87,6 +92,15 @@
   crée pas de doublon.
 - Suppression récupérable (`deleted_at`) plutôt que `DELETE` quand l'utilisateur peut
   supprimer.
+- **`drizzle-kit migrate` peut échouer en silence** (code de sortie 1, seuls les NOTICE s'affichent,
+  aucune migration appliquée) : faire de `pnpm db:migrate` un petit script `tsx db/migrate.ts` avec
+  le `migrate()` de `drizzle-orm/postgres-js/migrator`, qui affiche l'erreur SQL (modèle : Qiyam HQ).
+- **Un rôle créé par l'API Neon (MCP `create_postgres_role`, console) est membre de
+  `neon_superuser`** : il lit et écrit tout, et on ne peut pas le lui retirer en SQL. Pour un
+  utilisateur restreint (lecture seule, analyste) : `create role … login password '…'` en SQL,
+  puis `reset_postgres_role_password` par l'API pour que Neon garde le mot de passe et que
+  `run_sql` puisse l'utiliser avec `role_name`. Vérifier `pg_auth_members` avant d'accorder quoi
+  que ce soit.
 - Le MCP Neon refuse (garde-fou) les `UPDATE`/`DELETE` sans cible précise : cibler par id.
 
 ## Vercel
@@ -96,6 +110,14 @@
 - `vercel link` ajoute `VERCEL_OIDC_TOKEN` à `.env.local` : sans danger, ignoré par git.
 - `vercel.json` avec `"regions": ["fra1"]` quand la base Neon est à Francfort.
 - Envoyer un secret sans l'afficher : `vercel env add NOM production < <(commande)`.
+
+## Tâches planifiées
+
+- **Le `schedule` de GitHub Actions n'est pas ponctuel** : sur un repo peu actif, des exécutions
+  arrivent avec des heures de retard ou sautent (Qiyam HQ : « toutes les heures » → 5 exécutions
+  en 13 h). Planifier deux essais par heure si l'endpoint ignore un doublon, et rafraîchir aussi à
+  l'ouverture de l'app quand la donnée est vieille (`after()` dans le layout).
+- Vercel Hobby : une seule cron par jour.
 
 ## Actions serveur : tester sans navigateur (secours)
 

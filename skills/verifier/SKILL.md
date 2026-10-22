@@ -65,9 +65,12 @@ Pour chaque parcours :
 5. Rechargement en plein milieu si l'état doit survivre ; double clic sur une action
    qui écrit (pas de doublon).
 
-**Si l'app a un canal de corrections** : ouvrir la fenêtre au doigt (le clavier ne doit pas
-s'ouvrir tout seul), envoyer une correction, puis contrôler le statut de l'élément et la
-page des règles.
+**Fenêtres et panneaux qui contiennent un champ** : les ouvrir au doigt (`locator.tap()`) ; le
+clavier ne doit pas s'ouvrir tout seul (`document.activeElement` n'est pas le champ).
+
+**Barre latérale (ordinateur)** : capture repliée et dépliée, survol d'une entrée voisine de
+l'entrée active. Le logo reste carré une fois replié, le bouton de repli est dans la barre et pas
+dans l'en-tête, deux fonds gris ne se touchent jamais.
 
 **Ce qui s'affiche ne prouve rien** : après chaque action qui écrit, relire la base. Sur
 ciao, une correction s'affichait à l'écran alors que le serveur l'avait refusée.

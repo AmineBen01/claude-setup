@@ -22,6 +22,13 @@ dossier par date (`ls -t`), prends celles qui correspondent au moment de mon mes
 ouvre-les avec Read. Dans une session cloud ce dossier n'existe pas : dis-le et demande-moi
 de coller l'image.
 
+## Me montrer une image
+
+Je travaille dans Ghostty : je ne vois pas les images dans le terminal. Chaque fois que tu veux
+me montrer une image (icône, capture, maquette, graphique), ouvre-la dans Aperçu sur le Mac avec
+`open <fichier>` (plusieurs fichiers d'un coup si tu compares des variantes), puis dis-moi dans
+quel ordre elles sont. Dans une session cloud, donne plutôt le lien ou le chemin.
+
 ## Nouvelle fonctionnalité ou changement : poser des questions jusqu'à accord
 
 Quand je demande une nouvelle fonctionnalité, ou un changement à une fonctionnalité
@@ -89,6 +96,10 @@ Tu crées les repos (GitHub privé), les bases (Neon, région Francfort) et les 
 Vercel, tu règles leurs variables d'environnement et tu mets en ligne. Je ne veux pas
 d'étape « à toi d'importer dans Vercel ».
 
+Mon équipe Vercel est sur le plan **Pro** depuis le 20 octobre 2026 (je compte le garder) :
+usage commercial permis, crons Vercel sans la limite d'un par jour du plan Hobby. Ne contourne
+plus ces limites (GitHub Actions pour les crons, etc.) dans un nouveau projet.
+
 ## Livraison : jusqu'au bout
 
 Quand une fonctionnalité validée est construite et vérifiée, **utilise la skill
@@ -96,6 +107,15 @@ Quand une fonctionnalité validée est construite et vérifiée, **utilise la sk
 prêt, contrôle du site en ligne, puis l'adresse et ce que je dois tester sur téléphone.
 
 Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
+
+## Les demandes de Claude dans HQ
+
+HQ (https://hq.amineben.ch, `~/Projects/headquarters`) réunit les chiffres et les posts de mes
+apps ; le « growth lead » y dépose des demandes de fonctionnalités et de correctifs, que
+j'approuve. Au début d'une session de travail sur `headquarters`, `ironmile`, `qiyam-app` ou
+`qiyam-website`, regarde les demandes **approuvées** pour ce repo
+(`~/Projects/headquarters/docs/lead-api.md`, jeton dans le trousseau : `hq-lead-token`),
+annonce-les-moi et traite-les en premier, puis marque chacune « faite » une fois livrée.
 
 ## Design par défaut
 
@@ -109,10 +129,17 @@ Toute app avec un écran, sauf avis contraire :
   look « mignon » : je l'ai jugé enfantin.
 - **Mode sombre** qui suit l'appareil, avec un choix Clair / Sombre / Auto dans l'en-tête et
   dans les réglages : `next-themes` (`attribute="class"`, `defaultTheme="system"`), des
-  couleurs sombres tirées de la palette de la marque (jamais un gris standard),
-  `themeColor` par schéma de couleurs.
-- **Un tableau de bord shadcn professionnel** : barre latérale repliable sur l'ordinateur,
-  en-tête et onglets en bas sur le téléphone ; cartes, tableaux et graphiques là où les
+  gris neutres sans teinte (charbon doux en sombre, voir `design.md`), la marque seulement
+  sur l'action et les données, `themeColor` par schéma de couleurs.
+- **App grand public** (qu'on ouvre pour soi, comme Ironmile) : la même base sobre **plus un
+  système d'identité** (police de marque pour titres et chiffres, composant signature, motif,
+  voix, une seule surface de couleur de marque, un seul mouvement orchestré), décidé sur planches
+  avant de coder. Voir « Outil ou app grand public » dans `design.md` et l'étape « Identité »
+  de `nouveau-projet`. Sans le logo, on doit reconnaître l'app sur une capture.
+- **Un tableau de bord shadcn professionnel** : barre latérale repliable sur l'ordinateur (à la
+  ChatGPT : bouton de repli dans la barre, logo carré qui devient le bouton d'ouverture au
+  survol, interstice entre les entrées ; modèle dans `nouveau-projet`), en-tête et onglets en
+  bas sur le téléphone ; cartes, tableaux et graphiques là où les
   données le méritent, dans l'identité de la marque.
 - **La largeur des grands écrans sert** : une colonne principale et une colonne latérale,
   des grilles, une scène avec un panneau à partir de `lg`. Jamais une colonne étroite seule
@@ -121,15 +148,12 @@ Toute app avec un écran, sauf avis contraire :
 - `verifier` contrôle le clair **et** le sombre, sur iPhone, Android et 1440 px, avec une
   console sans erreur d'hydratation.
 
-## Canal de corrections
+## Pas de bouton « Corriger Claude » dans mes apps
 
-Chaque app que je construis avec toi a un canal de corrections, mis en place avec la skill
-`canal-corrections` :
-- un bouton dans l'app où je dis ce qui ne va pas et pourquoi ;
-- il lance une routine Claude dans le cloud (déclencheur API), qui me pose ses questions
-  dans l'app Claude si besoin, applique le correctif (réécriture d'un contenu, ou code :
-  build, `verifier`, `mise-en-ligne`) et me prévient ;
-- les leçons que je garde deviennent des règles que Claude suit ensuite.
+Je ne veux pas de canal de corrections intégré aux apps (bouton qui lance une routine, page de
+règles) : c'est de la complexité inutile. Pour corriger quelque chose, j'ouvre moi-même une
+session Claude dans le cloud depuis mon téléphone. Retiré du studio et de Qiyam HQ le
+17 octobre 2026.
 
 ## Fin de session
 
@@ -145,7 +169,8 @@ règle.
 - `nouveau-projet` : d'une idée à une adresse en ligne (cadrage, puis tout d'un coup).
 - `verifier` : la preuve que ça marche, par le vrai chemin.
 - `mise-en-ligne` : commit, push, Vercel, contrôle en ligne.
+- `aligner` : après un changement visible dans une app, remettre d'accord avec ses faits le site,
+  les fiches des stores et les notes de HQ (appelée par `mise-en-ligne`).
 - `pwa` : rendre un site installable sur téléphone.
-- `canal-corrections` : le bouton « Corriger Claude » et sa routine dans le cloud.
 - Sur appel seulement : `/transitions-dev`, `/transitions-polish`,
   `/transitions-ui-generation` (animations), `/anatomy` (illustrations isométriques).

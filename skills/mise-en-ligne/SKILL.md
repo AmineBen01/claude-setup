@@ -59,6 +59,12 @@ Sur l'adresse de production (alias stable affiché par `vercel inspect`) :
 - les routes non HTML touchées (export, manifeste, API en lecture) répondent `200` ;
 - **aucune écriture** : pas de formulaire envoyé, pas de session créée en production.
 
+## 4 bis. Aligner (une app qui a une liste de faits)
+
+Dans `ironmile` ou `qiyam-app`, si le changement se remarque (ce que l'utilisateur voit ou ce que
+fait l'app) : la liste de faits est à jour dans le commit, puis **utiliser la skill `aligner`**
+(site, fiches des stores, notes de HQ). Ses corrections et ses demandes vont dans le compte rendu.
+
 ## 5. Rendre compte
 
 Court, dans la langue de la conversation :

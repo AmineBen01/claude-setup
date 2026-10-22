@@ -1,12 +1,10 @@
 CLAUDE.md
 cloud/sync.sh
-skills/canal-corrections/SKILL.md
-skills/canal-corrections/routine-prompt.md
 skills/mise-en-ligne/SKILL.md
-skills/nouveau-projet/SKILL.md
 skills/nouveau-projet/references/design.md
+skills/nouveau-projet/references/modeles/sidebar-top.tsx
 skills/nouveau-projet/references/pieges.md
-skills/pwa/SKILL.md
+skills/nouveau-projet/SKILL.md
 skills/pwa/references/modeles/generate-icons.tsx
 skills/pwa/references/modeles/install-banner.tsx
 skills/pwa/references/modeles/install-prompt.ts
@@ -15,6 +13,7 @@ skills/pwa/references/modeles/offline.html
 skills/pwa/references/modeles/service-worker.tsx
 skills/pwa/references/modeles/sw.js
 skills/pwa/references/modeles/use-is-client.ts
-skills/verifier/SKILL.md
+skills/pwa/SKILL.md
 skills/verifier/references/perf-critique.md
 skills/verifier/references/regles-interface.md
+skills/verifier/SKILL.md
