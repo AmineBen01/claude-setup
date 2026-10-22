@@ -223,6 +223,16 @@ pas en bash (guillemets).
   seulement quand l'app n'a rien de semblable à l'écran.
 - **Health Connect demande l'historique (plus de 30 jours) et la lecture en arrière-plan sur une
   deuxième page**, après les types de données : le flow doit la passer aussi.
+- **Un tap pendant qu'une feuille modale monte se perd** : `waitForAnimationToEnd` avant de taper
+  dans un écran présenté en modal (le paywall qui s'ouvre tout seul après un relancement).
+- **`tapOn` sur un id ne fait pas défiler** : un bouton sous le pli (le « Save » d'une feuille sur un
+  écran de 6,3 pouces) se tape dans le vide sans erreur ; `scrollUntilVisible` d'abord.
+- **La barre jaune « Open debugger to view warnings » de React Native** se pose sur la barre
+  d'onglets et avale les taps : `LogBox.ignoreLogs` pour les avertissements connus de développement
+  (clé de test RevenueCat, « Sending `onAnimatedValueUpdate` with no listeners registered »).
+- **Une capture prise au début d'une étape animée ne prouve rien** : la semaine « vide » de la
+  révélation se dessinait jour après jour ; regarder la capture de l'étape suivante avant de
+  conclure à un bug.
 - Les flows tournent depuis un dossier `.screens/` (ignoré) ; les captures sont dans
   `~/.maestro/tests/<run>/…`, à regarder une par une.
 
