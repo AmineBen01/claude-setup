@@ -100,6 +100,17 @@ Mon équipe Vercel est sur le plan **Pro** depuis le 20 octobre 2026 (je compte 
 usage commercial permis, crons Vercel sans la limite d'un par jour du plan Hobby. Ne contourne
 plus ces limites (GitHub Actions pour les crons, etc.) dans un nouveau projet.
 
+## Le starter : chaque nouvelle app en part
+
+Tout nouveau projet (site, outil web, app des stores) part de `~/Projects/starter` (GitHub
+`AmineBen01/starter`), via la skill `nouveau-projet` : comptes, paiements, site, blog, HQ, scripts
+de sortie iOS, déjà faits et prouvés. **Quand un projet m'apprend quelque chose qui vaut pour
+toutes les apps** (un piège, un correctif, une meilleure façon de faire), **tu le reportes dans le
+starter dans la même session** (`pnpm check:modules` doit passer) et dans
+`nouveau-projet/references/pieges.md`, et tu me le dis dans ton dernier message. Ce qui n'est pas
+encore écrit (sortie Google Play, connexion avec Apple et Google) se fait depuis la vraie première
+fois d'Ironmile : voir le README du starter.
+
 ## Livraison : jusqu'au bout
 
 Quand une fonctionnalité validée est construite et vérifiée, **utilise la skill
@@ -166,9 +177,11 @@ règle.
 
 ## Mes skills
 
-- `nouveau-projet` : d'une idée à une adresse en ligne (cadrage, puis tout d'un coup).
-- `verifier` : la preuve que ça marche, par le vrai chemin.
-- `mise-en-ligne` : commit, push, Vercel, contrôle en ligne.
+- `nouveau-projet` : d'une idée à une adresse en ligne, site ou app des stores (cadrage, puis tout
+  d'un coup, depuis le starter).
+- `verifier` : la preuve que ça marche, par le vrai chemin (navigateur, ou simulateur pour une app).
+- `mise-en-ligne` : commit, push, Vercel, contrôle en ligne ; pour une app, TestFlight, fiche, revue
+  et lancement.
 - `aligner` : après un changement visible dans une app, remettre d'accord avec ses faits le site,
   les fiches des stores et les notes de HQ (appelée par `mise-en-ligne`).
 - `pwa` : rendre un site installable sur téléphone.
