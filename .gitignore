@@ -11,9 +11,15 @@
 !/hooks/
 !/cloud/
 !/skills/
-/skills/*
-!/skills/verifier/
-!/skills/mise-en-ligne/
-!/skills/nouveau-projet/
-!/skills/pwa/
-!/skills/canal-corrections/
+# Every skill of mine is versioned by default; only these stay out: the ones synced from
+# claude.ai and the third-party ones (THIRD_PARTY.md, reinstalled by scripts/).
+/skills/synced/
+/skills/anatomy/
+/skills/transitions-dev/
+/skills/transitions-polish/
+/skills/transitions-ui-generation/
+
+# Logs and locks of the hooks
+/hooks/*.log
+/hooks/.push-setup.lock/
+/skills/.trash/

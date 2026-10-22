@@ -1,5 +1,6 @@
 CLAUDE.md
 cloud/sync.sh
+skills/aligner/SKILL.md
 skills/mise-en-ligne/SKILL.md
 skills/nouveau-projet/references/design.md
 skills/nouveau-projet/references/modeles/sidebar-top.tsx
