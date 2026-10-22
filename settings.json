@@ -95,6 +95,23 @@
             "type": "command",
             "command": "~/.claude/hooks/stop-session-processes.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/push-setup.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/push-setup.sh",
+            "timeout": 10
           }
         ]
       }
