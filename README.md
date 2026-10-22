@@ -32,6 +32,10 @@ d'installation de l'environnement cloud (claude.ai/code → environnement **Defa
 dans `~/.claude` et pose un hook SessionStart qui refait la synchro à chaque session. Un push
 ici arrive dans les nouvelles sessions en quelques minutes. `cloud/manifest.txt` (la liste des
 fichiers copiés) est régénéré par le hook git `pre-commit` de ce Mac.
+**Push automatique** (depuis le 22 octobre 2026) : `hooks/push-setup.sh`, lancé par Claude Code après
+chaque modification de fichier ou commande et en fin de session, commite et pousse tout fichier versionné
+qui a changé (push en arrière-plan, journal dans `hooks/push-setup.log`). Rien à faire à la main. Toute
+skill maison est versionnée d'office ; seules les synchronisées et les externes sont exclues (`.gitignore`).
 Limite : chaque session repart de l'instantané de l'environnement (refait environ chaque semaine,
 ou quand on modifie le script d'installation). Une modification de la **logique** de `cloud/sync.sh`
 ne s'applique donc qu'après cette reconstruction ; les fichiers qu'il copie, eux, sont à jour.
