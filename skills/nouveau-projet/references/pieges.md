@@ -250,6 +250,11 @@ pas en bash (guillemets).
   `structured_output`, `stop_reason` vaut `tool_use` ; `usage` donne les vrais jetons, donc le
   prix API équivalent. Jamais sur Vercel (`VERCEL` force l'API), jamais pour d'autres
   utilisateurs. Les évals payantes (Sonnet/Opus sur l'API) exigent `--confirm-cost`.
+- **Un schéma de sortie se valide sur la vraie API, au moins une fois, avec Haiku** : `claude -p
+  --json-schema` et les tests à client simulé acceptent des schémas que l'API refuse. Un objet « plan
+  ou réparation » qui contenait deux fois le schéma d'une séance a été refusé sur Haiku et Opus
+  (« The compiled grammar is too large ») : tous les appels du coach auraient échoué en production.
+  Un seul schéma plat, chaque gros objet une seule fois.
 - **La sortie, réflexion comprise, fait ~90 % de la facture** : mesurer l'effort (`low`,
   `medium`) sur des cas de test avant de le monter ; Ironmile est passé à `low` pour les plans
   hebdomadaires (−42 % de jetons, plans aussi bons).
