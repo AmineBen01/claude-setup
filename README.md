@@ -12,6 +12,9 @@ que ce qui suit) :
 - `THIRD_PARTY.md` + `scripts/install-third-party-skills.sh` — skills externes (non
   versionnées ici), plugins et serveurs MCP, avec leurs versions relues.
 
+**Droits :** tous droits réservés (voir `LICENSE`). Le repo est lisible, pas réutilisable :
+aucune copie ni réutilisation sans mon accord écrit.
+
 ## Restaurer sur un autre Mac
 
 ```bash
