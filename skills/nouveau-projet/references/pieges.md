@@ -102,6 +102,12 @@
   `run_sql` puisse l'utiliser avec `role_name`. Vérifier `pg_auth_members` avant d'accorder quoi
   que ce soit.
 - Le MCP Neon refuse (garde-fou) les `UPDATE`/`DELETE` sans cible précise : cibler par id.
+- **Dans une session cloud, Postgres en TCP (port 5432) est bloqué** : `pnpm db:migrate` échoue
+  (connexion qui expire). Appliquer la migration par HTTPS : MCP Neon `run_sql_transaction` avec les
+  instructions du fichier (séparées par `--> statement-breakpoint`), plus la ligne de
+  `drizzle.__drizzle_migrations` (`hash` = sha256 du fichier, `created_at` = `when` du journal), dans
+  la même transaction. Lire d'abord les lignes existantes pour copier leur format (Job HQ, 23 octobre
+  2026).
 
 ## Vercel
 
@@ -133,6 +139,10 @@ pas en bash (guillemets).
 - **Une routine cloud n'atteint que les domaines autorisés** : un run échoue avec
   `fetch failed` ou un `403` du proxy (`CONNECT tunnel failed`) tant que l'accès réseau de
   l'environnement n'autorise pas le domaine de l'app. Ce n'est pas le jeton.
+- **Une tâche planifiée créée depuis une session (`create_trigger`) n'emporte pas les connecteurs**
+  (Neon, Gmail…) : elle tourne sans, et tout appel au connecteur échoue. Les ajouter à la tâche dans
+  l'interface des tâches planifiées de claude.ai, et le dire à Amine en la créant (« Carrière :
+  aligner », 23 octobre 2026).
 - **Arrêter un serveur de dev** : par port ou PID (`lsof -t -iTCP:3000 -sTCP:LISTEN`).
   `pkill -f "next dev"` tue aussi le shell qui le lance.
 
