@@ -184,6 +184,8 @@ règle.
   et lancement.
 - `aligner` : après un changement visible dans une app, remettre d'accord avec ses faits le site,
   les fiches des stores et les notes de HQ (appelée par `mise-en-ligne`).
+- `aligner-carriere` : garder vrais mon site, mes CV, la routine de candidatures et mon LinkedIn
+  quand mes projets avancent (routine du lundi ; petit corrigé, gros demandé dans Job HQ).
 - `pwa` : rendre un site installable sur téléphone.
 - Sur appel seulement : `/transitions-dev`, `/transitions-polish`,
   `/transitions-ui-generation` (animations), `/anatomy` (illustrations isométriques).
