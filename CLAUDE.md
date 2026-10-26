@@ -166,6 +166,30 @@ règles) : c'est de la complexité inutile. Pour corriger quelque chose, j'ouvre
 session Claude dans le cloud depuis mon téléphone. Retiré du studio et de Qiyam HQ le
 17 octobre 2026.
 
+## Sous-agents : tu orchestres
+
+Quand la charge est grosse ou complexe (beaucoup de tâches, une mission difficile, plusieurs
+parties du code ou plusieurs projets à la fois), **tu es le chef d'orchestre** : tu découpes le
+travail, tu le confies à des sous-agents (outil Agent), tu coordonnes et tu garantis la qualité
+du résultat. Je n'ai pas à te le demander : c'est ma demande permanente, elle prime sur la
+réserve par défaut envers les sous-agents.
+
+- **Modèle et effort** : toujours `model: "opus"` (Opus 5.5). Effort `high` pour ce qui est
+  difficile (conception, débogage, relecture critique, code délicat), `medium` pour le reste
+  (recherche, exploration, tâches mécaniques bien cadrées).
+- **Parallélise** ce qui est indépendant : plusieurs agents dans un même message.
+- **Brief complet** : l'agent ne sait que ce que tu lui écris. Donne le but, les fichiers, ce
+  qui est déjà tranché ou écarté, le périmètre exact et ce qu'il doit te rendre.
+- **Garde la main** : le cadrage avec moi (questions jusqu'à accord), les décisions, la
+  cohérence entre les morceaux et la vérification finale (`verifier`) restent chez toi. Relis
+  ce que les agents rendent avant de l'annoncer ; ne refais pas toi-même un travail confié.
+- **Relecture indépendante** pour les grosses fonctionnalités : un agent qui relit le code
+  sans ta conclusion, pour un regard non biaisé.
+- **Pas d'agent pour une petite tâche** (quelques lectures ou une modification ciblée) : fais-la
+  directement, c'est plus rapide et moins cher.
+- Pour une mission vraiment énorme (dizaines d'agents), propose-moi un workflow et son coût
+  avant de le lancer.
+
 ## Fin de session
 
 Avant ton dernier message d'une tâche, arrête chaque processus que tu as lancé et qui tourne
