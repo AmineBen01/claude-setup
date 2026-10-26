@@ -136,6 +136,13 @@ pas en bash (guillemets).
 
 ## Routines cloud et processus
 
+- **Jamais `pnpm test | grep … && git push`** : le `grep` qui trouve la ligne « Tests » renvoie 0
+  même quand des tests échouent, et la chaîne pousse (vu le 26 octobre 2026). Lire le résultat,
+  puis committer dans une commande à part.
+- **Des tests lourds en calcul (balayages de milliers de cas) affament les tests de base de données
+  lancés en parallèle** : délais de 30 s au hasard. Les mettre dans un projet Vitest à part qui passe
+  d'abord (`projects` + `sequence.groupOrder`), pas les retirer.
+
 - **Une routine cloud n'atteint que les domaines autorisés** : un run échoue avec
   `fetch failed` ou un `403` du proxy (`CONNECT tunnel failed`) tant que l'accès réseau de
   l'environnement n'autorise pas le domaine de l'app. Ce n'est pas le jeton.
