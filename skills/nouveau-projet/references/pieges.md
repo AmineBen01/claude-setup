@@ -347,3 +347,12 @@ pas en bash (guillemets).
   au public.
 - Un connecteur réutilise les fonctions des routes de l'app (jamais de logique à part) et ne lit que
   les données de l'utilisateur du jeton.
+
+## Plusieurs portes vers le même produit
+
+- **App, site web de l'app, connecteur : une seule source pour ce qu'ils disent** (Ironmile, 28 octobre
+  2026 : la page Connexions du web gardait l'ancien menu Strava corrigé dans l'app). Les textes et les
+  règles partagés vivent dans `packages/core` ; un changement de ce que l'app montre ou fait touche les
+  autres portes dans le même commit (ou la porte dit « dans l'app »). Le `CLAUDE.md` du projet l'écrit
+  dans ses règles.
+
