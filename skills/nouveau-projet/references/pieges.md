@@ -311,6 +311,12 @@ pas en bash (guillemets).
 - **Un worktree peut partir d'un commit plus ancien que `main`** (vu le 22 octobre 2026) :
   vérifier `git worktree list` et faire `git merge main` dans le worktree avant tout travail qui
   dépend du dernier commit.
+- **Un build de dev sur un autre simulateur et un autre port de Metro, sans rebuild** (vu le
+  28 octobre 2026 sur Ironmile) : copier l'app installée sur le simulateur principal
+  (`xcrun simctl get_app_container <udid> <bundle id> app`, `cp -R`, `xcrun simctl install <autre udid>`),
+  puis `xcrun simctl spawn <autre udid> defaults write <bundle id> RCT_jsLocation localhost:<port>`
+  (un build de dev sans expo-dev-client cherche Metro là) et `EXPO_PUBLIC_API_URL=http://localhost:<port API>
+  npx expo start --port <port>`.
 - Chaque agent ses ports (API, Metro) et son simulateur ; la base de dev partagée ne reçoit que
   des migrations additives écrites pour tourner deux fois (`IF NOT EXISTS`), renumérotées à la
   fusion (régénérer avec `drizzle-kit generate` pour un instantané juste, puis remettre le SQL
