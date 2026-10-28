@@ -301,3 +301,14 @@ pas en bash (guillemets).
   des migrations additives écrites pour tourner deux fois (`IF NOT EXISTS`), renumérotées à la
   fusion (régénérer avec `drizzle-kit generate` pour un instantané juste, puis remettre le SQL
   idempotent).
+
+## Rédaction (site, fiches, posts)
+
+- **Les faits disent ce qui est vrai, pas quoi écrire** (Ironmile, 27 octobre 2026). Une page
+  bâtie en recopiant les phrases de `lib/product/facts.ts` (`fact("a") + fact("b")` dans une FAQ,
+  des paragraphes « inventaire ») énonce sans convaincre ; Amine l'a vu tout de suite. Le texte
+  suit un argument (le problème, une preuve vécue, le prix) et cite un fait seulement là où il
+  prouve ce que le lecteur veut savoir à ce moment, avec ses mots ; moins de faits, mieux placés.
+  Les chiffres restent importés du code. La skill `aligner` rend un texte vrai, elle ne le
+  remplit pas des faits du jour.
+
