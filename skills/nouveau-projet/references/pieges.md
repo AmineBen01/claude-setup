@@ -155,6 +155,13 @@ pas en bash (guillemets).
 
 ## Better Auth
 
+- **`BETTER_AUTH_URL` = le domaine public** (`https://<app>.app`), jamais l'adresse `*.vercel.app` :
+  Better Auth ne fait confiance qu'à sa propre origine, donc une connexion ou une réinitialisation
+  postée depuis une page du vrai domaine est refusée « Invalid origin » (Ironmile, 28 octobre 2026 :
+  le site web et la page de réinitialisation étaient cassés sans qu'on le voie, l'app native passait
+  par `ironmile://`). Vérifier en ligne : `POST /api/auth/sign-in/email` avec `Origin` du domaine doit
+  répondre 401 (mauvais identifiants), pas 403.
+
 - Sur le driver HTTP de Neon : pas de transaction interactive, donc l'adaptateur tourne avec
   `transaction: false` (son défaut). Nos écritures sur plusieurs tables passent par `db.batch([...])`.
 - Ses tables sont générées : `pnpm dlx auth@<version> generate --config lib/auth.ts --output
