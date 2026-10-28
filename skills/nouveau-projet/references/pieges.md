@@ -191,6 +191,13 @@ pas en bash (guillemets).
   (~15 min). DerivedData n'y est pour rien.
 - **Santé et notifications sont natives** : tout changement de leurs plugins dans `app.json`
   demande `npx expo prebuild --clean` et un nouveau build de dev, sur les deux plateformes.
+- **Faire viser un autre port de Metro à un build de dev sans `expo-dev-client`** (plusieurs
+  sessions en parallèle, chacune son Metro) : le build lit `RCT_jsLocation` dans les préférences
+  de son conteneur. `defaults write` simple écrit à côté et rien ne change (« No script URL
+  provided ») ; passer par le démon du simulateur avec le chemin du conteneur : `xcrun simctl spawn
+  <udid> defaults write <conteneur data>/Library/Preferences/<bundle id> RCT_jsLocation
+  localhost:8083` (conteneur : `xcrun simctl get_app_container <udid> <bundle id> data`), puis
+  relancer l'app. Supprimer la clé à la fin (vu le 28 octobre 2026 sur Ironmile).
 - **Ne pas descendre le `compileSdk` d'Android sous celui d'Expo** (SDK 58 : 37). Health Connect
   n'a besoin que de `minSdkVersion: 26` (`expo-build-properties`).
 - `npx expo install <paquet>` toujours (versions accordées au SDK).
