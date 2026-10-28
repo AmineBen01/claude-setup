@@ -312,3 +312,18 @@ pas en bash (guillemets).
   Les chiffres restent importés du code. La skill `aligner` rend un texte vrai, elle ne le
   remplit pas des faits du jour.
 
+## Connecteur Claude (MCP) d'une app
+
+- **Better Auth 1.7 sert un connecteur claude.ai** avec `@better-auth/oauth-provider` + `@better-auth/mcp`
+  (Ironmile, 28 octobre 2026, `apps/api/app/mcp/`, `lib/connector/`) : l'enregistrement dynamique des
+  clients (RFC 7591) s'active **explicitement**, et les routes de métadonnées s'ajoutent à la main dans
+  Next (`/.well-known/oauth-protected-resource/<chemin du serveur>` et
+  `/.well-known/oauth-authorization-server/api/auth`, aussi à la racine). Claude n'utilise que le
+  premier serveur d'autorisation listé ; son retour OAuth est `https://claude.ai/api/mcp/auth_callback`.
+- **`fetch` de Node reçoit une réponse JSON de redirection** depuis `/oauth2/authorize` là où un
+  navigateur reçoit un 302 : un test de bout en bout doit suivre l'URL du JSON.
+- **Les limites de débit de Better Auth (5 par minute par IP)** s'appliquent à toute la plage d'IP
+  sortante de Claude (partagée par tous ses utilisateurs) : à relever avant d'ouvrir le connecteur
+  au public.
+- Un connecteur réutilise les fonctions des routes de l'app (jamais de logique à part) et ne lit que
+  les données de l'utilisateur du jeton.
