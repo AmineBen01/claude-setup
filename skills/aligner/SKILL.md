@@ -51,9 +51,16 @@ reprendre les mots du fait.
 
 ## 3. Corriger ou demander
 
+**Les faits disent ce qui est vrai, pas quoi écrire** (Amine, 27 octobre 2026, après un site
+Ironmile qui alignait les faits au lieu de convaincre). Un texte cite un fait seulement là où il
+prouve ce que le lecteur veut savoir à ce moment, avec ses propres mots : jamais une liste de faits,
+jamais la phrase d'un fait recopiée, et moins de faits plutôt qu'un inventaire. Aligner, c'est
+rendre le texte vrai, pas le remplir des faits du jour : un fait nouveau n'entre dans un texte que
+s'il sert son argument (sinon, rien à faire, ou une demande si une section manque vraiment).
+
 - **Une phrase fausse ou dépassée** (un chiffre, une règle, une plateforme, une fonctionnalité qui
-  a changé de nom ou de palier) : la corriger soi-même, dans le dépôt concerné, en reprenant la
-  phrase du fait. Commit et push dans ce dépôt (« Aligner : … »), avec la règle de livraison de
+  a changé de nom ou de palier) : la corriger soi-même, dans le dépôt concerné, pour qu'elle dise
+  vrai **dans la voix du texte où elle est**, jamais en collant la phrase du fait. Commit et push dans ce dépôt (« Aligner : … »), avec la règle de livraison de
   chaque projet.
 - **Ce qui demande du jugement ou du design** : une nouvelle section pour une fonctionnalité, une
   refonte, de nouvelles captures, un article à réécrire : ne pas le faire ; déposer une demande
@@ -64,7 +71,8 @@ reprendre les mots du fait.
 - Un article de blog dont l'idée reste vraie mais un détail a changé : corriger le détail. Un
   article bâti sur ce qui n'est plus vrai : demande.
 - Ne jamais écrire une affirmation qu'aucun fait ne soutient, ni un prix ou une durée d'essai pour
-  Qiyam.
+  Qiyam. Ne jamais construire une phrase en mettant des faits bout à bout (`fact("a") + fact("b")`
+  dans une page, ou leur texte recopié) : les chiffres se lisent dans le code, les phrases s'écrivent.
 
 Un dépôt absent (session dans le cloud) : tout ce qu'on n'a pas pu lire ou corriger devient une
 demande, et on le dit.
