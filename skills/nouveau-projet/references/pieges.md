@@ -296,6 +296,14 @@ pas en bash (guillemets).
   ou réparation » qui contenait deux fois le schéma d'une séance a été refusé sur Haiku et Opus
   (« The compiled grammar is too large ») : tous les appels du coach auraient échoué en production.
   Un seul schéma plat, chaque gros objet une seule fois.
+- **Le schéma est près de la limite : un seul champ de plus peut tout casser, et rien en local ne le
+  voit** (Ironmile, 28 octobre 2026 : un champ `hr` nullable sur les étapes de course a fait échouer
+  en production tous les appels du coach, 400 « The compiled grammar is too large » ; les évals sur
+  `claude -p` et les tests à client simulé passaient). Un test réel à la demande
+  (`REAL_SCHEMA=1 … schema.real.test.ts`) envoie la requête de production telle quelle (même prompt,
+  même schéma, chaque modèle de la route, `max_tokens` minuscule, quelques centimes) et échoue sur
+  tout 400 : à lancer avant de pousser toute modification du schéma. Ce qui a une seule bonne réponse
+  (où va un plafond, une étiquette déduite) se calcule dans le code après la lecture, hors du schéma.
 - **La sortie, réflexion comprise, fait ~90 % de la facture** : mesurer l'effort (`low`,
   `medium`) sur des cas de test avant de le monter ; Ironmile est passé à `low` pour les plans
   hebdomadaires (−42 % de jetons, plans aussi bons).
