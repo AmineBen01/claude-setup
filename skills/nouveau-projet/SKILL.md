@@ -105,7 +105,8 @@ et RevenueCat » pour une app).
    Directory = `apps/web`** sur le projet, `vercel git connect --yes`, région `fra1`
    (`vercel.json`). Variables de production sans les afficher (`vercel env add NOM production <
    <(commande)`) : `DATABASE_URL` (production), et selon les modules `BETTER_AUTH_SECRET`,
-   `BETTER_AUTH_URL`, `APP_URL`, `RESEND_API_KEY`, `EMAIL_FROM`, `CRON_SECRET`,
+   `BETTER_AUTH_URL` et `APP_URL` (**le domaine public**, jamais `*.vercel.app` : piège « Better
+   Auth »), `RESEND_API_KEY`, `EMAIL_FROM`, `CRON_SECRET`,
    `REVENUECAT_SECRET_KEY`, `REVENUECAT_WEBHOOK_SECRET`. Crons : `vercel.json` (Pro), jamais
    GitHub Actions. Première mise en ligne par un push (`pnpm build` d'abord).
 9. **HQ** (module hq) : dans `~/Projects/headquarters`, l'app commence dans `lib/products.ts`
