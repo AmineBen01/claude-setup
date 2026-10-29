@@ -129,7 +129,8 @@
   viennent les visiteurs, un **drain Web Analytics** (`vercel api /v1/drains -X POST --input -`,
   schéma `analytics` v1, livraison `http` JSON signée HMAC-SHA1 dans `x-vercel-signature`,
   échantillonnage 1) vers une route de l'app, qui garde `queryParams`. Pas d'historique avant sa
-  création. Le script de `@vercel/analytics` se charge depuis un chemin au hasard
+  création. **`queryParams` arrive en objet JSON** (`{"ref":"tiktok"}`), pas en chaîne de requête
+  comme dans l'exemple de la doc : le lire comme tel. Le script de `@vercel/analytics` se charge depuis un chemin au hasard
   (`/<hash>/script.js`, puis `POST /<hash>/view`), pas `/_vercel/insights` : chercher ça pour
   vérifier qu'une visite part.
 
