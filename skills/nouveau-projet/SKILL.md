@@ -107,8 +107,12 @@ et RevenueCat » pour une app).
    <(commande)`) : `DATABASE_URL` (production), et selon les modules `BETTER_AUTH_SECRET`,
    `BETTER_AUTH_URL` et `APP_URL` (**le domaine public**, jamais `*.vercel.app` : piège « Better
    Auth »), `RESEND_API_KEY`, `EMAIL_FROM`, `CRON_SECRET`,
-   `REVENUECAT_SECRET_KEY`, `REVENUECAT_WEBHOOK_SECRET`. Crons : `vercel.json` (Pro), jamais
-   GitHub Actions. Première mise en ligne par un push (`pnpm build` d'abord).
+   `REVENUECAT_SECRET_KEY`, `REVENUECAT_WEBHOOK_SECRET`. Un secret que je génère et que j'aurai à
+   réutiliser depuis le Mac (`CRON_SECRET` pour appeler une route de maintenance…) va **d'abord dans
+   le trousseau** (`security add-generic-password -a <nom> -s <nom>-cron-secret -w "$(openssl rand
+   -hex 32)"`), puis dans Vercel depuis le trousseau : Vercel ne le rend jamais (piège « Vercel »).
+   Crons : `vercel.json` (Pro), jamais GitHub Actions. Première mise en ligne par un push
+   (`pnpm build` d'abord).
 9. **HQ** (module hq) : dans `~/Projects/headquarters`, l'app commence dans `lib/products.ts`
    (suivre son `CLAUDE.md`) ; `db/hq-reader.sql` appliqué aux deux branches, mot de passe posé, la
    chaîne de lecture donnée à HQ ; demandes approuvées et faits suivent alors l'app.

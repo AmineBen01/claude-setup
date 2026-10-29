@@ -80,6 +80,9 @@
   l'en-tête, les barres fixes et les marges latérales.
 - Icônes d'écran d'accueil en mode sombre : iOS les assombrit lui-même, un site ne peut
   rien y faire.
+- **Un contenu affiché dans un `<button>`** (aperçu cliquable, carte qu'on touche pour l'ouvrir)
+  hérite du `text-align: center` que WebKit met aux boutons : fixer `text-align` sur la racine du
+  contenu, sinon l'aperçu ne ressemble plus à l'original (vu sur l'aperçu des slides de HQ).
 
 ## Base de données (Neon + Drizzle)
 
@@ -116,6 +119,11 @@
 - `vercel link` ajoute `VERCEL_OIDC_TOKEN` à `.env.local` : sans danger, ignoré par git.
 - `vercel.json` avec `"regions": ["fra1"]` quand la base Neon est à Francfort.
 - Envoyer un secret sans l'afficher : `vercel env add NOM production < <(commande)`.
+- **Une variable « Secret » (sensible) ne se relit jamais** : `vercel env pull` écrit un masque
+  (`[redacted]`), pas la valeur. Un secret qu'on devra réutiliser depuis le Mac (appeler une route
+  de maintenance avec `CRON_SECRET`…) se garde dans le trousseau dès sa création ; sinon il faut le
+  remplacer (`vercel env update NOM production` avec la valeur sur l'entrée standard) puis
+  redéployer (`vercel redeploy <url>`). Vu sur HQ le 2026-10-29.
 
 ## Tâches planifiées
 
