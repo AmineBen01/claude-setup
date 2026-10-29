@@ -124,6 +124,14 @@
   de maintenance avec `CRON_SECRET`…) se garde dans le trousseau dès sa création ; sinon il faut le
   remplacer (`vercel env update NOM production` avec la valeur sur l'entrée standard) puis
   redéployer (`vercel redeploy <url>`). Vu sur HQ le 2026-10-29.
+- **Web Analytics sur le plan Pro : pas de `?ref=` par l'API** (vu le 2026-10-29 sur HQ) : l'API
+  répond 402 aux dimensions UTM (Enterprise ou l'option « Web Analytics Plus »). Pour savoir d'où
+  viennent les visiteurs, un **drain Web Analytics** (`vercel api /v1/drains -X POST --input -`,
+  schéma `analytics` v1, livraison `http` JSON signée HMAC-SHA1 dans `x-vercel-signature`,
+  échantillonnage 1) vers une route de l'app, qui garde `queryParams`. Pas d'historique avant sa
+  création. Le script de `@vercel/analytics` se charge depuis un chemin au hasard
+  (`/<hash>/script.js`, puis `POST /<hash>/view`), pas `/_vercel/insights` : chercher ça pour
+  vérifier qu'une visite part.
 
 ## Tâches planifiées
 
@@ -287,6 +295,17 @@ pas en bash (guillemets).
   affiche la date du jour, ce n'est pas un bug.
 - Nom, sous-titre, catégories, classement d'âge, étiquettes de confidentialité et déclaration de
   dispositif médical se règlent une fois dans l'interface web.
+- **Apple ajoute des questions au classement d'âge** (`socialMedia`, octobre 2026) : tant qu'une
+  est sans réponse, toute soumission échoue (409 `ENTITY_STATE_INVALID`, détail sur
+  `/v1/ageRatingDeclarations/…`), même pour une mise à jour. La déclaration ne se lit que par
+  `/v1/appInfos/<id>/ageRatingDeclaration` ; `scripts/asc-submit.mjs` signale les questions sans
+  réponse. C'est la déclaration d'Amine : il répond, ou donne son accord explicite.
+- **Réordonner les captures d'un jeu** (`PATCH …/appScreenshotSets/<id>/relationships/appScreenshots`)
+  exige la liste de **toutes** les captures du jeu (409 sinon) : supprimer les anciennes d'abord, puis
+  réordonner. Une nouvelle version reprend les captures et textes de la précédente.
+- **Sous-titre et mots-clés ne changent qu'avec une version** (le texte promotionnel, lui, à tout
+  moment) : pour changer la fiche sans changer l'app, une version au même code suffit. Les mots du
+  nom, du sous-titre et des mots-clés sont indexés ensemble : un mot répété est perdu.
 
 ## IA (Claude) dans une app
 
@@ -323,6 +342,10 @@ pas en bash (guillemets).
 
 ## Travail en parallèle (agents dans des worktrees)
 
+- **`isolation: "worktree"` crée le worktree du dépôt où tourne la session** (vu le 2026-10-29) :
+  lancée depuis `~/Projects`, ou depuis un autre dépôt, l'agent atterrit dans le mauvais repo. Lancer
+  depuis le dossier du dépôt visé, ou demander à l'agent de cloner le dépôt dans le scratchpad et d'y
+  travailler sur une branche (puis `git fetch <clone> <branche>` et fusionner).
 - **`.claude/worktrees/` dans `.gitignore`** : sinon `git status` du dépôt principal les montre.
 - **Un worktree peut partir d'un commit plus ancien que `main`** (vu le 22 octobre 2026) :
   vérifier `git worktree list` et faire `git merge main` dans le worktree avant tout travail qui
