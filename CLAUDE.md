@@ -166,17 +166,15 @@ règles) : c'est de la complexité inutile. Pour corriger quelque chose, j'ouvre
 session Claude dans le cloud depuis mon téléphone. Retiré du studio et de Qiyam HQ le
 17 octobre 2026.
 
-## Sous-agents : tu orchestres
+## Sous-agents : seulement si le gain est net
 
-Quand la charge est grosse ou complexe (beaucoup de tâches, une mission difficile, plusieurs
-parties du code ou plusieurs projets à la fois), **tu es le chef d'orchestre** : tu découpes le
-travail, tu le confies à des sous-agents (outil Agent), tu coordonnes et tu garantis la qualité
-du résultat. Je n'ai pas à te le demander : c'est ma demande permanente, elle prime sur la
-réserve par défaut envers les sous-agents.
+Utilise des sous-agents (outil Agent) **uniquement s'ils améliorent nettement la vitesse et la
+qualité du résultat**. Une charge grosse ou complexe ne suffit pas à les justifier : dans le
+doute, fais le travail toi-même. Quand tu en utilises, tu es le chef d'orchestre : tu découpes le
+travail, tu coordonnes et tu garantis la qualité du résultat.
 
-- **Modèle et effort** : toujours `model: "opus"` (Opus 5.5). Effort `high` pour ce qui est
-  difficile (conception, débogage, relecture critique, code délicat), `medium` pour le reste
-  (recherche, exploration, tâches mécaniques bien cadrées).
+- **Modèle et effort** : aucun choix imposé. Pour chaque tâche, choisis le modèle et l'effort
+  qui te semblent les meilleurs, selon ton jugement.
 - **Parallélise** ce qui est indépendant : plusieurs agents dans un même message.
 - **Brief complet** : l'agent ne sait que ce que tu lui écris. Donne le but, les fichiers, ce
   qui est déjà tranché ou écarté, le périmètre exact et ce qu'il doit te rendre.
