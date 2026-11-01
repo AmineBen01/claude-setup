@@ -1,102 +1,101 @@
-# Le style de mes interfaces : un outil précis et sobre
+# Concevoir une interface : sur mesure, jamais un modèle
 
-Validé sur le studio de contenu Qiyam (15 octobre 2026) : « c'est le type et le niveau de
-design que je veux ». À appliquer à toute nouvelle app et à tout écran remanié, avec la skill
-`frontend-design`. Implémentation de référence : **AmineBen01/content** (`app/globals.css`,
-`components/ui/button.tsx`, `components/status-badge.tsx`, `app/(studio)/page.tsx`,
-`app/(studio)/settings/page.tsx`, `components/post-workspace.tsx`).
+Décidé le 1er novembre 2026. Il n'y a plus de look maison : ni Stripe, Linear ou Vercel comme
+référence par défaut, ni police, couleur, forme ou barre latérale imposées. Chaque projet reçoit un
+design de haut niveau, tiré de son sujet et de ses utilisateurs, avec la skill `frontend-design`.
+Le niveau attendu : l'identité d'Ironmile (`~/Projects/ironmile/brand/README.md`) ; Amine : « c'est
+le niveau de travail et d'attention au détail que j'attends ».
 
-Références : **Linear**, le tableau de bord **Vercel / Stripe**, **Notion**.
+**Projet existant dont le `CLAUDE.md` cite l'ancien guide** : son look reste celui de
+`ancien-style-sobre.md` tant qu'Amine ne demande pas sa refonte.
 
-## Outil ou app grand public : la question à trancher d'abord
+## Ce qui reste obligatoire : l'usage
 
-Ce guide décrit un **outil** (studio, HQ, tableau de bord) : sobre, neutre, au service des
-données. Appliqué tel quel à une **app grand public** (qu'on ouvre pour soi, chaque jour), il
-donne un look « Expo / shadcn par défaut » qu'on ne reconnaît pas (constaté sur Ironmile le
-20 octobre 2026).
+- **Mobile d'abord**, puis l'élargissement.
+- **44 px minimum** pour toute cible tactile sur téléphone.
+- **Clair et sombre** qui suivent l'appareil, avec un choix Clair / Sombre / Auto
+  (`next-themes`, `attribute="class"`, `defaultTheme="system"`, `themeColor` par schéma). Les deux
+  thèmes sont dessinés, le sombre n'est pas une inversion.
+- **La largeur des grands écrans sert** : jamais une colonne étroite seule au milieu de 1440 px.
+- **Jamais enfantin** : Amine a jugé ainsi le look « mignon » et ses gros boutons arrondis. La
+  question est le ton de l'ensemble, pas une forme interdite.
 
-Pour une app grand public, la base reste celle-ci (gris neutres, une couleur d'action, pas
-d'ombres, pas de pilules, rien d'enfantin), **plus un système d'identité obligatoire**, tiré du
-monde du sujet, pour qu'on reconnaisse l'app sur une seule capture sans le logo :
+Tout le reste se décide pour le projet.
 
-- **une police de marque** pour les titres et **les chiffres** (Geist reste pour le texte) ;
-- **un composant signature** présent sur les écrans principaux (Ironmile : la bande de la
-  semaine) ;
-- **un motif** qui revient (Ironmile : la route, ses jalons et ses tirets) ;
-- **une voix** (Ironmile : le coach en Barlow italique, phrases courtes) ;
-- **une seule surface de couleur de marque**, pour la chose la plus importante de l'écran
-  principal (Ironmile : la séance du jour) ; partout ailleurs la couleur reste sur l'action ;
-- **un seul mouvement orchestré**, qui répond à un vrai moment (Ironmile : les barres de la
-  semaine qui poussent quand le coach l'a écrite). Il joue pour tout le monde : pas de version
-  coupée pour « Réduire les animations » (décidé le 21 octobre 2026).
+## Quand passer par les planches
 
-Exemple de référence : Ironmile, `brand/README.md` (règles) et
-`apps/mobile/src/components/{week-band,road,today-hero}.tsx`.
+| Travail | Démarche |
+|---|---|
+| Nouveau projet, refonte complète, y compris les outils internes | Tout le parcours ci-dessous |
+| Grand nouvel écran : une page ou un parcours avec sa propre tâche principale | Tout le parcours ; dans un projet existant, à l'intérieur de son identité, sauf refonte demandée |
+| Petit ajout (un champ, une ligne, un état, un réglage) | Suivre `brand/README.md` du projet, sans planches |
 
-## Ce que je ne veux plus (« enfantin », « slop »)
+Dans le doute sur « grand » : si Amine découvrirait une nouvelle façon d'utiliser le produit, c'est
+un grand écran.
 
-- Boutons en pilule, coins de 16 px partout, boutons de 56 px de haut.
-- Blocs de couleur pleine (une tuile de statistique bleue), pastilles teintées vert menthe ou
-  ambre, graphiques bicolores criards.
-- Le kit « SaaS » : chaque bloc dans la même carte blanche avec ombre, quel que soit le contenu.
-- Une seule police sans échelle typographique : titres et texte qui se ressemblent.
+## Le parcours, dans cet ordre
 
-## Les choix
+### 1. La carte des tâches, validée avant tout visuel
 
-- **Le contenu porte la couleur** (visuels, images, données). L'interface reste neutre : une
-  seule couleur d'action (celle de la marque), tout le reste en gris et en encre.
-- **Typographie : Geist** (`next/font/google`), échelle 12 / 13 / 14 / 15 / 17 / 20 / 24 px.
-  Titres de page 17 px sur téléphone, 15 px sur ordinateur ; titres de section 15 px semibold
-  avec une description de 13 px en gris ; chiffres en `tabular-nums`. Graisse 500 pour les
-  boutons, 600 pour les titres, jamais 700. Garder la police de marque pour le contenu
-  lui-même (ex. les diapositives) si elle existe.
-- **Gris neutres, sans teinte** (décidé le 16 octobre 2026 sur Qiyam HQ : le graphite bleuté
-  du studio faisait « bizarre » ; le studio garde son ancien thème tant que je ne demande
-  pas de le changer). Seule la couleur d'action et les données portent la marque.
-- **Couleurs, clair :** fond `#fafafa`, surfaces blanches, encre `#0a0a0a`, texte secondaire
-  `#6b6b6b`, lignes `#e5e5e5`, champs `#d4d4d4`, action = couleur de la marque.
-- **Couleurs, sombre : charbon doux, neutre** (style Linear / Notion), jamais un noir bleuté :
-  fond `#121212`, surfaces `#181818`, menus `#202020`, lignes `#2a2a2a`, texte `#e8e8e8`,
-  secondaire `#9a9a9a`, action = la couleur de la marque éclaircie.
-- **Statuts : un point de couleur + le mot en gris** (ambre à relire, bleu programmé, vert
-  publié, rouge échec, point vide pour neutre). Jamais de pastille pleine.
-- **Coins :** 6 px pour les contrôles, 8 px pour les panneaux (`--radius: 0.5rem`). Pas
-  d'ombre, sauf menus et panneaux qui s'ouvrent.
-- **Structure :** des listes à filets (`divide-y` dans un panneau bordé) plutôt que des cartes
-  empilées ; une bande de chiffres séparés par des filets plutôt que des tuiles ; les
-  réglages en lignes « titre + description à gauche, contrôle à droite ».
-- **Boutons :** 44 px de haut sur téléphone (minimum tactile d'Apple), 36 px sur ordinateur
-  (`h-11 md:h-9`), 15 px / 14 px. Un bouton principal désactivé devient gris neutre, pas bleu
-  délavé.
-- **Navigation :** barre latérale compacte (lignes de 32 px, compteurs en gris alignés à
-  droite, l'élément actif sur fond gris léger), en-tête de 48 px ; sur téléphone, onglets en
-  bas de 56 px, icônes 20 px trait fin, l'onglet actif en encre (pas en couleur).
-- **Barre latérale (ordinateur), comme ChatGPT** (décidé le 17 octobre 2026 après le même
-  défaut sur le studio et Qiyam HQ) :
-  - le **bouton de repli est dans la barre**, en haut à droite à côté du logo ; l'en-tête de la
-    page n'a ni bouton de repli ni trait vertical (pas de `SidebarTrigger` + `Separator` dans
-    l'en-tête) ;
-  - **repliée**, il ne reste que le logo, **toujours carré** (`size-6 shrink-0` dans un bouton
-    `size-8`, jamais dans un `SidebarMenuButton` qui le rétrécit) ; **au survol, le logo devient
-    le bouton d'ouverture** (icône `PanelLeftOpen`) ;
-  - **un fin interstice entre les entrées** (`SidebarMenu` en `gap-0.5`) : le gris du survol ne
-    se colle jamais au gris de l'entrée active ;
-  - modèle prêt : `references/modeles/sidebar-top.tsx` (bascule en CSS sur
-    `group-data-[collapsible=icon]`, donc même rendu serveur et navigateur).
-- **Écran de décision** (relire, approuver) : sur ordinateur la scène à gauche et un panneau
-  bordé à droite, collant ; sur téléphone **une barre fixe fine** au-dessus des onglets avec
-  l'action principale large et remplie, les secondaires compactes.
-- **Mouvement :** aucun, sauf l'ouverture des menus et panneaux. Pas d'apparitions animées.
-  (App grand public : un seul moment orchestré en plus, voir plus haut.)
-- **Textes :** phrases courtes, casse de phrase, pas de libellés en MAJUSCULES, pas de
-  « A · B · C » (des virgules), pas de flèche ajoutée aux liens.
+Pour chaque écran, en langage simple : **qui arrive ici et pourquoi ; ce qu'il doit comprendre en
+5 secondes ; la prochaine action ; ce qui peut attendre un niveau plus bas**. Partir des vraies
+données et, pour une refonte, de ce qui gêne aujourd'hui. Amine valide avec AskUserQuestion ; les
+planches montrent ensuite ces tâches-là, pas un décor.
 
-## Vérifier
+### 2. Deux ou trois références du domaine
 
-Captures en clair et en sombre, iPhone, Android et 1440 px. Se demander devant chaque écran :
-- **outil** : est-ce que ça pourrait être un écran de Linear ou de Vercel ?
-- **app grand public** : sans le logo, reconnaîtrait-on l'app sur cette capture ? Si non, il
-  manque la signature.
+Étudier 2 ou 3 des meilleurs produits **de ce domaine précis**, pas toujours les mêmes noms. Dire ce
+qu'on en reprend et pourquoi : un mécanisme d'usage, jamais un look copié. Vérifier ce qu'ils
+montrent aujourd'hui plutôt que de citer de mémoire.
 
-Dans les deux cas, si un élément attire l'œil sans être le contenu ou l'action principale,
-l'enlever.
+### 3. Trois directions artistiques, sur planches
+
+Toujours avec `frontend-design`, en planches HTML rendues par Chrome sans fenêtre et ouvertes dans
+Aperçu (dire l'ordre).
+
+- **Vraiment différentes** : chacune part d'une idée tirée du monde du sujet, et change la
+  composition, la typographie, la couleur, la densité et la façon de montrer les données. Trois
+  variantes de couleur d'un même écran ne comptent pas.
+- **Mêmes écrans principaux**, avec le **vrai contenu** (ou des données réalistes), sur téléphone et
+  1440 px, en clair et en sombre.
+- **Écrire pour chacune** son idée en une phrase, ce qu'elle rend plus facile, et ce qu'elle coûte.
+- **Éviter les looks de série** : tableau de bord SaaS gris, crème et serif, néon sur noir, dégradé
+  violet, éclairs, cartes identiques partout. **Se critiquer et redessiner avant de montrer.**
+
+Si la marque n'existe pas, la marque passe d'abord (`SKILL.md`, étape 1 bis).
+
+### 4. Le choix, puis la planche combinée
+
+Amine peut choisir écran par écran et mélanger. Une planche combinée vérifie que l'ensemble tient ;
+il la valide ; seulement alors le code commence.
+
+### 5. Écrire le système dans le repo
+
+`brand/README.md` : l'idée, la typographie, les couleurs clair et sombre, la composition, le
+composant signature, le motif, la voix, le mouvement, et ce qui est interdit **à ce projet**. Toutes
+les valeurs vivent dans un seul endroit du code (`globals.css`, `layout.tsx`). Pour un projet tiré
+du starter : remplir `apps/web/design-direction.json` et retirer la base nue, sinon le build échoue.
+
+### 6. Le critique indépendant, sur le vrai produit
+
+Pour un nouveau projet, une refonte ou un grand écran, une fois construit (`verifier`, section
+« Critique ») : un agent qui n'a pas vu ce raisonnement juge le produit.
+
+## Ce qu'une bonne interface fait toujours
+
+- **Ce qui demande une action vient d'abord** : en arrivant, on sait quoi faire, et quand il n'y a
+  rien à faire, l'écran le dit.
+- **Une action principale par écran**, atteignable au pouce, sans quitter ce qu'il faut lire pour
+  décider.
+- **Un chiffre a un sens** : il vient avec une comparaison, une tendance ou un seuil, et l'écran dit
+  si c'est bien ou non.
+- **Un statut se comprend sans légende**, et jamais par la couleur seule.
+- **La navigation suit les tâches**, pas la base de données : les usages quotidiens à un geste, le
+  reste plus bas.
+- **Aucune impasse** : les états vide, chargement, erreur et hors-ligne sont dessinés et disent quoi
+  faire ensuite.
+
+## Le test final
+
+Devant chaque écran : **sans le logo, reconnaîtrait-on ce projet ?** Et : **quelqu'un qui arrive
+comprend-il en 5 secondes quoi faire ?** Si non à l'une des deux, ce n'est pas fini.
