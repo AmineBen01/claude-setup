@@ -402,3 +402,5 @@ pas en bash (guillemets).
   starter et le test de `verifier` imposaient tous le même modèle, donc chaque projet finissait par se
   ressembler. Le starter est désormais une base nue, et son build échoue tant qu'une direction n'est
   pas choisie (`apps/web/design-direction.json`, `apps/web/scripts/check-design.mjs`).
+- **Une refonte prouve ce qu'elle ne refait pas** (Job HQ et HQ, 1er novembre 2026) : `globals.css` et les polices touchent aussi ce qui partage le layout racine (l'écran de Lahcen, les diapositives qui partent sur les réseaux). Capturer l'ancienne version avant de coder, puis comparer les images à l'identique (`cmp`) à la fin.
+- **Deux chiffres sur deux périodes se contredisent à un geste d'écart** (HQ : « en baisse » sur l'accueil, « en hausse » sur la page ouverte) : le lien emporte la période (`?period=7d`).
