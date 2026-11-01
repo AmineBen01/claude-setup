@@ -68,9 +68,7 @@ Pour chaque parcours :
 **Fenêtres et panneaux qui contiennent un champ** : les ouvrir au doigt (`locator.tap()`) ; le
 clavier ne doit pas s'ouvrir tout seul (`document.activeElement` n'est pas le champ).
 
-**Barre latérale (ordinateur)** : capture repliée et dépliée, survol d'une entrée voisine de
-l'entrée active. Le logo reste carré une fois replié, le bouton de repli est dans la barre et pas
-dans l'en-tête, deux fonds gris ne se touchent jamais.
+**Navigation repliable** : si le projet en a une, la regarder ouverte et repliée, et au survol.
 
 **Ce qui s'affiche ne prouve rien** : après chaque action qui écrit, relire la base. Sur
 ciao, une correction s'affichait à l'écran alors que le serveur l'avait refusée.
@@ -122,6 +120,22 @@ et les pièges « App native » et « Maestro » de `nouveau-projet/references/p
 5. **Ce que le simulateur ne prouve pas** (notifications push reçues, vraies données de santé,
    achat réel, ouverture d'un lien depuis Mail) : le dire dans le compte rendu, c'est pour le
    téléphone d'Amine via TestFlight.
+
+## 2 ter. Critique (nouveau projet, refonte ou grand écran)
+
+Une fois le produit construit, pour éviter de juger son propre travail : **un agent neuf** (outil
+Agent), à qui on ne donne ni le raisonnement ni la direction vue comme acquise. Son brief :
+
+- la **carte des tâches** validée et les captures (téléphone et 1440 px, clair et sombre), ou
+  l'adresse locale à parcourir, avec les tâches à accomplir ;
+- `brand/README.md` et `~/.claude/skills/nouveau-projet/references/design.md` ;
+- ce qu'il doit rendre : pour chaque tâche, où il a hésité ou s'est trompé ; pour chaque écran, ce
+  qu'on comprend en 5 secondes, si l'action principale est évidente, et si l'on reconnaîtrait le
+  projet sans le logo ; ce qui fait générique. Des constats précis (écran, élément, problème, effet).
+
+Corriger ce qui est réel, puis ne reprendre que les captures concernées. Dire dans le compte rendu
+ce qui a été laissé et pourquoi. **Le test à appliquer soi-même aussi** : la fin de
+`references/design.md` de `nouveau-projet`.
 
 ## 3. Relecture (grosses fonctionnalités seulement)
 

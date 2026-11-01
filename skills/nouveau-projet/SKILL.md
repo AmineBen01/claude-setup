@@ -15,7 +15,8 @@ et prouvé. Lire son `README.md` (les modules, ce qui n'est pas encore écrit) a
 (`pnpm check:modules` passe), et le dernier message le dit.
 
 Lire `references/pieges.md` **avant d'écrire du code** : tous les pièges déjà rencontrés.
-Lire `references/design.md` **avant toute interface** : le style que je veux.
+Lire `references/design.md` **avant toute interface** : comment concevoir un design sur mesure ; il
+n'y a plus de look maison.
 
 ## 1. Cadrage (règle globale : questions jusqu'à accord)
 
@@ -36,11 +37,10 @@ trouve. Puis, par tours d'AskUserQuestion, en langage simple, avec une recommand
 - **Nom** du projet : il donne le repo, l'adresse `<nom>.vercel.app` et, pour une app, le bundle
   `app.<nom>`. Un domaine à soi est une dépense : demander.
 - **Installation sur téléphone** souhaitée ? Si oui, skill `pwa` dans le plan.
-- **Outil ou app grand public ?** Un outil suit `references/design.md` tel quel ; une app
-  grand public y ajoute un système d'identité (voir « Outil ou app grand public » dans
-  `references/design.md`).
-- **Identité visuelle** : si la marque existe, ses couleurs, sa police et sa **palette
-  sombre** ; sinon, l'étape « Identité » ci-dessous, avant toute interface.
+- **La carte des tâches** : pour chaque écran, ce qu'on comprend en 5 secondes et la prochaine
+  action (`references/design.md`) ; validée ici, avant tout visuel.
+- **Identité visuelle** : si la marque existe, ce qu'elle impose ; dans tous les cas, l'étape
+  « Identité et design » ci-dessous avant toute interface, outils internes compris.
 - **Échéance** et première version testable.
 - **Autorisations dont j'aurai besoin** : envoyer les secrets à Vercel, créer repo, base
   et projet Vercel ; pour une app : projet Expo, app dans App Store Connect, RevenueCat ; pour
@@ -49,11 +49,13 @@ trouve. Puis, par tours d'AskUserQuestion, en langage simple, avec une recommand
 
 Puis le plan avec la liste **Décisions validées** ; attendre le feu vert.
 
-## 1 bis. Identité (marque à créer, ou app grand public)
+## 1 bis. Identité et design (tout projet avec un écran)
 
 Fait pour Ironmile le 20 octobre 2026 ; Amine : « c'est le niveau de travail et d'attention au
-détail que j'attends ». Toujours avec la skill `frontend-design`, en planches HTML rendues par
-Chrome sans fenêtre et ouvertes dans Aperçu :
+détail que j'attends ». Étendu aux sites et aux outils le 1er novembre 2026 : la démarche complète
+est dans `references/design.md` (références du domaine, directions, planche combinée). Toujours avec
+la skill `frontend-design`, en planches HTML rendues par Chrome sans fenêtre et ouvertes dans
+Aperçu :
 
 1. **La marque : 3 directions** tirées du monde du sujet (jamais les looks génériques : crème
    et serif, néon sur noir, dégradés, éclairs). Chaque planche : l'icône en grand et sur un
@@ -61,11 +63,11 @@ Chrome sans fenêtre et ouvertes dans Aperçu :
    écran, l'en-tête de la boutique. **Se critiquer et redessiner avant de montrer.**
 2. **Variantes et mélanges des favorites**, testées à 60 et 29 px, en mode sombre, les
    mots-symboles côte à côte ; puis le choix.
-3. **App grand public : 3 directions d'interface** sur les mêmes écrans principaux, avec du vrai
-   contenu ; le choix peut se faire écran par écran ; une planche combinée pour vérifier que
-   l'ensemble tient ; puis seulement le code.
-4. **Tout dans le repo** : `brand/README.md` (les règles), les sources SVG et un script qui
-   génère toutes les icônes (iOS : un fichier Icon Composer avec ses variantes sombre et
+3. **3 directions d'interface** sur les mêmes écrans principaux, avec du vrai contenu, sur téléphone
+   et 1440 px, précédées de 2 ou 3 références du domaine ; le choix peut se faire écran par écran ;
+   une planche combinée pour vérifier que l'ensemble tient ; puis seulement le code.
+4. **Tout dans le repo** : `brand/README.md` (les règles du système choisi), les planches
+   retenues, les sources SVG et un script qui génère toutes les icônes (iOS : un fichier Icon Composer avec ses variantes sombre et
    teintée, vérifiées avec `ictool` ; Android ; favicon ; site).
 
 ## 2. Socle (après le feu vert)
@@ -90,14 +92,15 @@ et RevenueCat » pour une app).
    fiche du store : le test `legal.test.ts` échoue tant qu'il en reste), la section « Project » du
    `CLAUDE.md`, `docs/decisions.md` avec les **Décisions validées**.
 5. **L'identité** (étape 1 bis faite) : `brand/mark-*.svg` puis `node scripts/brand-assets.mjs`
-   (toutes les icônes), `--primary` dans `apps/web/app/globals.css` et `action` dans
-   `apps/mobile/src/lib/theme.ts` (clair et sombre), police de marque (`--font-display-face` dans
-   `app/layout.tsx`, `font.display` côté app), `brand/README.md`.
-6. **Interface web** (skill `frontend-design` et `references/design.md`) : le starter a déjà le
-   thème (next-themes, Clair / Sombre / Auto dans l'en-tête et les réglages), le cadre du tableau
-   de bord (barre latérale du modèle `references/modeles/sidebar-top.tsx`, onglets en bas sur
-   téléphone) et les composants shadcn de HQ ; ajouter seulement ce que le projet demande, et des
-   pages pensées aussi pour 1440 px.
+   (toutes les icônes), toutes les valeurs dans `apps/web/app/globals.css` et `app/layout.tsx`, et
+   `apps/mobile/src/lib/theme.ts` pour une app (clair et sombre), `brand/README.md`. **Le starter
+   est une base nue : `pnpm build` échoue** tant que `apps/web/design-direction.json` n'indique pas
+   la direction choisie et que le marqueur de base nue reste dans `globals.css`. Ne jamais contourner
+   ce contrôle pour mettre en ligne.
+6. **Interface web** (skill `frontend-design` et `references/design.md`) : le starter apporte des
+   fonctions, pas un look : thème Clair / Sombre / Auto, écrans de comptes, site, blog, cadre du
+   tableau de bord, composants shadcn. **Tout se restyle et se recompose selon la direction choisie**,
+   y compris la navigation, le tableau de bord et les pages d'arrivée, à partir de la carte des tâches.
 7. **GitHub** : `gh repo create AmineBen01/<nom> --private --source . --push`. Module hq : secret
    `FACTS_TOKEN` (`security find-generic-password -s hq-facts-token -w | gh secret set
    FACTS_TOKEN`).
@@ -128,7 +131,8 @@ Un site sans aucune donnée (rare) part aussi du starter : retirer `db/` et le d
 
 ## 3. Construire, vérifier, livrer
 
-Construire les fonctionnalités du plan, puis `verifier` (section 2 bis pour une app), puis
+Construire les fonctionnalités du plan, puis `verifier` (section 2 bis pour une app, section
+« Critique » pour le design), puis
 `mise-en-ligne` (section « App des stores » pour une app).
 Rendre compte avec l'adresse et seulement ce que l'utilisateur doit tester sur un vrai
 appareil.

@@ -396,3 +396,9 @@ pas en bash (guillemets).
   autres portes dans le même commit (ou la porte dit « dans l'app »). Le `CLAUDE.md` du projet l'écrit
   dans ses règles.
 
+## Design
+
+- **Un look maison revient toujours s'il reste quelque part** (1er novembre 2026) : le guide, le
+  starter et le test de `verifier` imposaient tous le même modèle, donc chaque projet finissait par se
+  ressembler. Le starter est désormais une base nue, et son build échoue tant qu'une direction n'est
+  pas choisie (`apps/web/design-direction.json`, `apps/web/scripts/check-design.mjs`).

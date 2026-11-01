@@ -128,36 +128,24 @@ j'approuve. Au début d'une session de travail sur `headquarters`, `ironmile`, `
 (`~/Projects/headquarters/docs/lead-api.md`, jeton dans le trousseau : `hq-lead-token`),
 annonce-les-moi et traite-les en premier, puis marque chacune « faite » une fois livrée.
 
-## Design par défaut
+## Design : sur mesure, jamais un modèle
 
-Toute app avec un écran, sauf avis contraire :
-- **Charge la skill `frontend-design` avant d'écrire la moindre interface**, nouvelle ou
-  remaniée, **et suis mon style : `~/.claude/skills/nouveau-projet/references/design.md`**.
-  En bref : un outil précis et sobre (Linear, Vercel, Notion), Geist, surfaces neutres, une
-  seule couleur d'action, le contenu porte la couleur ; des listes à filets plutôt que des
-  cartes, statuts en point + mot, coins de 6 à 8 px, pas d'ombres ni de blocs de couleur
-  pleine, boutons de 44 px sur téléphone et 36 px sur ordinateur. Jamais de pilules ni de
-  look « mignon » : je l'ai jugé enfantin.
-- **Mode sombre** qui suit l'appareil, avec un choix Clair / Sombre / Auto dans l'en-tête et
-  dans les réglages : `next-themes` (`attribute="class"`, `defaultTheme="system"`), des
-  gris neutres sans teinte (charbon doux en sombre, voir `design.md`), la marque seulement
-  sur l'action et les données, `themeColor` par schéma de couleurs.
-- **App grand public** (qu'on ouvre pour soi, comme Ironmile) : la même base sobre **plus un
-  système d'identité** (police de marque pour titres et chiffres, composant signature, motif,
-  voix, une seule surface de couleur de marque, un seul mouvement orchestré), décidé sur planches
-  avant de coder. Voir « Outil ou app grand public » dans `design.md` et l'étape « Identité »
-  de `nouveau-projet`. Sans le logo, on doit reconnaître l'app sur une capture.
-- **Un tableau de bord shadcn professionnel** : barre latérale repliable sur l'ordinateur (à la
-  ChatGPT : bouton de repli dans la barre, logo carré qui devient le bouton d'ouverture au
-  survol, interstice entre les entrées ; modèle dans `nouveau-projet`), en-tête et onglets en
-  bas sur le téléphone ; cartes, tableaux et graphiques là où les
-  données le méritent, dans l'identité de la marque.
-- **La largeur des grands écrans sert** : une colonne principale et une colonne latérale,
-  des grilles, une scène avec un panneau à partir de `lg`. Jamais une colonne étroite seule
-  au milieu d'un écran de 1440 px. Toujours **mobile d'abord** : le téléphone, puis
-  l'élargissement.
-- `verifier` contrôle le clair **et** le sombre, sur iPhone, Android et 1440 px, avec une
+Il n'y a plus de look maison : ni Stripe, Linear ou Vercel par défaut, ni police, couleur ou mise en
+page imposées. **Avant toute interface, charge la skill `frontend-design` et suis
+`~/.claude/skills/nouveau-projet/references/design.md`.** En bref :
+
+- **Nouveau projet, refonte ou grand nouvel écran**, outils internes compris : la carte des tâches
+  que je valide (ce qu'on comprend en 5 secondes, la prochaine action), puis 2 ou 3 références du
+  domaine, puis **3 directions artistiques sur planches** avec le vrai contenu, le choix écran par
+  écran, une planche combinée, et seulement alors le code ; à la fin, un critique indépendant.
+- **Petit ajout** : suivre le `brand/README.md` du projet, sans planches.
+- **Ce qui reste obligatoire** : mobile d'abord, 44 px tactiles sur téléphone, clair et sombre qui
+  suivent l'appareil avec un choix Clair / Sombre / Auto, la largeur des grands écrans mise à profit,
+  et jamais enfantin.
+- **Le but** : un design qu'on reconnaît sans le logo et une interface où l'on voit tout de suite
+  quoi faire. `verifier` contrôle le clair **et** le sombre, sur iPhone, Android et 1440 px, avec une
   console sans erreur d'hydratation.
+- **Projets existants** : leur look ne change pas tant que je ne demande pas leur refonte.
 
 ## Pas de bouton « Corriger Claude » dans mes apps
 
