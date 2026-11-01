@@ -141,7 +141,9 @@
   en 13 h). Planifier deux essais par heure si l'endpoint ignore un doublon, et rafraîchir aussi à
   l'ouverture de l'app quand la donnée est vieille (`after()` dans le layout).
 - Équipe Vercel sur Pro (depuis le 20 octobre 2026) : les crons Vercel (`vercel.json`, `CRON_SECRET`)
-  n'ont plus la limite d'une par jour ; les préférer à GitHub Actions dans un nouveau projet.
+  n'ont plus la limite d'une par jour ; les préférer à GitHub Actions, aussi pour une tâche déjà
+  en place dont l'heure se remarque (Ironmile : « toutes les 30 min » → une exécution toutes les
+  4,6 h, la semaine du coach encore absente à 20 h 15 un dimanche ; passée à Vercel le 1er novembre 2026).
 
 ## Actions serveur : tester sans navigateur (secours)
 
