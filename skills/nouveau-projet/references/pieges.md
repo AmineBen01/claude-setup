@@ -144,6 +144,9 @@
   n'ont plus la limite d'une par jour ; les préférer à GitHub Actions, aussi pour une tâche déjà
   en place dont l'heure se remarque (Ironmile : « toutes les 30 min » → une exécution toutes les
   4,6 h, la semaine du coach encore absente à 20 h 15 un dimanche ; passée à Vercel le 1er novembre 2026).
+- **Un cron toutes les 5 minutes, toute la semaine, garde la base Neon éveillée** : elle s'endort après
+  5 minutes sans requête, donc environ 180 heures de calcul par mois à 0,25 CU, au-delà des quelque
+  100 du plan gratuit (chiffre de mémoire, à revérifier). Resserrer le cron sur les heures utiles (Ironmile : dimanche soir).
 
 ## Actions serveur : tester sans navigateur (secours)
 
