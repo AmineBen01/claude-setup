@@ -404,3 +404,13 @@ pas en bash (guillemets).
   pas choisie (`apps/web/design-direction.json`, `apps/web/scripts/check-design.mjs`).
 - **Une refonte prouve ce qu'elle ne refait pas** (Job HQ et HQ, 1er novembre 2026) : `globals.css` et les polices touchent aussi ce qui partage le layout racine (l'écran de Lahcen, les diapositives qui partent sur les réseaux). Capturer l'ancienne version avant de coder, puis comparer les images à l'identique (`cmp`) à la fin.
 - **Deux chiffres sur deux périodes se contredisent à un geste d'écart** (HQ : « en baisse » sur l'accueil, « en hausse » sur la page ouverte) : le lien emporte la période (`?period=7d`).
+
+## Vu sur Vestiaire (1er novembre 2026)
+
+- **`bytea` avec le driver HTTP de Neon** : il répond un `Buffer`, pas du texte hexadécimal. Un `customType` Drizzle qui fait `String(v)` corrompt le fichier sans erreur. Le `fromDriver` accepte les deux, et le test relit les octets (`RIFF`…), pas seulement le statut 200.
+- **Une `<input>`/image dans un `<button>` (bouton dans bouton)** : erreur d'hydratation, l'arbre est régénéré côté client. Le contrôle console de `verifier` l'attrape.
+- **État client initialisé depuis une prop (`useState(props.x)`) quand l'adresse change** : les données fraîches arrivent après le montage et l'état reste l'ancien. Dériver de la prop tant que la personne n'a rien choisi, et `key` sur le paramètre.
+- **`grid` sans colonnes sur téléphone** : une liste à défilement horizontal élargit toute la page (`grid-cols-[minmax(0,1fr)]`, `min-w-0`).
+- **Des dizaines de `<Link>` vers des pages dynamiques** : préchargement de chacune, inutile sur téléphone, et messages d'erreur dans WebKit à l'abandon : `prefetch={false}`.
+- **Boutiques vues d'un serveur** : C&A sert ses pages et ses photos à plat (`-08` devant, `-11` dos) ; H&M, Zalando, Decathlon, Adidas, Nike, Arket, COS, Weekday refusent ou renvoient une page vide. Toujours prévoir un chemin « l'utilisateur ajoute l'image ».
+- **Tests de navigateur en série** : la limite de 5 connexions par minute de Better Auth s'applique aussi à eux : espacer les connexions ou réutiliser la session.
