@@ -29,7 +29,8 @@ Repos, déjà attachés à la routine et clonés au démarrage (il n'y a pas d'o
 `claude-setup` (lecture). Un nouveau repo à suivre s'ajoute aux sources de la routine
 (`trig_01TUX9NEsVHAH1Xu3cwPhF9L`), depuis le Mac. Repère de la
 dernière passe : réglage `aligner_last_run` dans la base de Job HQ (Neon, projet `job-hq`
-`frosty-violet-16640419`, branche par défaut = production, table `settings`, valeur ISO). Pas de
+`frosty-violet-16640419`, branche par défaut = production, table `settings`, colonne `value` en jsonb : la date ISO entre guillemets JSON, ex.
+`'"2026-11-02T10:30:00Z"'::jsonb`). Pas de
 repère : prendre 7 jours.
 
 ## 2. Ce qui a changé depuis le repère
