@@ -24,8 +24,10 @@ demande du jugement.
 
 ## 1. Préparer (routine dans le cloud)
 
-Repos (ajouter avec `add_repo`, cloner selon sa réponse) : `amineben` et `job-hq` (écriture),
-`qiyam-app`, `ironmile`, `headquarters`, `ciao`, `starter`, `claude-setup` (lecture). Repère de la
+Repos, déjà attachés à la routine et clonés au démarrage (il n'y a pas d'outil `add_repo`) :
+`amineben` et `job-hq` (écriture), `qiyam-app`, `ironmile`, `headquarters`, `ciao`, `starter`,
+`claude-setup` (lecture). Un nouveau repo à suivre s'ajoute aux sources de la routine
+(`trig_01TUX9NEsVHAH1Xu3cwPhF9L`), depuis le Mac. Repère de la
 dernière passe : réglage `aligner_last_run` dans la base de Job HQ (Neon, projet `job-hq`
 `frosty-violet-16640419`, branche par défaut = production, table `settings`, valeur ISO). Pas de
 repère : prendre 7 jours.
@@ -38,9 +40,10 @@ repère : prendre 7 jours.
   de ces fichiers (récupérer l'historique avec `git fetch --shallow-since=<repère>`).
 - **Le flux HQ** : Ironmile `status` passé à `live` ? (le site bascule seul ; les CV, la routine
   et LinkedIn, non).
-- **Les autres repos** : `ciao`, `starter`, `headquarters` (architecture), et tout **nouveau
-  repo** (`list_repos` : créé ou poussé depuis le repère, hors `job-hq`, `dawah-map`,
-  `claude-setup`, `ai-job-search`, `instructions`, anciens prototypes).
+- **Les autres repos** : `ciao`, `starter`, `headquarters` (architecture). Les **nouveaux
+  repos** ne sont pas visibles depuis la routine : sur le Mac, `gh repo list AmineBen01` (créé ou
+  poussé depuis le repère, hors `job-hq`, `dawah-map`, `claude-setup`, `ai-job-search`,
+  `instructions`, anciens prototypes).
 - Rien de remarquable : mettre à jour le repère, terminer (pas de commit vide).
 
 ## 3. Passer ce qui me décrit
