@@ -272,6 +272,12 @@ pas en bash (guillemets).
 
 ## Maestro (tests de l'app native)
 
+- **Sur iOS, un `View` avec un `testID` cache ses enfants à `childOf`** (Ironmile, 3 nov. 2026 : deux cartes de
+  compétence, chacune avec ses `skill-step-<n>`). Le parent est trouvé, les enfants non. Viser par `index`
+  (`tapOn: { id: "skill-step-1", index: 1 }`) ou donner des `testID` uniques aux enfants.
+- **Le pavé numérique iOS n'a pas de touche « OK »** : `hideKeyboard` échoue. Toucher un texte hors du champ
+  (un intitulé visible), et vérifier que l'écran ferme bien le clavier à ce toucher.
+
 - `hideKeyboard` échoue sur iOS : taper sur un titre à la place.
 - **`inputText` contourne la majuscule automatique et la correction d'iOS** : « hello. i » arrive tel
   quel même dans un champ normal. Pour tester la majuscule, taper les touches du clavier à l'écran
