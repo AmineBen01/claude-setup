@@ -452,3 +452,22 @@ pas en bash (guillemets).
 - **Résilier une boîte payante efface ses messages définitivement** : c'est Amine qui clique, après avoir regardé ce qu'elle contient.
 - **E-mail à un utilisateur (relance, question) : texte brut.** Avec des boutons HTML et l'en-tête `List-Unsubscribe`, Gmail a classé l'e-mail de Qiyam dans Promotions ; le même en texte brut arrive dans Principale. Le lien de désinscription reste en bas du texte. Avant d'envoyer à de vrais utilisateurs : un aperçu envoyé à Amine seul, et l'interrupteur (variable d'environnement) que c'est Amine qui bascule.
 - **Envoi automatique : une ligne par destinataire et par occasion, réservée en base avant d'envoyer** (index unique + `onConflictDoNothing`, clé d'idempotence Resend dérivée de l'occasion) : un cron Vercel peut être livré deux fois.
+
+## Vu sur VMC Trainer (3 novembre 2026)
+
+- **`/favicon.ico` en 404 dans chaque console** : les navigateurs le demandent d'eux-mêmes malgré
+  `app/icon.png`. Le starter le génère désormais (`scripts/brand-assets.mjs` → `apps/web/public/favicon.ico`).
+- **Outil privé à un seul utilisateur** : un code d'accès (`APP_PASSCODE`) vérifié par `proxy.ts`
+  (Next 16) + un cookie httpOnly signé (HMAC, jamais le code lui-même), et chaque route le revérifie.
+  Le `?next=` de la page d'accès se résout avec `new URL(next, origine factice)` : un simple test
+  `startsWith("//")` laisse passer `/\t/evil.com` (le navigateur retire tabulations et retours).
+  Exclure du `matcher` tout fichier que le service worker met en cache (`offline.html`), sinon il
+  garde la page d'accès à la place. Modèle : `~/Projects/vmc-trainer/apps/web/lib/vmc/access.ts`.
+- **Mesurer un temps de réaction** : prendre l'instant d'affichage dans un `useLayoutEffect` au
+  moment où l'élément est posé, pas dans un `requestAnimationFrame` (il peut tomber bien plus tard,
+  les temps mesurés étaient faux de ~100 ms). Ignorer `e.repeat` sur les touches de réponse.
+- **Un état d'écran (`stage`) qui survit d'un bloc à l'autre** : le remettre à zéro au début de
+  chaque bloc, et faire lire l'index courant dans une ref par les minuteurs (pause pendant le
+  décompte → reprise au mauvais index, bloc vide enregistré).
+- **Lancer une agent de relecture indépendante avant de livrer** : sur VMC Trainer, 8 vrais bugs
+  que les tests et le parcours dans le navigateur n'avaient pas vus.
