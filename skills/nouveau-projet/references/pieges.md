@@ -279,6 +279,10 @@ pas en bash (guillemets).
   simulateur est celui de la langue du Mac (AZERTY ici) : « i » → « I » est une correction anglaise.
 - **Une ligne dont tout le `Pressable` porte un `accessibilityLabel` cache ses textes à Maestro** :
   viser le libellé (`".*New 5 km best.*"`), et y mettre ce qui compte (VoiceOver le lit aussi).
+  Une ligne de réglage (`Row` du starter) met sa valeur dans `accessibilityValue`, sinon VoiceOver
+  lit « Session length » sans « 75 minutes » (Ironmile, 2026-11-03) ; Maestro la vise par `testID`.
+- **Un `tapOn` sur un texte caché par la barre d'onglets flottante d'iOS 26 touche l'onglet** (sans
+  erreur : le flow continue sur un autre écran) : `scrollUntilVisible` avec `centerElement: true` d'abord.
 - Avec un émulateur Android allumé, passer `--device <udid>`, sinon Maestro prend Android.
 - iOS cache les champs de mot de passe sur les captures : un champ vide n'est pas un bug.
 - La feuille « Enregistrer le mot de passe ? » d'iOS 26 arrive après l'inscription ou la connexion,
