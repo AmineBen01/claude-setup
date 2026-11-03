@@ -262,10 +262,23 @@ pas en bash (guillemets).
 - Le simulateur n'a ni notifications push ni vraies données de montre : il prouve la demande
   d'autorisation et une synchro propre, pas plus. Health Connect montre d'abord son propre écran
   « Get started ».
+- **Clavier : `KeyboardAvoidingView` laisse le champ sous le clavier dans une feuille modale iOS**,
+  hors de portée même en défilant (Ironmile, 3 novembre 2026, prouvé sur le simulateur). Le
+  starter utilise `react-native-keyboard-controller` : `KeyboardProvider` à la racine,
+  `KeyboardAwareScrollView bottomOffset={72}` dans `Screen` quand `keyboard`. Module natif : nouveau
+  build de dev.
+- **`Panel` ne mettait pas de trait entre les lignes d'un `.map()` suivi d'une autre ligne** : les
+  enfants se lisent avec `Children.toArray` (aplatis), pas `Array.isArray`.
 
 ## Maestro (tests de l'app native)
 
 - `hideKeyboard` échoue sur iOS : taper sur un titre à la place.
+- **`inputText` contourne la majuscule automatique et la correction d'iOS** : « hello. i » arrive tel
+  quel même dans un champ normal. Pour tester la majuscule, taper les touches du clavier à l'écran
+  (`tapOn: { point: "55%,76%" }`, des pourcentages entiers : `54.8%` plante Maestro). Le clavier du
+  simulateur est celui de la langue du Mac (AZERTY ici) : « i » → « I » est une correction anglaise.
+- **Une ligne dont tout le `Pressable` porte un `accessibilityLabel` cache ses textes à Maestro** :
+  viser le libellé (`".*New 5 km best.*"`), et y mettre ce qui compte (VoiceOver le lit aussi).
 - Avec un émulateur Android allumé, passer `--device <udid>`, sinon Maestro prend Android.
 - iOS cache les champs de mot de passe sur les captures : un champ vide n'est pas un bug.
 - La feuille « Enregistrer le mot de passe ? » d'iOS 26 arrive après l'inscription ou la connexion,
@@ -337,6 +350,14 @@ pas en bash (guillemets).
   même schéma, chaque modèle de la route, `max_tokens` minuscule, quelques centimes) et échoue sur
   tout 400 : à lancer avant de pousser toute modification du schéma. Ce qui a une seule bonne réponse
   (où va un plafond, une étiquette déduite) se calcule dans le code après la lecture, hors du schéma.
+- **Même un seul champ de premier niveau peut dépasser la limite** (Ironmile, 3 novembre 2026 : un
+  tableau de chaînes nullable `recap` a fait refuser le schéma, une simple chaîne, une ligne par
+  ligne, est passée). Un champ ajouté pour un usage secondaire se lit avec `.catch(...)` : mal
+  formé ou absent, il ne coûte jamais un nouvel essai.
+- **Donner au modèle les nombres que le contrôle va vérifier** : la plupart des réessais d'un plan
+  hebdomadaire venaient de comptes (une course de moins, des minutes de trop) que le modèle devait
+  recalculer ; les mettre dans le brief, calculés par les mêmes fonctions que le contrôle, fait passer
+  plus de plans du premier coup.
 - **La sortie, réflexion comprise, fait ~90 % de la facture** : mesurer l'effort (`low`,
   `medium`) sur des cas de test avant de le monter ; Ironmile est passé à `low` pour les plans
   hebdomadaires (−42 % de jetons, plans aussi bons).
