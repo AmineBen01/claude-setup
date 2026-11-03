@@ -420,3 +420,12 @@ pas en bash (guillemets).
 - **Boutiques vues d'un serveur** : C&A sert ses pages et ses photos à plat (`-08` devant, `-11` dos) ; H&M, Zalando, Decathlon, Adidas, Nike, Arket, COS, Weekday refusent ou renvoient une page vide. Toujours prévoir un chemin « l'utilisateur ajoute l'image ».
 - **Tests de navigateur en série** : la limite de 5 connexions par minute de Better Auth s'applique aussi à eux : espacer les connexions ou réutiliser la session.
 - **Google avec Better Auth, une seule personne** (Vestiaire, là où le connecteur Claude impose Better Auth plutôt qu'Auth.js) : `socialProviders.google`, `accountLinking` avec `trustedProviders: ["google"]` pour rejoindre un compte existant, et la liste blanche à deux endroits : `databaseHooks.user.create.before` et `session.create.before` (retourner `false`). Sur la page du connecteur, `callbackURL` = `/connect` + sa requête signée, sans `oauth_query` dans le corps. Le client OAuth se crée dans la console (`headquarters-509211`), Google n'affiche son secret qu'une fois.
+
+## Adresses e-mail d'un domaine (Qiyam, 3 novembre 2026)
+
+- **Jamais de boîte mail payante** (Namecheap Private Email, etc.) : réception par **redirection** vers le Gmail d'Amine, envoi par **Resend**. Rien à payer, une seule boîte de réception.
+- **ImprovMX gratuit = 1 seul domaine** (déjà pris par ironmile.app). Pour les autres : **Forward Email**, gratuit sans limite de domaines, réglé seulement dans le DNS (Vercel) : `MX 10 mx1.forwardemail.net` et `mx2`, SPF `include:spf.forwardemail.net`, et le TXT `forward-email=…` **chiffré** (`POST https://api.forwardemail.net/v1/encrypt {"input":"contact:x@gmail.com,…"}`), sinon l'adresse Gmail est publique dans le DNS.
+- **Resend** : ajouter le domaine racine (région Irlande) pour envoyer en `@domaine` ; ses enregistrements (`resend._domainkey`, CNAME `send` et `rsend`) ne touchent pas aux MX de la redirection. Une clé « Sending access » limitée au domaine par usage (serveur, Gmail).
+- **Tester la redirection** : depuis le Mac, le port 25 est bloqué par le fournisseur ; envoyer par l'API Resend vers chaque alias, puis chercher dans Gmail (`subject:` + `in:anywhere`) et vérifier le libellé INBOX (pas Spam).
+- **« Envoyer en tant que » dans Gmail** : SMTP `smtp.resend.com`, port 465 (SSL), utilisateur `resend`, mot de passe = la clé : c'est Amine qui la colle, Claude ne saisit pas de clé.
+- **Résilier une boîte payante efface ses messages définitivement** : c'est Amine qui clique, après avoir regardé ce qu'elle contient.
