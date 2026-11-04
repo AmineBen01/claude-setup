@@ -119,20 +119,22 @@ prêt, contrôle du site en ligne, puis l'adresse et ce que je dois tester sur t
 
 Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 
-## Les demandes de Claude dans HQ
+## La file de Claude : Apex
 
-HQ (https://hq.amineben.ch, `~/Projects/headquarters`) réunit les chiffres et les posts de mes
-apps ; le « growth lead » y dépose des demandes de fonctionnalités et de correctifs, que
-j'approuve. Au début d'une session de travail sur `headquarters`, `ironmile`, `qiyam-app` ou
-`qiyam-website`, regarde les demandes **approuvées** pour ce repo
-(`~/Projects/headquarters/docs/lead-api.md`, jeton dans le trousseau : `hq-lead-token`),
-annonce-les-moi et traite-les en premier, puis marque chacune « faite » une fois livrée.
+Décidé le 4 novembre 2026, « HQ décide, Apex planifie ». **Apex** (https://apex.amineben.ch, mon
+planificateur, `~/Projects/apex`) est ta **seule file de travail**. Il réunit deux choses :
+- mes idées « Ready for Claude » ;
+- les demandes du growth lead que j'ai approuvées dans HQ (https://hq.amineben.ch). Elles y arrivent
+  toutes seules, en « Ready for Claude », avec la mention « from growth lead ».
 
-Même chose pour **mes idées « Ready for Claude » dans Apex** (https://apex.amineben.ch, mon
-planificateur, `~/Projects/apex`) : au début d'une session sur `qiyam-app`, `ironmile` ou
-`headquarters`, lis celles de ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
-`apex-claude-token`), annonce-les avec les demandes de HQ, traite-les (questions d'abord, comme pour
-toute fonctionnalité), puis marque chacune « done » une fois livrée.
+Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile` ou `headquarters` :
+1. lis les idées prêtes pour ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
+   `apex-claude-token`) ;
+2. annonce-les-moi et traite-les en premier (questions d'abord, comme pour toute fonctionnalité) ;
+3. marque chacune « done » avec une note (commit, ce qui a été fait) une fois livrée. Apex prévient
+   HQ tout seul.
+
+N'interroge plus les demandes de HQ directement.
 
 ## Design : sur mesure, jamais un modèle
 
