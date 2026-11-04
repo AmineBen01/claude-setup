@@ -183,6 +183,13 @@ pas en bash (guillemets).
   le site web et la page de réinitialisation étaient cassés sans qu'on le voie, l'app native passait
   par `ironmile://`). Vérifier en ligne : `POST /api/auth/sign-in/email` avec `Origin` du domaine doit
   répondre 401 (mauvais identifiants), pas 403.
+- **Connexion Google** (module `accounts`, du starter depuis Apex, 4 novembre 2026) : le client OAuth
+  se crée dans le projet GCP `headquarters-509211` (Google Auth Platform → Clients → Web application ;
+  redirections `<domaine>/api/auth/callback/google` et `http://localhost:3010/api/auth/callback/google`).
+  Le secret ne s'affiche qu'une fois : trousseau `<app>-google-client-secret`, puis Vercel
+  (`AUTH_GOOGLE_ID`, `AUTH_GOOGLE_SECRET`). Le champ `consent` de Better Auth doit rester
+  `required: false`, sinon toute inscription Google échoue (« consent is required ») ; le hook
+  l'exige à la place.
 
 - Sur le driver HTTP de Neon : pas de transaction interactive, donc l'adaptateur tourne avec
   `transaction: false` (son défaut). Nos écritures sur plusieurs tables passent par `db.batch([...])`.

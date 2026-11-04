@@ -110,7 +110,9 @@ et RevenueCat » pour une app).
    <(commande)`) : `DATABASE_URL` (production), et selon les modules `BETTER_AUTH_SECRET`,
    `BETTER_AUTH_URL` et `APP_URL` (**le domaine public**, jamais `*.vercel.app` : piège « Better
    Auth »), `RESEND_API_KEY`, `EMAIL_FROM`, `CRON_SECRET`,
-   `REVENUECAT_SECRET_KEY`, `REVENUECAT_WEBHOOK_SECRET`. Un secret que je génère et que j'aurai à
+   `REVENUECAT_SECRET_KEY`, `REVENUECAT_WEBHOOK_SECRET`, et si la connexion Google est voulue
+   `AUTH_GOOGLE_ID` et `AUTH_GOOGLE_SECRET` (piège « Better Auth »), plus `AUTH_ALLOWED_EMAIL`
+   (adresses séparées par des virgules) pour un outil privé à une personne. Un secret que je génère et que j'aurai à
    réutiliser depuis le Mac (`CRON_SECRET` pour appeler une route de maintenance…) va **d'abord dans
    le trousseau** (`security add-generic-password -a <nom> -s <nom>-cron-secret -w "$(openssl rand
    -hex 32)"`), puis dans Vercel depuis le trousseau : Vercel ne le rend jamais (piège « Vercel »).
