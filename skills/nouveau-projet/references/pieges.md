@@ -283,6 +283,19 @@ pas en bash (guillemets).
 - **`Panel` ne mettait pas de trait entre les lignes d'un `.map()` suivi d'une autre ligne** : les
   enfants se lisent avec `Children.toArray` (aplatis), pas `Array.isArray`.
 
+## Données de santé (Apple Health, Health Connect) — vu sur Ironmile, 4 novembre 2026
+
+- **Relire « depuis la dernière synchro » à la minute coupe le jour le plus ancien** : sa nuit n'a
+  plus que ses dernières minutes, ses pas leurs dernières centaines, et cette valeur partielle
+  écrase la valeur complète déjà enregistrée. Lire depuis minuit la veille du premier jour et
+  n'envoyer que des jours entiers.
+- **Une phase de sommeil compte pour le matin qui suit** (journée de sommeil de 18 h à 18 h, comme
+  Santé), pas pour le jour où elle finit : sinon la première heure d'une nuit passe à la veille.
+- **Plusieurs sources écrivent la même chose** (la montre en direct, son app dans Santé, Strava) :
+  pour chaque mesure, un ordre fixe (montre connectée d'abord) et jamais « le dernier arrivé gagne ».
+  Une séance arrive en plusieurs copies, parfois d'un autre type (Strava écrit une séance de muscu
+  en « entraînement ») : les regrouper par heure de début et durée, pas par type.
+
 ## Maestro (tests de l'app native)
 
 - **Sur iOS, un `View` avec un `testID` cache ses enfants à `childOf`** (Ironmile, 3 nov. 2026 : deux cartes de
