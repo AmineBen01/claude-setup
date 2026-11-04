@@ -83,6 +83,9 @@
 - **Un contenu affiché dans un `<button>`** (aperçu cliquable, carte qu'on touche pour l'ouvrir)
   hérite du `text-align: center` que WebKit met aux boutons : fixer `text-align` sur la racine du
   contenu, sinon l'aperçu ne ressemble plus à l'original (vu sur l'aperçu des slides de HQ).
+- **`line-clamp-*` sur un `<button>` est ignoré par WebKit** (vu le 4 novembre 2026, vue Semaine
+  d'Apex) : le titre s'étalait sur 8 lignes. Mettre le `line-clamp` sur un `<span>` à l'intérieur du
+  bouton.
 
 ## Base de données (Neon + Drizzle)
 
@@ -403,6 +406,14 @@ pas en bash (guillemets).
   puis `xcrun simctl spawn <autre udid> defaults write <bundle id> RCT_jsLocation localhost:<port>`
   (un build de dev sans expo-dev-client cherche Metro là) et `EXPO_PUBLIC_API_URL=http://localhost:<port API>
   npx expo start --port <port>`.
+- **Deux sessions Claude sur le même projet web** (vu le 4 novembre 2026, Apex) : un `git worktree`
+  à soi (`git worktree add -b <branche> ../<projet>-<sujet> origin/main`, copier `.env.local`,
+  `pnpm install`), sans jamais toucher l'arbre de l'autre ; un autre port, en surchargeant pour ce
+  seul processus `BETTER_AUTH_URL` et `APP_URL` (sinon la connexion échoue sur l'origine) ; pour se
+  connecter sans le mot de passe d'Amine, `AUTH_ALLOWED_EMAIL=<adresse de test>` dans la même
+  commande et un compte de test sur la base de dev. Rebaser sur `origin/main` juste avant de pousser
+  (`git push origin HEAD:main`), prévenir l'autre session (SendMessage) des fichiers en commun et des
+  numéros de migration pris. Un `fatal error in commit_refs` de GitHub au push est passager : refaire.
 - Chaque agent ses ports (API, Metro) et son simulateur ; la base de dev partagée ne reçoit que
   des migrations additives écrites pour tourner deux fois (`IF NOT EXISTS`), renumérotées à la
   fusion (régénérer avec `drizzle-kit generate` pour un instantané juste, puis remettre le SQL
