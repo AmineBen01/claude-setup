@@ -128,6 +128,12 @@ j'approuve. Au début d'une session de travail sur `headquarters`, `ironmile`, `
 (`~/Projects/headquarters/docs/lead-api.md`, jeton dans le trousseau : `hq-lead-token`),
 annonce-les-moi et traite-les en premier, puis marque chacune « faite » une fois livrée.
 
+Même chose pour **mes idées « Ready for Claude » dans Apex** (https://apex.amineben.ch, mon
+planificateur, `~/Projects/apex`) : au début d'une session sur `qiyam-app`, `ironmile` ou
+`headquarters`, lis celles de ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
+`apex-claude-token`), annonce-les avec les demandes de HQ, traite-les (questions d'abord, comme pour
+toute fonctionnalité), puis marque chacune « done » une fois livrée.
+
 ## Design : sur mesure, jamais un modèle
 
 Il n'y a plus de look maison : ni Stripe, Linear ou Vercel par défaut, ni police, couleur ou mise en
