@@ -195,7 +195,10 @@ pas en bash (guillemets).
   `transaction: false` (son défaut). Nos écritures sur plusieurs tables passent par `db.batch([...])`.
 - Ses tables sont générées : `pnpm dlx auth@<version> generate --config lib/auth.ts --output
   db/auth-schema.ts --yes`, avec `import "server-only"` commenté dans `db/index.ts` pendant
-  l'exécution (le CLI ne sait pas le charger) et `DATABASE_URL` exportée.
+  l'exécution (le CLI ne sait pas le charger) et `DATABASE_URL` exportée. **Relire le diff de
+  `auth-schema.ts` avant `db:generate`** (Apex, 4 novembre 2026) : le CLI réécrit tout le fichier et
+  perd ce qu'on y a réglé à la main (`consent` y redevenait sans défaut ni `not null`, et la migration
+  aurait modifié la table `user` en production). Remettre la ligne, puis générer.
 - `after()` lève une erreur hors requête : les tests qui appellent les handlers directement la
   font échouer. Le travail en arrière-plan passe par un `later()` qui l'ignore sous Vitest (starter :
   `apps/web/lib/later.ts`).
@@ -430,6 +433,12 @@ pas en bash (guillemets).
   au public.
 - Un connecteur réutilise les fonctions des routes de l'app (jamais de logique à part) et ne lit que
   les données de l'utilisateur du jeton.
+- **Des server actions qui lisent la session ne servent pas un connecteur** (Apex, 4 novembre 2026) :
+  leur logique va dans `lib/ops.ts` (l'id de l'utilisateur en premier argument), et `lib/actions.ts`
+  ne garde que des enveloppes `"use server"` (session + `refresh()`). Une action qui en appelait une
+  autre perdait son `refresh()` implicite : le remettre dans son enveloppe.
+- **Navigateur de test et limite de 5 connexions par minute** : donner à chaque contexte Playwright
+  sa propre adresse (`extraHTTPHeaders: { "x-forwarded-for": "10.9.x.y" }`), comme les tests Vitest.
 
 ## Plusieurs portes vers le même produit
 
