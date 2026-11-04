@@ -488,3 +488,26 @@ pas en bash (guillemets).
   décompte → reprise au mauvais index, bloc vide enregistré).
 - **Lancer une agent de relecture indépendante avant de livrer** : sur VMC Trainer, 8 vrais bugs
   que les tests et le parcours dans le navigateur n'avaient pas vus.
+
+## Vu sur Apex (4 novembre 2026)
+
+- **Planches HTML : un `id` SVG qui porte le nom d'un élément de la page** (`url(#r1)` alors qu'une
+  rangée de la planche s'appelle `id="r1"`) : le dégradé pointe vers la `div` et la forme sort vide, sauf
+  la première. Préfixer les ids des dégradés (`sky0`, `sky1`…).
+- **Première visite : la page lit en même temps que le layout prépare le compte** (valeurs par défaut,
+  modèle de journée…) : la page crée ses données avant que les défauts existent (une journée sans blocs).
+  La fonction de données appelle elle-même la préparation (`ensureSetup` idempotent), et toute copie
+  « une seule fois » est garantie par un **index unique** en base, pas seulement par un verrou applicatif.
+- **Rappels à l'heure avec Neon gratuit** : pas de cron à la minute (la base ne s'endort jamais). Cron
+  toutes les 15 min sur les heures utiles ; chaque passage envoie ce qui commence dans [T, T+15) en
+  donnant l'heure exacte, réservé dans une table `notification_log` avant l'envoi (cron livré deux fois).
+- **Horaires de prière d'une mosquée (Mawaqit)** : pas d'API publique, mais la page publique de la
+  mosquée (`mawaqit.net/fr/<slug>`) porte toute l'année dans `confData.calendar` (12 mois, jour →
+  [fajr, shuruq, dhuhr, asr, maghrib, isha]). Lire l'objet accolade par accolade (chaînes respectées),
+  copier l'année en base chaque nuit, repli approximatif signalé si un jour manque. Modèle :
+  `~/Projects/apex/apps/web/lib/prayers.ts`.
+- **Mode auto de Claude Code** : `vercel env pull` de la production d'un autre projet et `vercel redeploy`
+  d'un autre projet sont refusés. Poser les variables (`vercel env add … --force`), puis laisser le
+  prochain déploiement normal les prendre, ou demander à Amine.
+- **Grille sans colonnes sur téléphone** (déjà noté) : revu sur une page Réglages en deux colonnes —
+  `grid-cols-[minmax(0,1fr)] md:grid-cols-2` et `min-w-0` sur chaque colonne.
