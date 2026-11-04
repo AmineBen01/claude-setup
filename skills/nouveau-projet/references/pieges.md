@@ -426,6 +426,11 @@ pas en bash (guillemets).
   Next (`/.well-known/oauth-protected-resource/<chemin du serveur>` et
   `/.well-known/oauth-authorization-server/api/auth`, aussi à la racine). Claude n'utilise que le
   premier serveur d'autorisation listé ; son retour OAuth est `https://claude.ai/api/mcp/auth_callback`.
+- **Avec `cacheComponents`, les routes de métadonnées OAuth (`/.well-known/…`) doivent appeler
+  `await connection()`** avant le handler de Better Auth (Apex, 4 novembre 2026) : sinon Next tente de les
+  prérendre au build (« needs to bail out of prerendering … request.headers ») et le build échoue. Le
+  cache de build de Vercel l'a masqué deux fois avant d'échouer : un build local réussi ne le prouve
+  qu'après `rm -rf .next/cache`. Les tests qui appellent ces handlers simulent `connection` (`vi.mock`).
 - **`fetch` de Node reçoit une réponse JSON de redirection** depuis `/oauth2/authorize` là où un
   navigateur reçoit un 302 : un test de bout en bout doit suivre l'URL du JSON.
 - **Les limites de débit de Better Auth (5 par minute par IP)** s'appliquent à toute la plage d'IP
