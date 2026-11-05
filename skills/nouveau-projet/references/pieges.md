@@ -562,3 +562,14 @@ pas en bash (guillemets).
   `focus-visible:` (utile au clavier de toute façon) et le vérifier en tabulant dessus.
 - **Champ date vide dans Safari** : WebKit y affiche une date grisée qui passe pour une valeur. Une
   date facultative (échéance) s'ouvre par un bouton « + Échéance » qui fait apparaître le champ.
+- **Navigation qui affiche un écran vide entre deux pages** (Apex : ~0,3 s de noir à chaque changement de
+  jour). Cause : avec `cacheComponents` + `partialPrefetching: true`, un `<Link>` ne précharge que le cadre
+  de la page, jamais les données lues en base pour l'utilisateur ; chaque page attend donc le serveur
+  derrière son `<Suspense>`, dont le fallback était un `div` vide. Recette (Apex, commit du 5 nov.) :
+  `partialPrefetching: false` + `prefetch` sur les liens qui comptent (flèches, onglets, menu latéral ;
+  jamais sur une grille de 30 jours qui créerait des données) ; `experimental.staleTimes { dynamic: 300,
+  static: 300 }` ; après chaque écriture `revalidatePath("/", "layout")` (vide **tout** le cache du
+  navigateur ; `router.refresh()` ne vide que la page courante) ; au retour dans l'app
+  (`visibilitychange`, absent > 15 s) une action serveur qui fait de même ; chaque fallback = le contour
+  de la page, et celui du layout un cadre fixe sans `usePathname` ni `new Date()` (sinon le build refuse
+  le prérendu). Mesure : passage direct d'une page à l'autre en ~40 ms, aucun cadre vide.
