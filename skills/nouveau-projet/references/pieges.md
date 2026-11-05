@@ -346,6 +346,23 @@ pas en bash (guillemets).
   Review » sur le **groupe** d'abonnements, puis sur **chaque** abonnement, puis sur la version,
   tous dans le même brouillon, puis « Submit for Review ». Un brouillon ouvert par le script doit
   d'abord perdre sa version, sinon la page de la version ne propose rien.
+- **Rejet 3.1.2(c) « ne décrit pas ce que l'utilisateur reçoit pour le prix »** (Ironmile, 5 novembre
+  2026) : c'est l'écran d'abonnement **dans l'app** (la capture jointe au rejet le montre). Le
+  paywall doit dire ce que le prix achète (une liste concrète), plus le titre de l'abonnement, la
+  durée et le prix de chaque option, l'essai et ses dates, le renouvellement et comment annuler,
+  Restaurer, et des liens « Terms of Use » (EULA) et « Privacy Policy » (annexe 2, 3.8(b)). Mettre
+  à jour aussi la **capture de vérification** de chaque abonnement (elle montre l'ancien écran) et
+  sa description (55 caractères, verrouillée tant que l'abonnement est dans une soumission).
+- **Après le rejet d'une première soumission avec abonnements**, un abonnement retiré de la
+  soumission ne peut plus y revenir (« Impossible d'ajouter pour vérification ») : annuler la
+  soumission rejetée (« Annuler la soumission »), puis refaire un brouillon groupe → chaque
+  abonnement → version, et soumettre. Ce qu'on aurait répondu à Apple va dans les notes de
+  vérification de la version. Les captures et notes des abonnements se changent par l'API
+  (`subscriptionAppStoreReviewScreenshots`, `reviewNote`).
+- **Renvoyer la même version avec un correctif seulement** : construire depuis le commit de la
+  build rejetée (une branche `release-x.y.z`), avec un numéro de build au-dessus de toutes les
+  builds déjà envoyées (`BUILD=<n> scripts/release-ios.sh`) ; l'écart de numéros n'a aucune
+  importance pour Apple.
 - Le Test Store de RevenueCat raccourcit l'essai d'une semaine à 5 minutes : « Gratuit jusqu'au »
   affiche la date du jour, ce n'est pas un bug.
 - Nom, sous-titre, catégories, classement d'âge, étiquettes de confidentialité et déclaration de
