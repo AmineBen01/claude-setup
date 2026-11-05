@@ -549,3 +549,16 @@ pas en bash (guillemets).
   prochain déploiement normal les prendre, ou demander à Amine.
 - **Grille sans colonnes sur téléphone** (déjà noté) : revu sur une page Réglages en deux colonnes —
   `grid-cols-[minmax(0,1fr)] md:grid-cols-2` et `min-w-0` sur chaque colonne.
+
+## Vu sur Apex (5 novembre 2026)
+
+- **Rangée d'actions d'un en-tête de page qui déborde sur téléphone** : un conteneur `flex shrink-0
+  flex-wrap` ne revient jamais à la ligne (il ne rétrécit pas), la page devient plus large que l'écran
+  dès qu'on y ajoute un contrôle. Écrire `flex max-w-full min-w-0 flex-wrap md:shrink-0`, et contrôler
+  `document.documentElement.scrollWidth === innerWidth` dans `verifier`.
+- **Survol invisible dans Playwright « iPhone » et « Android »** : ces profils émulent un écran tactile
+  (`(hover: hover)` faux), et Tailwind v4 n'applique `hover:` que sous `@media (hover: hover)`. Un
+  élément révélé au survol (poignée, bouton) ne s'y voit jamais : lui donner le même style en
+  `focus-visible:` (utile au clavier de toute façon) et le vérifier en tabulant dessus.
+- **Champ date vide dans Safari** : WebKit y affiche une date grisée qui passe pour une valeur. Une
+  date facultative (échéance) s'ouvre par un bouton « + Échéance » qui fait apparaître le champ.
