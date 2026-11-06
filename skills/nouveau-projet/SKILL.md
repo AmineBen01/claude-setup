@@ -17,6 +17,8 @@ et prouvé. Lire son `README.md` (les modules, ce qui n'est pas encore écrit) a
 Lire `references/pieges.md` **avant d'écrire du code** : tous les pièges déjà rencontrés.
 Lire `references/design.md` **avant toute interface** : comment concevoir un design sur mesure ; il
 n'y a plus de look maison.
+Lire `references/apprentissage.md` **avant toute app ou module pour apprendre** (cours, révisions,
+quiz) : les principes choisis par Amine, tirés de Briefing.
 
 ## 1. Cadrage (règle globale : l'intention d'abord, puis je décide)
 
