@@ -5,12 +5,14 @@ Lu au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmil
 
 Décidé le 4 novembre 2026, « HQ décide, Apex planifie » ; une file par projet depuis le 6 novembre.
 **Apex** (https://apex.amineben.ch, mon planificateur, `~/Projects/apex`) est ta **seule file de
-travail**. Tâches et idées n'y font plus qu'une : chaque projet de code (Qiyam, Ironmile, HQ, Apex) a
-sa **file**, ses choses à faire ouvertes (triées par carré, puis par l'ordre que j'ai glissé : une
-indication, pas une consigne). Les demandes du growth lead que j'ai approuvées dans HQ y arrivent toutes seules
-(« from growth lead »). « Someday » (nouvelles apps, marketing) n'en fait pas partie.
+travail**. Tâches et idées n'y font plus qu'une, dans deux listes (6 novembre, à la place de la matrice
+et de Someday) : **Now**, la priorité du moment, et **Later**, le reste. La **file** d'un projet de code
+(Qiyam, Ironmile, HQ, Apex), c'est son **Now**, dans l'ordre que j'ai glissé (une indication, pas une
+consigne) : la prochaine session fait tout ce qui y est. Later n'en fait jamais partie. Les demandes du
+growth lead que j'ai approuvées dans HQ arrivent dans Later toutes seules (« from growth lead ») ; c'est
+moi qui les passe dans Now.
 
-1. lis la file de ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
+1. lis la file de ce repo (son Now ; si elle est vide, dis-le et arrête-toi là) (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
    `apex-claude-token`) ;
 2. annonce-la-moi, puis **organise toi-même le travail** (l'ordre de la file n'est qu'une indication) :
    d'abord les petits correctifs et les bugs (cause prouvée, sans tour de questions ; un sous-agent par
