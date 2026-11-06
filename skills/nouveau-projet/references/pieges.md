@@ -590,3 +590,12 @@ pas en bash (guillemets).
   (`visibilitychange`, absent > 15 s) une action serveur qui fait de même ; chaque fallback = le contour
   de la page, et celui du layout un cadre fixe sans `usePathname` ni `new Date()` (sinon le build refuse
   le prérendu). Mesure : passage direct d'une page à l'autre en ~40 ms, aucun cadre vide.
+
+## Vu sur Apex (6 novembre 2026)
+
+- **Glisser pour réordonner, au doigt** : `@dnd-kit/sortable` avec une poignée (`touch-none`, 44 px)
+  et `PointerSensor` (distance 4) + `KeyboardSensor`. Pour le **prouver** : la souris de Playwright
+  dans le profil WebKit tactile (iPhone) ne déclenche pas le glisser de dnd-kit (faux échec) ; le
+  doigt se simule sur Chromium (Android) avec `Input.dispatchTouchEvent` via une session CDP, et la
+  logique d'ordre se teste aussi au clavier (Espace, flèches, Espace). Enregistrer l'ordre en une
+  seule fois (`db.batch`), pas une requête par ligne.
