@@ -132,8 +132,12 @@ Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`,
 `apex` :
 1. lis la file de ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
    `apex-claude-token`) ;
-2. annonce-la-moi et traite-la dans l'ordre (questions d'abord, comme pour toute fonctionnalité) ;
-   saute celles marquées `held` (« HELD until… » dans les notes) et dis-le ;
+2. annonce-la-moi, puis **organise toi-même le travail** (l'ordre de la file n'est qu'une indication) :
+   d'abord les petits correctifs et les bugs (cause prouvée, sans tour de questions ; un sous-agent par
+   repo s'ils sont indépendants et que le gain est net), livrés ensemble ; ensuite les fonctionnalités
+   et changements qui demandent des questions, cadrés par petits lots de 3 ou 4 (questions d'abord,
+   comme pour toute fonctionnalité), construits, vérifiés, livrés, puis le lot suivant. Saute celles
+   marquées `held` (« HELD until… » dans les notes) et dis-le ;
 3. marque chacune « done » avec une note d'une ligne (commit, ce qui a changé) une fois livrée. Apex
    prévient HQ tout seul.
 
