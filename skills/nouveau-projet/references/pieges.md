@@ -679,5 +679,6 @@ pas en bash (guillemets).
   (24 erreurs, « next/font/google queries have exactly one entry ») : ce n'est pas le code, c'est
   Google Fonts qui n'a pas répondu au build sur le Mac. Relancer le build seul ; vérifier son code de
   sortie (`echo $?`), pas seulement l'absence d'erreurs filtrées par `grep`.
-- **Un `?` dans une URL non citée casse toute la ligne zsh** (`no matches found`) : les commandes
-  enchaînées avant ne s'affichent pas et on croit à tort qu'elles ont réussi. Toujours citer les URL.
+- **Un `?` dans une URL non citée casse toute la ligne zsh** (`no matches found`) : zsh n'exécute
+  rien de la ligne, pas même les commandes placées avant ; sans sortie, on croit à tort qu'elles ont
+  réussi. Toujours citer les URL.
