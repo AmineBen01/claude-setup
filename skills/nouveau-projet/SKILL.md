@@ -1,6 +1,6 @@
 ---
 name: nouveau-projet
-description: Lancer un nouveau projet de A à Z jusqu'à une adresse en ligne — site, outil web ou app des stores (iPhone/Android) — cadrage par questions jusqu'à accord, plan validé, puis tout d'un coup depuis le starter (~/Projects/starter, scripts/new-app.mjs) - Next.js + shadcn, Expo pour une app, Neon + Drizzle (branche dev pour les tests), comptes, paiements, site et blog, branchement à HQ, GitHub privé, Vercel avec ses variables, CLAUDE.md du projet, première mise en ligne. À utiliser quand l'utilisateur veut créer, démarrer ou « construire » un nouveau site, outil ou app, même s'il ne dit pas « nouveau projet ».
+description: Lancer un nouveau projet de A à Z jusqu'à une adresse en ligne — site, outil web ou app des stores (iPhone/Android) — cadrage par l'intention (questions jusqu'à ce qu'elle soit claire), plan validé, puis tout d'un coup depuis le starter (~/Projects/starter, scripts/new-app.mjs) - Next.js + shadcn, Expo pour une app, Neon + Drizzle (branche dev pour les tests), comptes, paiements, site et blog, branchement à HQ, GitHub privé, Vercel avec ses variables, CLAUDE.md du projet, première mise en ligne. À utiliser quand l'utilisateur veut créer, démarrer ou « construire » un nouveau site, outil ou app, même s'il ne dit pas « nouveau projet ».
 ---
 
 # Nouveau projet
