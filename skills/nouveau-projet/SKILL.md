@@ -90,7 +90,9 @@ et RevenueCat » pour une app).
 4. **Ce que l'app dit d'elle** : `apps/web/lib/product/app.ts` (la phrase, les plateformes),
    `lib/product/facts.ts` (ses faits, ses règles), chaque `[FILL: …]` (pages légales, blog, bio,
    fiche du store : le test `legal.test.ts` échoue tant qu'il en reste), la section « Project » du
-   `CLAUDE.md`, `docs/decisions.md` avec les **Décisions validées**.
+   `CLAUDE.md`, `docs/decisions.md` avec les **Décisions validées**. **Sa ligne dans la carte des
+   projets** du CLAUDE.md global (« Mes projets »), avec ce qu'elle lit ou envoie à d'autres projets
+   (HQ, Apex…) : avant le premier push.
 5. **L'identité** (étape 1 bis faite) : `brand/mark-*.svg` puis `node scripts/brand-assets.mjs`
    (toutes les icônes), toutes les valeurs dans `apps/web/app/globals.css` et `app/layout.tsx`, et
    `apps/mobile/src/lib/theme.ts` pour une app (clair et sombre), `brand/README.md`. **Le starter
