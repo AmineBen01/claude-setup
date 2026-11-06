@@ -12,8 +12,8 @@ consigne) : la prochaine session fait tout ce qui y est. Later n'en fait jamais 
 growth lead que j'ai approuvées dans HQ arrivent dans Later toutes seules (« from growth lead ») ; c'est
 moi qui les passe dans Now.
 
-1. lis la file de ce repo (son Now ; si elle est vide, dis-le et arrête-toi là) (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
-   `apex-claude-token`) ;
+1. lis la file de ce repo, son Now (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
+   `apex-claude-token`) ; si elle est vide, dis-le et arrête-toi là ;
 2. annonce-la-moi, puis **organise toi-même le travail** (l'ordre de la file n'est qu'une indication) :
    d'abord les petits correctifs et les bugs (cause prouvée, sans tour de questions ; un sous-agent par
    repo s'ils sont indépendants et que le gain est net), livrés ensemble ; ensuite les fonctionnalités
