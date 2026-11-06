@@ -121,18 +121,21 @@ Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 
 ## La file de Claude : Apex
 
-Décidé le 4 novembre 2026, « HQ décide, Apex planifie ». **Apex** (https://apex.amineben.ch, mon
-planificateur, `~/Projects/apex`) est ta **seule file de travail**. Il réunit deux choses :
-- mes idées « Ready for Claude » ;
-- les demandes du growth lead que j'ai approuvées dans HQ (https://hq.amineben.ch). Elles y arrivent
-  toutes seules, en « Ready for Claude », avec la mention « from growth lead ».
+Décidé le 4 novembre 2026, « HQ décide, Apex planifie » ; une file par projet depuis le 6 novembre.
+**Apex** (https://apex.amineben.ch, mon planificateur, `~/Projects/apex`) est ta **seule file de
+travail**. Tâches et idées n'y font plus qu'une : chaque projet de code (Qiyam, Ironmile, HQ, Apex) a
+sa **file**, ses choses à faire ouvertes, dans l'ordre où tu les traites (le carré d'abord, puis l'ordre
+que j'ai glissé). Les demandes du growth lead que j'ai approuvées dans HQ y arrivent toutes seules
+(« from growth lead »). « Someday » (nouvelles apps, marketing) n'en fait pas partie.
 
-Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile` ou `headquarters` :
-1. lis les idées prêtes pour ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
+Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters` ou
+`apex` :
+1. lis la file de ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
    `apex-claude-token`) ;
-2. annonce-les-moi et traite-les en premier (questions d'abord, comme pour toute fonctionnalité) ;
-3. marque chacune « done » avec une note (commit, ce qui a été fait) une fois livrée. Apex prévient
-   HQ tout seul.
+2. annonce-la-moi et traite-la dans l'ordre (questions d'abord, comme pour toute fonctionnalité) ;
+   saute celles marquées `held` (« HELD until… » dans les notes) et dis-le ;
+3. marque chacune « done » avec une note d'une ligne (commit, ce qui a changé) une fois livrée. Apex
+   prévient HQ tout seul.
 
 N'interroge plus les demandes de HQ directement.
 
