@@ -7,6 +7,8 @@ description: Livrer jusqu'au bout une fonctionnalité vérifiée d'un projet web
 
 Règle de l'utilisateur : je livre jusqu'au bout, il n'a rien à faire dans Vercel.
 Prérequis : `verifier` est passé (sauf tout petit changement).
+Lire la section « Mise en ligne » / « Deploy » du CLAUDE.md du projet **et le fichier vers lequel
+elle renvoie** (souvent `docs/claude/deploy.md`) : elle a le dernier mot.
 
 **Exceptions** : si le CLAUDE.md ou la mémoire du projet interdit le push (ex. `ai-job-search`),
 s'arrêter au commit et le dire. Un projet non web n'a pas d'étape Vercel.

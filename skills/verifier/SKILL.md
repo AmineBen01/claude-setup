@@ -16,7 +16,8 @@ contrôle le plus proche du vrai usage).
 
 ## 0. Préparer
 
-- Lire la section « Vérifier » du CLAUDE.md du projet : elle a le dernier mot (port,
+- Lire la section « Vérifier » du CLAUDE.md du projet, **et le fichier vers lequel elle renvoie**
+  (souvent `docs/claude/verify.md`) : elle a le dernier mot (port,
   commandes, parcours clés, interdits comme « pas de build pendant `pnpm dev` »).
 - **Base de données : jamais la production.** Vérifier que `DATABASE_URL` de `.env.local`
   pointe sur la branche Neon « dev » (l'hôte contient l'id de l'endpoint de la branche dev,
@@ -101,7 +102,7 @@ Décidé le 19 octobre 2026 (Ironmile) : **les tests d'abord, le moins cher d'ab
 unitaires et d'API couvrent la logique ; le simulateur coûte des minutes par passage, il ne prouve
 que le parcours visible de **ce qui a changé** : un passage sur iOS, Android seulement si le
 changement dépend de la plateforme, pas de rejeu du parcours complet pour un petit correctif, pas
-de nouveau passage une fois réussi. Lire avant : la section « Vérifier » du CLAUDE.md du projet
+de nouveau passage une fois réussi. Lire avant : la section « Vérifier » du CLAUDE.md du projet (et le fichier vers lequel elle renvoie)
 et les pièges « App native » et « Maestro » de `nouveau-projet/references/pieges.md`.
 
 1. **Serveurs, en tâches de fond de l'outil** (jamais `&`, jamais `CI=1`) : l'API (`pnpm dev`
