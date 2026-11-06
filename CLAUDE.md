@@ -195,7 +195,9 @@ Tout nouveau projet (site, outil web, app des stores) part de `~/Projects/starte
 de sortie iOS, déjà faits et prouvés. **Quand un projet m'apprend quelque chose qui vaut pour
 toutes les apps** (un piège, un correctif, une meilleure façon de faire), **tu le reportes dans le
 starter dans la même session** (`pnpm check:modules` doit passer) et dans
-`nouveau-projet/references/pieges.md`, et tu me le dis dans ton dernier message. Ce qui n'est pas
+`nouveau-projet/references/pieges.md`, et tu me le dis dans ton dernier message. Les apps déjà faites
+ne reçoivent rien d'elles-mêmes : leur `.starter-version` dit jusqu'où elles ont rattrapé le starter,
+et le hook de début de session liste ce qui manque (README du starter, « Keeping it current »). Ce qui n'est pas
 encore écrit (sortie Google Play, connexion avec Apple et Google) se fait depuis la vraie première
 fois d'Ironmile : voir le README du starter.
 
@@ -221,6 +223,13 @@ Il n'y a pas de look maison. **Avant toute interface → charger la skill `front
 `~/.claude/skills/nouveau-projet/references/design.md`** (quand passer par les planches, les
 obligations : mobile d'abord, 44 px, clair/sombre/auto, grands écrans, jamais enfantin). **Projets
 existants** : leur look ne change pas tant que je ne demande pas leur refonte.
+
+## Mémoire : ce qui se périme
+
+Une mémoire qui décrit un état appelé à changer (un statut, « ce qui reste à faire », une échéance)
+porte une date de revérification dans son en-tête, `metadata.expires: AAAA-MM-JJ` : le jour où elle
+risque d'être fausse. Passé ce jour, le hook de début de session la signale ; revérifie, puis
+avance la date ou supprime-la. Une règle ou une préférence durable n'en a pas.
 
 ## Mes captures d'écran
 
