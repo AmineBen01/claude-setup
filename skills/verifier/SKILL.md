@@ -76,8 +76,10 @@ ciao, une correction s'affichait à l'écran alors que le serveur l'avait refus�
 
 ### Astuces Playwright MCP (apprises sur un vrai projet)
 
-- Captures et instantanés doivent rester dans le projet : `filename: ".playwright-mcp/…"`
-  (ignoré par git globalement, `~/.config/git/ignore`). Regarder chaque capture avec Read.
+- Captures et instantanés doivent rester dans le projet : un **chemin absolu**
+  `<projet>/.playwright-mcp/…` (ignoré par git globalement, `~/.config/git/ignore`). Un chemin
+  relatif part du dossier où tourne le serveur MCP (`~/Projects`), pas du projet : on relit alors
+  une vieille capture du même nom (vu le 6 novembre 2026, Apex). Regarder chaque capture avec Read.
 - Un bouton dont le nom accessible change (compteur, état) invalide sa référence : cibler
   par sélecteur, ex. `button[aria-label^="TikTok"]`, `button:has-text("Voir le résultat")`.
 - Les écrans rendus seulement côté navigateur (lecture de `localStorage`) arrivent après
