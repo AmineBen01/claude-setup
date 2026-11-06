@@ -607,3 +607,13 @@ pas en bash (guillemets).
   doigt se simule sur Chromium (Android) avec `Input.dispatchTouchEvent` via une session CDP, et la
   logique d'ordre se teste aussi au clavier (Espace, flèches, Espace). Enregistrer l'ordre en une
   seule fois (`db.batch`), pas une requête par ligne.
+
+## Le CLAUDE.md d'une app : en couches (6 novembre 2026)
+
+- **Un CLAUDE.md se charge en entier à chaque session.** Ceux d'Ironmile et de HQ avaient atteint
+  ~32 Ko (~8 000 tokens) : les règles valables partout s'y noyaient dans le détail de la mise en
+  ligne, de la vérification et du studio. Ne garder dedans que ce qui vaut à chaque tâche (ce
+  qu'est l'app, les règles partout, les commandes) ; chaque sujet d'un moment précis va dans
+  `docs/claude/<sujet>.md`, avec une ligne « Before … → read `docs/claude/<sujet>.md` ». Le starter
+  le fait d'office (`claude-template/` devient le `docs/claude/` de l'app) ; `verifier` et
+  `mise-en-ligne` suivent ces renvois. Au-delà d'environ 15 Ko, découper.
