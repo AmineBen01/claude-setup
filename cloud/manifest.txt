@@ -6,6 +6,7 @@ skills/aligner-carriere/SKILL.md
 skills/aligner/SKILL.md
 skills/mise-en-ligne/SKILL.md
 skills/nouveau-projet/references/ancien-style-sobre.md
+skills/nouveau-projet/references/apprentissage.md
 skills/nouveau-projet/references/design.md
 skills/nouveau-projet/references/modeles/sidebar-top.tsx
 skills/nouveau-projet/references/pieges.md
