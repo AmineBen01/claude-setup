@@ -675,3 +675,9 @@ pas en bash (guillemets).
 - **Relecture de code indépendante avant de livrer, encore** : sur Briefing, elle a trouvé 11 vrais
   problèmes (bilan d'examen gonflé, Entrée sans effet après un clic, champ numérique jamais
   focalisé…) que les tests et mes parcours n'avaient pas vus.
+- **`pnpm build` qui échoue par moments sur `Can't resolve '@vercel/turbopack-next/internal/font/google/font'`**
+  (24 erreurs, « next/font/google queries have exactly one entry ») : ce n'est pas le code, c'est
+  Google Fonts qui n'a pas répondu au build sur le Mac. Relancer le build seul ; vérifier son code de
+  sortie (`echo $?`), pas seulement l'absence d'erreurs filtrées par `grep`.
+- **Un `?` dans une URL non citée casse toute la ligne zsh** (`no matches found`) : les commandes
+  enchaînées avant ne s'affichent pas et on croit à tort qu'elles ont réussi. Toujours citer les URL.
