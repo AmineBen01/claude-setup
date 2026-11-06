@@ -30,7 +30,8 @@ changement dans l'un peut en toucher un autre : pense aux liens ci-dessous avant
 **Cette carte se tient à jour dans la session qui la change** : créer, retirer ou renommer un projet,
 ou changer ce qu'un projet lit ou envoie à un autre (un flux, un jeton, une base partagée, un
 contrat comme `docs/blog.md`), met à jour sa ligne ici dans la même session, et ton dernier message
-le dit. Chaque dossier de `~/Projects` relié à GitHub doit y être nommé : le hook de début de
+le dit. Un nouveau lien entre deux apps entre aussi dans le contrôle quotidien de HQ (`lib/links.ts`, ou
+`/api/hq/links` de l'app qui le lit) : sans ça, une panne passe inaperçue. Chaque dossier de `~/Projects` relié à GitHub doit y être nommé : le hook de début de
 session `~/.claude/hooks/check-drift.sh` signale un projet manquant ou un dossier disparu ; corrige
 la carte avant le reste.
 

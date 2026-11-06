@@ -698,3 +698,11 @@ pas en bash (guillemets).
 - **Un `?` dans une URL non citée casse toute la ligne zsh** (`no matches found`) : zsh n'exécute
   rien de la ligne, pas même les commandes placées avant ; sans sortie, on croit à tort qu'elles ont
   réussi. Toujours citer les URL.
+
+## Les liens entre apps tombent en silence (6 novembre 2026)
+
+- Un lien entre deux apps (un flux à jeton, une copie de base, un article commité dans un autre
+  repo) échoue sans bruit là où il sert : Apex gardait un bloc sport sans nom quand Ironmile ne
+  répondait pas ; HQ marquait « publié » un article commité, sans regarder le site. Tout nouveau
+  lien entre dans le contrôle quotidien de HQ (`headquarters/lib/links.ts`, qui appelle aussi
+  `GET /api/hq/links` d'Apex) : une notification nomme ce qui a cassé.
