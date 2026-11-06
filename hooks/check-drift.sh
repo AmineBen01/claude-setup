@@ -30,7 +30,7 @@ done
 # that differ from their folder are written "repo `x`" and skipped.
 while read -r name; do
   [ -d "$projects/$name" ] || problems+=("La carte nomme \`$name\`, mais ~/Projects/$name n'existe plus.")
-done < <(grep -oE '(^|[(:,] |et )`[a-z0-9][a-z0-9.-]*`' <<<"$map" | grep -oE '`[^`]+`' | tr -d '`' | sort -u \
+done < <(grep -oE '(^ *|[(:,] |et )`[a-z0-9][a-z0-9.-]*`' <<<"$map" | grep -oE '`[^`]+`' | tr -d '`' | sort -u \
   | while read -r n; do grep -qE "(repo|branche) \`$n\`" <<<"$map" || echo "$n"; done)
 
 [ ${#problems[@]} -eq 0 ] && exit 0
