@@ -3,6 +3,16 @@
 Ces règles valent partout. Le CLAUDE.md d'un projet les complète ; s'il dit autre chose
 sur un point précis, c'est lui qui l'emporte.
 
+## Comment ces consignes sont rangées
+
+Ce fichier ne garde que ce qui vaut à chaque tâche. Le détail d'un sujet vit dans un fichier à part,
+lu au moment où il sert (divulgation progressive) : chaque « → lire … » ici ou dans un CLAUDE.md de
+projet est une **obligation** au moment dit, pas une suggestion. Un CLAUDE.md de projet suit la même
+règle : dedans, ce qu'est le projet, les règles valables à chaque tâche et les commandes ; chaque
+sujet spécialisé (vérifier, mettre en ligne, un module…) dans `docs/claude/<sujet>.md`, avec une
+ligne « avant de … → lire `docs/claude/<sujet>.md` ». Quand tu ajoutes une consigne, range-la au
+niveau où elle sert : partout ici, dans un projet chez lui, pour un moment précis dans son fichier.
+
 ## Qui je suis
 
 Amine (GitHub `AmineBen01`). Je développe seul, surtout des sites et apps web en Next.js,
@@ -12,51 +22,117 @@ Quand plusieurs options se valent, recommande celle qui me demande **le moins d'
 répété** : une mise en place unique que tu fais toi-même vaut mieux qu'un geste à refaire
 chaque semaine.
 
-## Mes captures d'écran
+## Mes projets : la vue d'ensemble
 
-Quand je parle d'une capture d'écran (« je t'ai mis une capture », « regarde le screenshot »),
-elle est sur le Mac dans
-`~/Library/Mobile Documents/com~apple~CloudDocs/Capture d'écran/`, nommée
-`Screenshot AAAA-MM-JJ at HH.MM.SS.png`. Ce sont en général la ou les dernières : liste le
-dossier par date (`ls -t`), prends celles qui correspondent au moment de mon message, et
-ouvre-les avec Read. Dans une session cloud ce dossier n'existe pas : dis-le et demande-moi
-de coller l'image.
+Tous dans `~/Projects/<dossier>`, repo GitHub privé `AmineBen01/<repo>` (sauf mention). Un
+changement dans l'un peut en toucher un autre : pense aux liens ci-dessous avant de livrer.
 
-## Me montrer une image
+- **Qiyam** (`qiyam-app`) : l'app de révision du Coran (iOS Swift, Android Kotlin, un cœur de
+  règles partagé, Supabase). Mon produit principal ; l'ordre de son travail vient du growth lead.
+  Son site et son blog : `qiyam-website` (les articles arrivent de HQ, jamais à la main).
+- **Ironmile** (`ironmile`) : le coach course + muscu (app Expo + API Next.js sur Vercel, Neon).
+  `ironmile-1.0.0` est un second dossier du même repo, sur la branche `release-1.0.0`.
+  `ironmile-character` : les vidéos du personnage.
+- **HQ** (`headquarters`, https://hq.amineben.ch) : mes apps gérées comme des entreprises. Il lit
+  les chiffres de Qiyam et d'Ironmile, abrite le growth lead (ses demandes approuvées vont dans
+  Apex), l'écrivain, le studio et le blog de chaque app. Une app de plus s'y branche
+  (`lib/products.ts`).
+- **Apex** (`apex`, https://apex.amineben.ch) : mon planificateur et **ta file de travail** (une
+  file par projet de code). Il lit la séance du jour d'Ironmile.
+- **Le starter** (`starter`) : la base de toute nouvelle app (mon « ShipFast »), Ironmile rendu
+  générique. Voir plus bas.
+- **Carrière** : `amineben` (mon site et mes CV, qui lisent le flux public de HQ), `job` (Job HQ,
+  une install pour moi et une pour mon père Lahcen).
+- **Outils privés, faits depuis le starter** : `vestiaire` (ma garde-robe), `vmc-trainer`
+  (entraînement SPHAIR), `muslim-lantern` (repo `dawah-map`).
+- **Pour d'autres** : `instructions` (13 instructeurs, **son `.env.local` pointe sur la
+  production**), `ciao` (stands ontécoute.ch).
+- **Retirés, ne pas y travailler** : `qiyam-hq` (fondu dans HQ), `app-qiyam` et `qiyam`
+  (anciennes versions de Qiyam).
 
-Je travaille dans Ghostty : je ne vois pas les images dans le terminal. Chaque fois que tu veux
-me montrer une image (icône, capture, maquette, graphique), ouvre-la dans Aperçu sur le Mac avec
-`open <fichier>` (plusieurs fichiers d'un coup si tu compares des variantes), puis dis-moi dans
-quel ordre elles sont. Dans une session cloud, donne plutôt le lien ou le chemin.
+## Ce qu'on vise : du logiciel de professionnel
 
-## Nouvelle fonctionnalité ou changement : poser des questions jusqu'à accord
+Le niveau : ce que livrerait une équipe produit et ingénierie exigeante, jamais un prototype
+bricolé (« vibe-codé »), sans perdre notre vitesse : la qualité vient de bons choix, pas de
+cérémonie. Ces principes guident tes questions, ton raisonnement et chacune de tes décisions ; ils
+passent avant l'habitude et avant ce qui est le plus rapide à écrire. Les règles plus précises de
+ce fichier et des projets en sont des applications ; là où rien n'est écrit, ce sont eux qui
+tranchent.
 
-Quand je demande une nouvelle fonctionnalité, ou un changement à une fonctionnalité
-existante — simple ou complexe — pose des questions **avant d'écrire du code**, tour
-après tour, jusqu'à ce que ce qu'il faut construire soit parfaitement clair et
-explicitement validé par nous deux. Pas après la première réponse, et pas en comblant
-les trous avec un choix par défaut raisonnable.
+**Le produit**
+- **Le besoin avant la solution** : quel problème, pour qui, et comment on saura qu'il est réglé.
+  Ce qui ne sert pas ce but ne se construit pas, même facile ou séduisant.
+- **Moins, mais fini** : la plus petite chose qui résout entièrement le problème, finie dans tous
+  ses états (vide, chargement, erreur, hors ligne, premier usage, beaucoup de données), plutôt que
+  trois choses à moitié.
+- **Les conventions que les gens connaissent** (celles de la plateforme et du domaine) avant
+  l'invention ; on n'innove que là où c'est la valeur du produit.
+- **Évident et soigné** : on comprend chaque écran en quelques secondes et on voit quoi faire ;
+  des textes clairs, une interface accessible (WCAG) et rapide, du détail travaillé.
+- **Respect de l'utilisateur** : ses données, sa vie privée, son temps et son argent ; aucun motif
+  trompeur.
 
-- **Utilise AskUserQuestion** : quelques questions ciblées par tour, autant de tours que
-  nécessaire.
-- **Langage simple.** Demande ce que l'utilisateur verra et fera, pas quelles tables ou
-  quels composants. Ne passe au technique que quand le choix l'est vraiment, et
-  explique-le simplement même alors.
-- **Recommande.** Mets en premier l'option que tu choisirais, avec la raison en une
-  ligne. Montre une petite maquette quand la question porte sur une mise en page.
-- **Apporte ce que tu as trouvé.** Si le code, la doc ou les données changent la
-  question, dis-le avant de la poser.
-- **Suis mes doutes.** Quand je réponds « je ne sais pas » ou « discutons-en », explique
-  le compromis avec un exemple concret avant/après, propose, puis redemande.
-- **Les changements de comportement comptent aussi.** Un correctif qui change ce que
-  l'utilisateur voit ou vit passe par la même boucle.
-- **Demande dès le cadrage ce dont tu auras besoin plus tard**, par exemple
-  l'autorisation d'envoyer un secret à Vercel, plutôt que de bloquer à la fin.
-- Seulement quand tout est tranché : écris le plan avec une liste **Décisions
-  validées**, attends mon feu vert, puis construis.
+**L'ingénierie**
+- **Correct d'abord** : cas limites, erreurs, accès concurrents, fuseaux horaires, argent et
+  données traités comme un professionnel les traiterait. Une donnée ne se perd et ne se corrompt
+  jamais.
+- **Simple et lisible** : la conception la plus simple qui tient ; du code qu'un autre développeur
+  comprend sans toi (noms justes, une responsabilité par morceau, ni abstraction prématurée ni
+  duplication qui finira par diverger).
+- **Les standards de l'écosystème** (conventions du framework, du langage et de la plateforme,
+  OWASP, WCAG) plutôt qu'une manière maison ; une bibliothèque éprouvée plutôt que du code
+  réinventé, mais pas une dépendance pour trois lignes.
+- **Sûr par défaut** : secrets hors du code, entrées validées côté serveur, droits minimaux,
+  données personnelles réduites au nécessaire.
+- **Testé là où ça peut casser** (règles, calculs, argent, droits, migrations, synchro), avec des
+  tests qui décrivent le comportement, pas l'implémentation.
+- **Fini veut dire fini** : pas de code mort, d'option à moitié branchée, de TODO caché ni d'erreur
+  avalée ; la doc et le journal des décisions à jour dans le même commit.
+- **Fait pour durer** : migrations sûres, changements compatibles avec ce qui tourne déjà (anciennes
+  versions de l'app, données existantes), assez de journaux pour comprendre une panne.
+- **La performance se mesure** : on optimise ce que l'utilisateur ressent, pas ce qu'on suppose.
 
-Exceptions : la correction d'un bug évident qui ne change pas le comportement voulu, et
-une tâche que j'ai déjà entièrement spécifiée.
+**La façon de travailler**
+- **Comprendre avant d'agir** : lire le code et la doc existants, suivre leurs façons de faire ;
+  un changement s'intègre comme s'il avait toujours été là.
+- **Penser aux conséquences** : ce que le changement touche ailleurs (autres apps, HQ, site, fiches
+  des stores, anciennes versions, données).
+- **Honnête** : un compromis, un raccourci, un risque ou une incertitude se dit, avec sa raison.
+  Quand un principe et la vitesse s'opposent vraiment, dis-le et propose ; ne sacrifie jamais en
+  silence.
+
+## Nouvelle fonctionnalité ou changement : l'intention d'abord, puis tu décides
+
+Je peux me laisser convaincre de dire oui à tout. Ton travail : comprendre ce que je veux vraiment,
+puis construire précisément, élégamment et efficacement ce qui y répond. Avant d'écrire du code :
+
+1. **L'intention, jusqu'à ce qu'elle soit limpide.** Par tours d'AskUserQuestion, en langage
+   simple, demande ce qui relève de moi : le problème ou l'envie derrière la demande, pour qui (moi
+   ou mes utilisateurs), ce qu'on verra et fera, à quoi on saura que c'est réussi, les limites
+   (délai, dépenses). Reformule ce que tu as compris. Ne passe pas à la suite tant qu'un doute
+   reste sur le *pourquoi* : autant de tours que nécessaire, et pas de trou comblé par un choix
+   par défaut sur ce que je veux.
+2. **La solution, c'est toi.** Interface, technique, périmètre, cas limites : tu tranches selon les
+   principes ci-dessus et les conventions du métier, sans me les faire choisir. Ne me pose que les
+   questions qui sont vraiment une affaire de goût ou de priorité à moi (une direction artistique,
+   un prix, ce qui part en premier), avec ta recommandation et son argument.
+3. **Pas de fonctionnalités en plus.** Ne propose ni extension, ni option, ni « tant qu'on y est ».
+   Si tu penses qu'il manque vraiment quelque chose au besoin, dis-le en une ligne, sans le vendre.
+4. **Le plan** : l'intention comprise en quelques lignes, puis la liste **Décisions validées**
+   (ce que tu as tranché, chacune avec sa raison en une ligne). Attends mon feu vert, puis construis.
+
+En chemin :
+- **Apporte ce que tu as trouvé.** Si le code, la doc ou les données changent la question, dis-le
+  avant de la poser.
+- **Suis mes doutes.** Quand je réponds « je ne sais pas » ou « discutons-en », explique le
+  compromis avec un exemple concret avant/après, propose, puis redemande.
+- **Les changements de comportement comptent aussi.** Un correctif qui change ce que l'utilisateur
+  voit ou vit passe par la même démarche.
+- **Demande dès le cadrage ce dont tu auras besoin plus tard**, par exemple l'autorisation
+  d'envoyer un secret à Vercel, plutôt que de bloquer à la fin.
+
+Exceptions : la correction d'un bug évident qui ne change pas le comportement voulu, et une tâche
+que j'ai déjà entièrement spécifiée.
 
 Dans une routine (exécution dans le cloud, sans moi), suis son prompt : pas de questions ni
 de mise en ligne qu'il ne prévoit pas.
@@ -121,46 +197,35 @@ Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 
 ## La file de Claude : Apex
 
-Décidé le 4 novembre 2026, « HQ décide, Apex planifie » ; une file par projet depuis le 6 novembre.
-**Apex** (https://apex.amineben.ch, mon planificateur, `~/Projects/apex`) est ta **seule file de
-travail**. Tâches et idées n'y font plus qu'une : chaque projet de code (Qiyam, Ironmile, HQ, Apex) a
-sa **file**, ses choses à faire ouvertes (triées par carré, puis par l'ordre que j'ai glissé : une
-indication, pas une consigne). Les demandes du growth lead que j'ai approuvées dans HQ y arrivent toutes seules
-(« from growth lead »). « Someday » (nouvelles apps, marketing) n'en fait pas partie.
-
-Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters` ou
-`apex` :
-1. lis la file de ce repo (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
-   `apex-claude-token`) ;
-2. annonce-la-moi, puis **organise toi-même le travail** (l'ordre de la file n'est qu'une indication) :
-   d'abord les petits correctifs et les bugs (cause prouvée, sans tour de questions ; un sous-agent par
-   repo s'ils sont indépendants et que le gain est net), livrés ensemble ; ensuite les fonctionnalités
-   et changements qui demandent des questions, cadrés par petits lots de 3 ou 4 (questions d'abord,
-   comme pour toute fonctionnalité), construits, vérifiés, livrés, puis le lot suivant. Saute celles
-   marquées `held` (« HELD until… » dans les notes) et dis-le ;
-3. marque chacune « done » avec une note d'une ligne (commit, ce qui a changé) une fois livrée. Apex
-   prévient HQ tout seul.
-
-N'interroge plus les demandes de HQ directement.
+Apex est ta **seule file de travail** (« HQ décide, Apex planifie », une file par projet de code).
+**Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters` ou
+`apex` → lire `~/.claude/docs/file-apex.md`** et le suivre : lire la file du repo, me l'annoncer,
+organiser le travail (petits correctifs d'abord, puis les fonctionnalités par lots), marquer chaque
+chose « done » une fois livrée.
 
 ## Design : sur mesure, jamais un modèle
 
-Il n'y a plus de look maison : ni Stripe, Linear ou Vercel par défaut, ni police, couleur ou mise en
-page imposées. **Avant toute interface, charge la skill `frontend-design` et suis
-`~/.claude/skills/nouveau-projet/references/design.md`.** En bref :
+Il n'y a pas de look maison. **Avant toute interface → charger la skill `frontend-design` et lire
+`~/.claude/skills/nouveau-projet/references/design.md`** (quand passer par les planches, les
+obligations : mobile d'abord, 44 px, clair/sombre/auto, grands écrans, jamais enfantin). **Projets
+existants** : leur look ne change pas tant que je ne demande pas leur refonte.
 
-- **Nouveau projet, refonte ou grand nouvel écran**, outils internes compris : la carte des tâches
-  que je valide (ce qu'on comprend en 5 secondes, la prochaine action), puis 2 ou 3 références du
-  domaine, puis **3 directions artistiques sur planches** avec le vrai contenu, le choix écran par
-  écran, une planche combinée, et seulement alors le code ; à la fin, un critique indépendant.
-- **Petit ajout** : suivre le `brand/README.md` du projet, sans planches.
-- **Ce qui reste obligatoire** : mobile d'abord, 44 px tactiles sur téléphone, clair et sombre qui
-  suivent l'appareil avec un choix Clair / Sombre / Auto, la largeur des grands écrans mise à profit,
-  et jamais enfantin.
-- **Le but** : un design qu'on reconnaît sans le logo et une interface où l'on voit tout de suite
-  quoi faire. `verifier` contrôle le clair **et** le sombre, sur iPhone, Android et 1440 px, avec une
-  console sans erreur d'hydratation.
-- **Projets existants** : leur look ne change pas tant que je ne demande pas leur refonte.
+## Mes captures d'écran
+
+Quand je parle d'une capture d'écran (« je t'ai mis une capture », « regarde le screenshot »),
+elle est sur le Mac dans
+`~/Library/Mobile Documents/com~apple~CloudDocs/Capture d'écran/`, nommée
+`Screenshot AAAA-MM-JJ at HH.MM.SS.png`. Ce sont en général la ou les dernières : liste le
+dossier par date (`ls -t`), prends celles qui correspondent au moment de mon message, et
+ouvre-les avec Read. Dans une session cloud ce dossier n'existe pas : dis-le et demande-moi
+de coller l'image.
+
+## Me montrer une image
+
+Je travaille dans Ghostty : je ne vois pas les images dans le terminal. Chaque fois que tu veux
+me montrer une image (icône, capture, maquette, graphique), ouvre-la dans Aperçu sur le Mac avec
+`open <fichier>` (plusieurs fichiers d'un coup si tu compares des variantes), puis dis-moi dans
+quel ordre elles sont. Dans une session cloud, donne plutôt le lien ou le chemin.
 
 ## Pas de bouton « Corriger Claude » dans mes apps
 
@@ -171,25 +236,8 @@ session Claude dans le cloud depuis mon téléphone. Retiré du studio et de Qiy
 
 ## Sous-agents : seulement si le gain est net
 
-Utilise des sous-agents (outil Agent) **uniquement s'ils améliorent nettement la vitesse et la
-qualité du résultat**. Une charge grosse ou complexe ne suffit pas à les justifier : dans le
-doute, fais le travail toi-même. Quand tu en utilises, tu es le chef d'orchestre : tu découpes le
-travail, tu coordonnes et tu garantis la qualité du résultat.
-
-- **Modèle et effort** : aucun choix imposé. Pour chaque tâche, choisis le modèle et l'effort
-  qui te semblent les meilleurs, selon ton jugement.
-- **Parallélise** ce qui est indépendant : plusieurs agents dans un même message.
-- **Brief complet** : l'agent ne sait que ce que tu lui écris. Donne le but, les fichiers, ce
-  qui est déjà tranché ou écarté, le périmètre exact et ce qu'il doit te rendre.
-- **Garde la main** : le cadrage avec moi (questions jusqu'à accord), les décisions, la
-  cohérence entre les morceaux et la vérification finale (`verifier`) restent chez toi. Relis
-  ce que les agents rendent avant de l'annoncer ; ne refais pas toi-même un travail confié.
-- **Relecture indépendante** pour les grosses fonctionnalités : un agent qui relit le code
-  sans ta conclusion, pour un regard non biaisé.
-- **Pas d'agent pour une petite tâche** (quelques lectures ou une modification ciblée) : fais-la
-  directement, c'est plus rapide et moins cher.
-- Pour une mission vraiment énorme (dizaines d'agents), propose-moi un workflow et son coût
-  avant de le lancer.
+Dans le doute, fais le travail toi-même ; jamais d'agent pour une petite tâche. **Avant d'utiliser
+l'outil Agent → lire `~/.claude/docs/sous-agents.md`.**
 
 ## Fin de session
 
@@ -202,15 +250,6 @@ règle.
 
 ## Mes skills
 
-- `nouveau-projet` : d'une idée à une adresse en ligne, site ou app des stores (cadrage, puis tout
-  d'un coup, depuis le starter).
-- `verifier` : la preuve que ça marche, par le vrai chemin (navigateur, ou simulateur pour une app).
-- `mise-en-ligne` : commit, push, Vercel, contrôle en ligne ; pour une app, TestFlight, fiche, revue
-  et lancement.
-- `aligner` : après un changement visible dans une app, remettre d'accord avec ses faits le site,
-  les fiches des stores et les notes de HQ (appelée par `mise-en-ligne`).
-- `aligner-carriere` : garder vrais mon site, mes CV, la routine de candidatures et mon LinkedIn
-  quand mes projets avancent (routine du lundi ; petit corrigé, gros demandé dans Job HQ).
-- `pwa` : rendre un site installable sur téléphone.
-- Sur appel seulement : `/transitions-dev`, `/transitions-polish`,
-  `/transitions-ui-generation` (animations), `/anatomy` (illustrations isométriques).
+Leur liste et leur description arrivent d'elles-mêmes. Sur appel seulement : `/transitions-dev`,
+`/transitions-polish`, `/transitions-ui-generation` (animations), `/anatomy` (illustrations
+isométriques).
