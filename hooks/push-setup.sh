@@ -12,6 +12,11 @@ cat >/dev/null # the hook's input isn't needed
 log="$HOME/.claude/hooks/push-setup.log"
 lock="$HOME/.claude/hooks/.push-setup.lock"
 
+# What cloud sessions download (cloud/sync.sh): rebuilt here, a versioned hook, so a fresh clone of
+# this setup keeps it right (a .git/hooks/pre-commit would not come along).
+git ls-files -- CLAUDE.md docs skills cloud/sync.sh 2>/dev/null | sort > cloud/manifest.txt.new
+cmp -s cloud/manifest.txt.new cloud/manifest.txt && rm cloud/manifest.txt.new || mv cloud/manifest.txt.new cloud/manifest.txt
+
 changed=$(git status --porcelain 2>/dev/null)
 ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null || echo 0)
 [ -z "$changed" ] && [ "$ahead" = "0" ] && exit 0

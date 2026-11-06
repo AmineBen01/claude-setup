@@ -28,6 +28,7 @@ le nouveau commit, puis changer le commit ici et dans le script.
 - `typescript-lsp@claude-plugins-official` (Anthropic) — nécessite
   `npm install -g typescript-language-server typescript`.
 - `frontend-design@claude-plugins-official` (Anthropic).
+- `swift-lsp@claude-plugins-official` (Anthropic) — pour `qiyam-app` (iOS).
 - `playwright-iphone` : `npx -y @playwright/mcp@0.0.83 --browser webkit --device "iPhone 15" --headless --isolated`
 - `playwright-android` : `npx -y @playwright/mcp@0.0.83 --browser chromium --device "Pixel 7" --headless --isolated`
 - Navigateurs : `npx playwright@1.64.0-alpha-1790635538000 install webkit chromium`
