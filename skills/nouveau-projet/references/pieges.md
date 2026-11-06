@@ -663,3 +663,15 @@ pas en bash (guillemets).
   dans un module sans directive (`lib/…`).
 - **Ne pas importer l'index du contenu (`@/content`) dans un composant client** : tout le contenu
   part dans le JavaScript du navigateur. Passer au client seulement ce qu'il affiche.
+- **`cacheComponents` garde les pages visitées en vie (React `<Activity>`)** : un composant client
+  dont l'état part de ses props (`useState(questions)`, une série, un formulaire à étapes) revient
+  tel qu'on l'a laissé quand on rouvre la page par un lien, même si le serveur a envoyé de nouvelles
+  données. Donner une `key` neuve à chaque requête (`crypto.randomUUID()` dans une fonction de
+  `lib/`, appelée après `await connection()`). Prouvé sur Briefing : « Une autre série » rouvrait
+  l'ancien bilan.
+- **SVG calculés avec `Math.sin/cos`** : Node et les navigateurs diffèrent sur les derniers chiffres,
+  l'attribut rendu côté serveur ne correspond plus et l'hydratation échoue. Dessiner ces schémas
+  seulement dans le navigateur (`useIsClient`), avec un cadre de même hauteur en attendant.
+- **Relecture de code indépendante avant de livrer, encore** : sur Briefing, elle a trouvé 11 vrais
+  problèmes (bilan d'examen gonflé, Entrée sans effet après un clic, champ numérique jamais
+  focalisé…) que les tests et mes parcours n'avaient pas vus.
