@@ -27,6 +27,13 @@ chaque semaine.
 Tous dans `~/Projects/<dossier>`, repo GitHub privé `AmineBen01/<repo>` (sauf mention). Un
 changement dans l'un peut en toucher un autre : pense aux liens ci-dessous avant de livrer.
 
+**Cette carte se tient à jour dans la session qui la change** : créer, retirer ou renommer un projet,
+ou changer ce qu'un projet lit ou envoie à un autre (un flux, un jeton, une base partagée, un
+contrat comme `docs/blog.md`), met à jour sa ligne ici dans la même session, et ton dernier message
+le dit. Chaque dossier de `~/Projects` relié à GitHub doit y être nommé : le hook de début de
+session `~/.claude/hooks/check-drift.sh` signale un projet manquant ou un dossier disparu ; corrige
+la carte avant le reste.
+
 - **Qiyam** (`qiyam-app`) : l'app de révision du Coran (iOS Swift, Android Kotlin, un cœur de
   règles partagé, Supabase). Mon produit principal ; l'ordre de son travail vient du growth lead.
   Son site et son blog : `qiyam-website` (les articles arrivent de HQ, jamais à la main).
@@ -43,12 +50,17 @@ changement dans l'un peut en toucher un autre : pense aux liens ci-dessous avant
   générique. Voir plus bas.
 - **Carrière** : `amineben` (mon site et mes CV, qui lisent le flux public de HQ), `job` (Job HQ,
   une install pour moi et une pour mon père Lahcen).
-- **Outils privés, faits depuis le starter** : `vestiaire` (ma garde-robe), `vmc-trainer`
-  (entraînement SPHAIR), `muslim-lantern` (repo `dawah-map`).
+- **Outils privés, faits depuis le starter** : `vestiaire` (ma garde-robe), `vmc-trainer` et
+  `briefing` (https://briefing.amineben.ch, manuel TVT/RAG ; tous deux pour SPHAIR, 10 novembre
+  2026, et partagent le code de file hors ligne), `muslim-lantern` (repo `dawah-map`).
+- **Autres outils à moi** : `quran-tracker` (suis-je dans les temps sur ma mémorisation),
+  `foc-final` (Commandingo, examens de la Formation au commandement).
 - **Pour d'autres** : `instructions` (13 instructeurs, **son `.env.local` pointe sur la
   production**), `ciao` (stands ontécoute.ch).
 - **Retirés, ne pas y travailler** : `qiyam-hq` (fondu dans HQ), `app-qiyam` et `qiyam`
   (anciennes versions de Qiyam).
+- **En sommeil** (rien en cours ; demande avant d'y toucher) : `alif-app`, `itstime-barber`,
+  `simpleje`, `stands-neuchatel`, `neurodeck`.
 
 ## Ce qu'on vise : du logiciel de professionnel
 
