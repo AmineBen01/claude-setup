@@ -12,6 +12,7 @@
 !/hooks/
 !/cloud/
 !/skills/
+!/docs/
 # Every skill of mine is versioned by default; only these stay out: the ones synced from
 # claude.ai and the third-party ones (THIRD_PARTY.md, reinstalled by scripts/).
 /skills/synced/

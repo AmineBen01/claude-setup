@@ -1,5 +1,7 @@
 CLAUDE.md
 cloud/sync.sh
+docs/file-apex.md
+docs/sous-agents.md
 skills/aligner-carriere/SKILL.md
 skills/aligner/SKILL.md
 skills/mise-en-ligne/SKILL.md
