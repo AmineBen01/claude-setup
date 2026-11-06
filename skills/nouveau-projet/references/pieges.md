@@ -254,6 +254,11 @@ pas en bash (guillemets).
   device install app`. `expo run:ios --device` veut l'UDID matériel (`xcrun xctrace list devices`).
 - Le numéro de build d'une release vient du script (`EXPO_PUBLIC_BUILD`, nombre de commits), pas
   d'un module natif : l'écran « Mettre à jour » marche sans reconstruire le client de dev.
+- **Hors ligne : garder aussi le compte, pas seulement les données** (Ironmile, 6 novembre 2026). L'app
+  gardait la semaine sur le téléphone, mais `MeProvider` attendait `/api/me` au lancement : en mode
+  avion, « Can't load your account » couvrait tout. Une app qui promet le hors-ligne garde aussi la
+  réponse de `/api/me` (par compte, effacée à la déconnexion), l'utilise sur tout échec sauf 401, et
+  redemande au retour au premier plan. Le starter n'a pas de mode hors ligne : à ajouter avec lui.
 - **`npx expo install` dans `apps/mobile` peut casser l'API d'à côté** (Ironmile, 6 novembre 2026) :
   un paquet qui devient pair d'`expo` (ici `expo-widgets`) change l'empreinte de tout ce qui dépend
   d'expo, `better-auth` compris (via `@better-auth/expo`) ; le lien de `apps/api/node_modules`
