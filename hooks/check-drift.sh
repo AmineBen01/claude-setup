@@ -7,9 +7,14 @@
 #  1. The project map ("## Mes projets" in ~/.claude/CLAUDE.md) names every folder of ~/Projects
 #     that is linked to GitHub, and every folder it names in backticks at the start of a line's
 #     description still exists.
+#  2. No memory (~/.claude/projects/*/memory/*.md) is past its `expires:` date: what it describes
+#     may have changed, so the session re-checks it, then updates it (new date) or deletes it.
+#  3. In an app made from the starter (a `.starter-version` file at its root, the starter commit it
+#     has caught up with): the starter's code changes since then.
 # A new check goes here, with a line above saying what it compares.
 
-cat >/dev/null # the hook's input isn't needed
+input=$(cat)
+cwd=$(python3 -c 'import json,sys; print(json.loads(sys.stdin.read() or "{}").get("cwd",""))' <<<"$input" 2>/dev/null)
 projects="$HOME/Projects"
 claude_md="$HOME/.claude/CLAUDE.md"
 [ -d "$projects" ] && [ -f "$claude_md" ] || exit 0 # cloud session: nothing to compare
@@ -33,7 +38,29 @@ while read -r name; do
 done < <(grep -oE '(^ *|[(:,] |et )`[a-z0-9][a-z0-9.-]*`' <<<"$map" | grep -oE '`[^`]+`' | tr -d '`' | sort -u \
   | while read -r n; do grep -qE "(repo|branche) \`$n\`" <<<"$map" || echo "$n"; done)
 
+# 2. Expired memories.
+today=$(date +%F)
+for f in "$HOME"/.claude/projects/*/memory/*.md; do
+  [ -f "$f" ] || continue
+  exp=$(awk '/^---$/{n++; next} n==1 && /^ *expires: *[0-9-]+/{print $2; exit}' "$f")
+  [ -n "$exp" ] && [[ "$exp" < "$today" ]] && problems+=("La mémoire $(basename "$f") a expiré le $exp : revérifie ce qu'elle dit, puis mets-la à jour (nouvelle date \`expires\`) ou supprime-la (et sa ligne dans MEMORY.md).")
+done
+
+# 3. Starter changes the app in this session hasn't reviewed yet.
+starter="$projects/starter"
+dir="$cwd"
+while [ -n "$dir" ] && [ "$dir" != "/" ] && [ "$dir" != "$projects" ] && [ ! -f "$dir/.starter-version" ]; do dir=$(dirname "$dir"); done
+if [ -f "$dir/.starter-version" ] && [ "$dir" != "$starter" ] && [ -d "$starter/.git" ]; then
+  since=$(tr -d '[:space:]' <"$dir/.starter-version")
+  changes=$(git -C "$starter" log --format='  %h %s' "$since..HEAD" -- . ':!README.md' ':!CLAUDE.md' ':!CLAUDE.template.md' ':!claude-template' ':!scripts/new-app.mjs' ':!scripts/check-modules.mjs' 2>/dev/null | cut -c1-150)
+  if [ -n "$changes" ]; then
+    problems+=("Le starter a changé depuis la version que $(basename "$dir") a rattrapée (.starter-version) :
+$(head -12 <<<"$changes")
+  Propose à Amine ceux qui valent pour cette app (en une ligne chacun), applique ce qu'il accepte, puis écris $(git -C "$starter" rev-parse --short HEAD) (le commit revu) dans .starter-version.")
+  fi
+fi
+
 [ ${#problems[@]} -eq 0 ] && exit 0
-echo "Dérive détectée par ~/.claude/hooks/check-drift.sh : à corriger avant le reste de la session (CLAUDE.md global, « Mes projets ») :"
+echo "Dérive détectée par ~/.claude/hooks/check-drift.sh, à traiter avant le reste de la session :"
 printf -- '- %s\n' "${problems[@]}"
 exit 0
