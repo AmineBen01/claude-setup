@@ -18,36 +18,36 @@ Lire `references/pieges.md` **avant d'écrire du code** : tous les pièges déj�
 Lire `references/design.md` **avant toute interface** : comment concevoir un design sur mesure ; il
 n'y a plus de look maison.
 
-## 1. Cadrage (règle globale : questions jusqu'à accord)
+## 1. Cadrage (règle globale : l'intention d'abord, puis je décide)
 
 Lire d'abord ce qui existe (doc, PDF, maquettes dans le dossier) et apporter ce qu'on y
-trouve. Puis, par tours d'AskUserQuestion, en langage simple, avec une recommandation :
+trouve. Puis, par tours d'AskUserQuestion, en langage simple, **demander l'intention** jusqu'à ce
+qu'elle soit limpide :
 
-- **Site / outil web, ou app des stores ?** (une app qu'on installe depuis l'App Store, avec son
-  site). C'est le `--kind web|store` du starter.
-- **Les modules** (README du starter) : comptes, paiements (prix, essai, ce qui reste gratuit),
-  notifications, site de lancement et blog (HQ), tableau de bord web, branchement à HQ. Les
-  proposer selon ce qui a été dit, avec la valeur par défaut recommandée.
+- **Pourquoi** ce projet : le problème ou l'envie, ce qui doit changer une fois en ligne, à quoi on
+  saura que c'est réussi. Pour moi ou pour des utilisateurs (et lesquels) ?
 - **Qui** l'utilise, sur quel appareil (téléphone, tablette, ordinateur), où (en
   classe, dans la rue…), avec quelle connexion.
-- **Ce qu'ils font et voient**, écran par écran ; les cas limites (erreur, vide, réseau).
-- **Données à garder ?** Si oui : base Neon + Drizzle. Si non : pas de base.
-- **Accès** : public, ou code d'accès partagé (variable d'environnement), et pour quelles
-  actions (lire, écrire, modifier, supprimer).
-- **Nom** du projet : il donne le repo, l'adresse `<nom>.vercel.app` et, pour une app, le bundle
-  `app.<nom>`. Un domaine à soi est une dépense : demander.
-- **Installation sur téléphone** souhaitée ? Si oui, skill `pwa` dans le plan.
-- **La carte des tâches** : pour chaque écran, ce qu'on comprend en 5 secondes et la prochaine
-  action (`references/design.md`) ; validée ici, avant tout visuel.
-- **Identité visuelle** : si la marque existe, ce qu'elle impose ; dans tous les cas, l'étape
-  « Identité et design » ci-dessous avant toute interface, outils internes compris.
-- **Échéance** et première version testable.
+- **Ce qu'ils doivent pouvoir faire**, du point de vue de l'utilisateur ; ce qui compte le plus.
+- **Ce qui est à Amine seul** : le nom (il donne le repo, l'adresse `<nom>.vercel.app` et, pour une
+  app, le bundle `app.<nom>`), le prix et ce qui reste gratuit s'il y a des paiements, l'échéance,
+  ce que la marque impose si elle existe.
+- **Dépenses** : tout ce qui coûte (domaine, plan payant, clé d'API) se demande à chaque fois.
 - **Autorisations dont j'aurai besoin** : envoyer les secrets à Vercel, créer repo, base
   et projet Vercel ; pour une app : projet Expo, app dans App Store Connect, RevenueCat ; pour
   HQ : une modification du repo `headquarters`. Les demander maintenant, pas à la fin.
-- **Dépenses** : tout ce qui coûte (domaine, plan payant, clé d'API) se demande à chaque fois.
 
-Puis le plan avec la liste **Décisions validées** ; attendre le feu vert.
+**Je décide ensuite, et je l'écris dans le plan avec la raison** (sans en faire des questions) :
+site / outil web ou app des stores (`--kind web|store` du starter), les modules du README du
+starter (comptes, paiements, notifications, site et blog, tableau de bord, branchement à HQ), base
+Neon + Drizzle ou pas, l'accès (public, code partagé, et pour quelles actions), l'installation sur
+téléphone (skill `pwa`), les écrans et leurs cas limites (erreur, vide, réseau), et **la carte des
+tâches** (pour chaque écran, ce qu'on comprend en 5 secondes et la prochaine action,
+`references/design.md`), proposée ici avant tout visuel. Rien de plus que ce que le besoin demande.
+L'identité visuelle passe dans tous les cas par l'étape « Identité et design » ci-dessous, outils
+internes compris.
+
+Puis le plan : l'intention comprise, puis la liste **Décisions validées** ; attendre le feu vert.
 
 ## 1 bis. Identité et design (tout projet avec un écran)
 
