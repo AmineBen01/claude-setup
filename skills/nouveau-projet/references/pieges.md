@@ -86,6 +86,14 @@
 - **`line-clamp-*` sur un `<button>` est ignoré par WebKit** (vu le 4 novembre 2026, vue Semaine
   d'Apex) : le titre s'étalait sur 8 lignes. Mettre le `line-clamp` sur un `<span>` à l'intérieur du
   bouton.
+- **`field-sizing: content`** (la classe `field-sizing-content` du `Textarea` shadcn) n'existe pas dans
+  les Safari plus anciens : le champ reste à sa hauteur de départ. Garder un repli qui règle la hauteur
+  sur `scrollHeight` quand `CSS.supports("field-sizing", "content")` est faux (Apex,
+  `components/ui/textarea.tsx`, 6 novembre 2026). Un titre à éditer sur téléphone : `Textarea rows={1}`
+  qui grandit, Entrée qui enregistre, plutôt qu'un `Input` d'une ligne.
+- **Les suggestions du navigateur** (anciennes saisies sous un champ) gênent dans un outil : mettre
+  `autoComplete="off"` par défaut dans le composant `Input` de l'app, les formulaires de connexion
+  gardant leurs propres valeurs.
 
 ## Base de données (Neon + Drizzle)
 
