@@ -635,3 +635,26 @@ pas en bash (guillemets).
   `docs/claude/<sujet>.md`, avec une ligne « Before … → read `docs/claude/<sujet>.md` ». Le starter
   le fait d'office (`claude-template/` devient le `docs/claude/` de l'app) ; `verifier` et
   `mise-en-ligne` suivent ces renvois. Au-delà d'environ 15 Ko, découper.
+
+## Vu sur Briefing (6 novembre 2026)
+
+- **Une file d'envoi `running = (async () => {…})()` peut se bloquer pour toujours** (VMC Trainer et
+  Briefing, même code) : quand il n'y a rien à envoyer, le corps de la fonction async s'exécute en
+  entier de façon synchrone (aucun `await` atteint), son `finally` remet `running = null`… puis
+  l'affectation pose la promesse déjà résolue dans `running`. Chaque `flush()` suivant la renvoie et
+  plus rien ne part : les réponses restent « en attente » sur l'appareil. Commencer le corps par
+  `await Promise.resolve()`, et un test « vider une file vide, puis envoyer » (Briefing,
+  `lib/sync-queue.test.ts`). Les tests unitaires d'avant ne le voyaient pas : seul le vrai parcours
+  dans le navigateur l'a montré.
+- **Le navigateur Playwright du MCP est partagé** : des sous-agents qui s'en servent pendant que tu
+  testes changent la page sous tes yeux (et tes réponses de test partent avec). Donner aux agents
+  un outil de capture à eux (`scripts/shot.sh` avec Chrome sans fenêtre, `--user-data-dir` neuf), et
+  tester soi-même dans un navigateur isolé (un script Playwright avec son propre `launch()`).
+- **Après une réécriture complète de `globals.css`, `next dev` a servi l'ancien CSS** (et un ancien
+  rendu serveur d'un composant modifié : erreur d'hydratation trompeuse) : arrêter le serveur,
+  `rm -rf .next`, relancer, avant de conclure à un bug.
+- **Une fonction importée d'un fichier `"use client"` dans un composant serveur n'est plus une
+  fonction** (référence client) : les petites fonctions partagées (formatage d'une réponse…) vivent
+  dans un module sans directive (`lib/…`).
+- **Ne pas importer l'index du contenu (`@/content`) dans un composant client** : tout le contenu
+  part dans le JavaScript du navigateur. Passer au client seulement ce qu'il affiche.
