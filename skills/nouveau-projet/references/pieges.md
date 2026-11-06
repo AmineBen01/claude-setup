@@ -254,6 +254,19 @@ pas en bash (guillemets).
   device install app`. `expo run:ios --device` veut l'UDID matériel (`xcrun xctrace list devices`).
 - Le numéro de build d'une release vient du script (`EXPO_PUBLIC_BUILD`, nombre de commits), pas
   d'un module natif : l'écran « Mettre à jour » marche sans reconstruire le client de dev.
+- **`npx expo install` dans `apps/mobile` peut casser l'API d'à côté** (Ironmile, 6 novembre 2026) :
+  un paquet qui devient pair d'`expo` (ici `expo-widgets`) change l'empreinte de tout ce qui dépend
+  d'expo, `better-auth` compris (via `@better-auth/expo`) ; le lien de `apps/api/node_modules`
+  pointe alors vers un dossier disparu (« Cannot find module 'better-auth' »). Remède : `pnpm install`
+  à la racine, puis relancer typecheck et tests de l'API.
+- **Widgets et Live Activities : `expo-widgets`** (module Expo, SDK 58 ; mises en page en JS avec
+  `@expo/ui/swift-ui`, directive `'widget'`, rien du module ni de hooks dans la fonction). Les
+  données se calculent dans l'app (fonction pure testée) et le widget ne fait que dessiner ; un
+  `require` paresseux limité à iOS évite d'importer le module natif sur Android. Le compte à rebours
+  d'une Live Activity se donne en deux dates (`Text timerInterval`) : iOS l'anime seul, app fermée.
+  **Finir une Live Activity avec `end('immediate')`** : la politique par défaut laisse la dernière
+  bannière jusqu'à 4 heures sur l'écran verrouillé. Ajouter l'extension = `expo prebuild --clean`
+  et un nouveau build (TestFlight), jamais une mise à jour OTA.
 
 ## App native : écrans et navigation
 
@@ -345,6 +358,11 @@ pas en bash (guillemets).
   conclure à un bug.
 - Les flows tournent depuis un dossier `.screens/` (ignoré) ; les captures sont dans
   `~/.maestro/tests/<run>/…`, à regarder une par une.
+- **`launchApp` relance l'app** (état perdu) : pour revenir dans l'app après `pressKey: Home`, c'est
+  `launchApp: { stopApp: false }`. Le Centre de notifications du simulateur peut montrer une bannière
+  de Live Activity **en cache** (ancien contenu) : se fier à la Dynamic Island et aux journaux de
+  l'app, vérifier la vraie bannière sur le téléphone. Un widget s'ajoute au doigt (Edit → Add
+  Widget → recherche du nom) ; celui de l'écran verrouillé ne se pose pas avec Maestro.
 
 ## App Store et RevenueCat
 
