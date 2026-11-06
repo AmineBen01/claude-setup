@@ -630,6 +630,22 @@ pas en bash (guillemets).
   doigt se simule sur Chromium (Android) avec `Input.dispatchTouchEvent` via une session CDP, et la
   logique d'ordre se teste aussi au clavier (Espace, flèches, Espace). Enregistrer l'ordre en une
   seule fois (`db.batch`), pas une requête par ligne.
+- **Les réglages par défaut d'un nouveau compte s'écrivaient deux fois** : les premiers écrans se
+  chargent en même temps et chacun appelait la mise en place (« pas encore de profil → tout
+  insérer ») ; un compte neuf avait 14 domaines au lieu de 7. **Réserver d'abord** : insérer la ligne
+  qui marque « fait » (`onConflictDoNothing().returning()`), et seule la requête qui l'a créée écrit
+  le reste (`db.batch`) ; en cas d'échec, rendre la réservation. Un test lance la mise en place trois
+  fois en parallèle et compte les lignes.
+- **Une rangée de boutons qui doit passer à la ligne** : un groupe intérieur en `shrink-0` ne se
+  replie jamais et pousse la page en largeur dès que les boutons dépassent ; sur ordinateur
+  `md:min-w-0 md:shrink md:flex-wrap` sur le groupe aussi. Tester une largeur étroite (1024 px) avec
+  plus de boutons que prévu.
+- **View transitions (le mouvement)** : laisser le fond de page (`root`) sans fondu
+  (`::view-transition-old(root), ::view-transition-new(root) { animation: none }`), sinon chaque
+  rafraîchissement après une action fait clignoter les changements ; clé de l'écran = l'adresse,
+  pour qu'un rafraîchissement n'anime pas toute la page ; un même nom visible deux fois annule la
+  transition (une copie en `display:none`, téléphone/ordinateur, ne gêne pas). Les filtres d'une
+  liste en `startTransition`, mais pas la frappe dans une recherche.
 
 ## Le CLAUDE.md d'une app : en couches (6 novembre 2026)
 

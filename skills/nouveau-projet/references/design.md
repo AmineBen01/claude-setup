@@ -19,6 +19,8 @@ le niveau de travail et d'attention au détail que j'attends ».
 - **La largeur des grands écrans sert** : jamais une colonne étroite seule au milieu de 1440 px.
 - **Jamais enfantin** : Amine a jugé ainsi le look « mignon » et ses gros boutons arrondis. La
   question est le ton de l'ensemble, pas une forme interdite.
+- **Du mouvement, au niveau d'Apex** (décidé le 6 novembre 2026 : « fais-le dans tous mes futurs
+  projets ») : voir « Le mouvement » plus bas.
 
 Tout le reste se décide pour le projet.
 
@@ -80,6 +82,37 @@ du starter : remplir `apps/web/design-direction.json` et retirer la base nue, si
 
 Pour un nouveau projet, une refonte ou un grand écran, une fois construit (`verifier`, section
 « Critique ») : un agent qui n'a pas vu ce raisonnement juge le produit.
+
+## Le mouvement
+
+Amine, sur Apex : l'app ne doit pas être inerte. Les actions qui tombent à plat, les écrans qui
+apparaissent d'un coup et l'absence de récompense le gênaient. Le niveau voulu : **discret et rapide
+partout, expressif à un ou trois endroits**, autant sur ordinateur que sur téléphone. Référence
+construite : Apex (`~/Projects/apex/brand/README.md`, « Motion »). Le starter apporte la mécanique
+(`components/motion.tsx`, `lib/celebrate.ts`, `components/celebration.tsx`, fin de `globals.css`).
+
+- **Seulement en réponse** à ce que fait la personne, ou pour une récompense ; jamais d'animation
+  qui tourne toute seule (fond, entrée de chaque section au chargement, survol de chaque carte).
+- **Les quatre couches**, toutes présentes :
+  1. **Le geste** : cocher, valider, enregistrer répond tout de suite (la case qui « pop » et dessine
+     sa coche, `.tick-pop`, seulement quand on vient de cocher).
+  2. **Les éléments d'une liste** arrivent, partent et glissent vers leur nouvelle place
+     (`ItemMotion`, nommé par l'id ; un id visible deux fois annule l'animation).
+  3. **Les écrans** : le contenu se fond, le cadre (barre, onglets) reste immobile ; les flèches
+     précédent/suivant glissent dans le sens du geste (`transitionTypes`).
+  4. **La récompense** : un à trois moments où la personne a fini quelque chose qui compte, choisis
+     avec Amine pendant le cadrage (sur Apex : la dernière tâche du jour, la dernière habitude, un
+     jalon). Son dessin vient de la signature du projet (sur Apex, le soleil de la marque qui monte
+     jusqu'à l'apex), jamais des confettis de série. Une fois par jour pour un moment quotidien,
+     jamais au chargement.
+- **Durées** : 150 / 220 / 300 ms, une courbe ; la récompense ~800 ms. Le projet peut les accorder à
+  sa marque, pas les enlever.
+- **Pas de bibliothèque** pour ça : `<ViewTransition>` de React 19.3 (sur le web) anime ce que le
+  serveur a renvoyé. Une app Expo suit les mêmes quatre couches avec Reanimated.
+- **« Réduire les animations »** de l'appareil coupe tout ; la récompense s'affiche immobile.
+- `brand/README.md` du projet écrit son mouvement (ses moments, son dessin) ; `verifier` prouve que
+  chaque transition se termine sans erreur (envelopper `document.startViewTransition` et lire
+  `finished` / `ready`) et que la récompense part au bon moment, une seule fois.
 
 ## Ce qu'une bonne interface fait toujours
 
