@@ -124,8 +124,8 @@ Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 Décidé le 4 novembre 2026, « HQ décide, Apex planifie » ; une file par projet depuis le 6 novembre.
 **Apex** (https://apex.amineben.ch, mon planificateur, `~/Projects/apex`) est ta **seule file de
 travail**. Tâches et idées n'y font plus qu'une : chaque projet de code (Qiyam, Ironmile, HQ, Apex) a
-sa **file**, ses choses à faire ouvertes, dans l'ordre où tu les traites (le carré d'abord, puis l'ordre
-que j'ai glissé). Les demandes du growth lead que j'ai approuvées dans HQ y arrivent toutes seules
+sa **file**, ses choses à faire ouvertes (triées par carré, puis par l'ordre que j'ai glissé : une
+indication, pas une consigne). Les demandes du growth lead que j'ai approuvées dans HQ y arrivent toutes seules
 (« from growth lead »). « Someday » (nouvelles apps, marketing) n'en fait pas partie.
 
 Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters` ou
