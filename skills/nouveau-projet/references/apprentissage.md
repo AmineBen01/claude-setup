@@ -44,7 +44,7 @@ sort s'ajoute ici, avec sa source. Le code de référence est Briefing (`~/Proje
 
 ## Comment la mémoire s'entraîne
 
-14. **Répétition espacée, adaptée à la ligne d'arrivée** (Briefing : 10 min, 5 h, 20 h, 48 h, rien
+14. **Répétition espacée, adaptée à la ligne d'arrivée** (Briefing : 2 h, 5 h, 20 h, 48 h, rien
     après le matin de l'examen).
 15. **Trois réponses de confiance : « Sûr », « Pas sûr », « Je ne sais pas ».** « Je ne sais pas »
     évite de deviner et distingue « jamais appris » (à enseigner) de « mal compris » ; une erreur
