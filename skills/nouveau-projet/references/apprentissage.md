@@ -45,7 +45,9 @@ sort s'ajoute ici, avec sa source. Le code de référence est Briefing (`~/Proje
 ## Comment la mémoire s'entraîne
 
 14. **Répétition espacée, adaptée à la ligne d'arrivée** (Briefing : 2 h, 5 h, 20 h, 48 h, rien
-    après le matin de l'examen).
+    après le matin de l'examen). Le premier retour d'une question ratée vient 1 à 2 h plus tard, pas
+    10 min : la répétition dans la même séance, c'est la question ratée reposée en fin de série ;
+    à 10 min, les révisions dues envahissent chaque séance et on n'avance plus (Amine, 7 nov. 2026).
 15. **Trois réponses de confiance : « Sûr », « Pas sûr », « Je ne sais pas ».** « Je ne sais pas »
     évite de deviner et distingue « jamais appris » (à enseigner) de « mal compris » ; une erreur
     « Sûr » signale une idée fausse, le signal le plus important à corriger. Une bonne réponse
