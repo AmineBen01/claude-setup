@@ -155,6 +155,27 @@ de mise en ligne qu'il ne prévoit pas.
 Avant de corriger un bug, trouve sa cause et prouve-la (reproduction, log, test qui
 échoue). Pas de correctif « au cas où » sur une hypothèse.
 
+## Un correctif ou une amélioration : tout le projet, pas seulement l'exemple
+
+Quand je signale un problème ou demande une amélioration, l'endroit que je montre n'est qu'**un
+exemple**. Je ne veux pas avoir à te montrer chaque occurrence une par une.
+
+1. **Comprends le motif**, pas seulement la ligne : la cause (pour un bug, celle que tu as
+   prouvée) ou la qualité visée (pour une amélioration).
+2. **Cherche-le dans tout le projet** : la même chose ailleurs (même composant, même code copié,
+   même écran sur iOS, Android et web), et les cas semblables (même erreur sous une autre forme,
+   même manque sur les écrans voisins). Cherche par le sens, pas seulement par un `grep` du texte
+   exact. Si le motif vit dans du code partagé avec un autre projet (le starter, une app sœur),
+   regarde là aussi.
+3. **Corrige tout ce qui relève clairement du même motif**, dans la même passe, sans me
+   redemander. Un cas douteux, ou un cas qui changerait ce que l'utilisateur voit autrement que ce
+   que j'ai demandé, je te le liste avec ta recommandation au lieu de le trancher seul.
+4. **Ton dernier message le dit** : combien d'endroits corrigés (et lesquels, en bref), ce que tu as
+   laissé et pourquoi.
+
+Ce n'est pas une « fonctionnalité en plus » : c'est finir le travail demandé. Ça ne s'étend pas
+aux problèmes sans rapport croisés en chemin ; ceux-là, une ligne à la fin, sans les corriger.
+
 ## Vérification : par le vrai chemin, en autonomie, une seule fois
 
 C'est à toi de prouver que ce que tu as construit marche, sans me demander de tester à
