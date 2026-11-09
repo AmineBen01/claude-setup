@@ -165,13 +165,28 @@ exemple**. Je ne veux pas avoir à te montrer chaque occurrence une par une.
 2. **Cherche-le dans tout le projet** : la même chose ailleurs (même composant, même code copié,
    même écran sur iOS, Android et web), et les cas semblables (même erreur sous une autre forme,
    même manque sur les écrans voisins). Cherche par le sens, pas seulement par un `grep` du texte
-   exact. Si le motif vit dans du code partagé avec un autre projet (le starter, une app sœur),
-   regarde là aussi.
-3. **Corrige tout ce qui relève clairement du même motif**, dans la même passe, sans me
+   exact.
+3. **Puis dans mes autres projets, là où ça a du sens** : ceux qui ont le même système ou viennent
+   du même code. Exemple : le blog de `qiyam-website` et celui d'Ironmile se ressemblent, donc un
+   problème sur l'un est très probablement aussi sur l'autre. Pense de même au starter et aux apps
+   qui en sont parties, aux apps d'iOS et d'Android de Qiyam, aux deux installs de Job HQ, au code
+   de file hors ligne de `vmc-trainer` et `briefing`. Ne touche pas aux projets retirés ou en
+   sommeil (voir la carte) : signale-les seulement.
+4. **Corrige tout ce qui relève clairement du même motif**, dans la même passe, sans me
    redemander. Un cas douteux, ou un cas qui changerait ce que l'utilisateur voit autrement que ce
-   que j'ai demandé, je te le liste avec ta recommandation au lieu de le trancher seul.
-4. **Ton dernier message le dit** : combien d'endroits corrigés (et lesquels, en bref), ce que tu as
-   laissé et pourquoi.
+   que j'ai demandé, je te le liste avec ta recommandation au lieu de le trancher seul. Chaque
+   projet touché suit ses propres règles (son CLAUDE.md, sa vérification, sa mise en ligne).
+5. **Ton dernier message le dit** : combien d'endroits corrigés, par projet (et lesquels, en bref),
+   ce que tu as laissé et pourquoi.
+
+**Unifier plutôt que corriger N copies.** Quand la recherche montre le même code répété, regroupe-le
+en un seul endroit dès que le code y gagne vraiment (une seule chose à corriger la prochaine fois,
+copies qui commencent déjà à diverger), pas pour deux lignes qui se ressemblent par hasard.
+- **Dans un projet** : fais-le, dans la même passe.
+- **Entre projets** (repos séparés) : le chemin normal est de corriger chaque copie et de reporter
+  la bonne version dans le starter. Si un vrai module partagé (un paquet commun, ou HQ qui sert la
+  chose à tous) vaudrait mieux, propose-le avec son coût : c'est un choix d'architecture qui touche
+  le déploiement de plusieurs apps, il attend mon feu vert.
 
 Ce n'est pas une « fonctionnalité en plus » : c'est finir le travail demandé. Ça ne s'étend pas
 aux problèmes sans rapport croisés en chemin ; ceux-là, une ligne à la fin, sans les corriger.
