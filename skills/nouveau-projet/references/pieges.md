@@ -706,3 +706,9 @@ pas en bash (guillemets).
   répondait pas ; HQ marquait « publié » un article commité, sans regarder le site. Tout nouveau
   lien entre dans le contrôle quotidien de HQ (`headquarters/lib/links.ts`, qui appelle aussi
   `GET /api/hq/links` d'Apex) : une notification nomme ce qui a cassé.
+
+- **Vu sur Briefing (9 nov 2026) : une image privée ne va pas dans `public/`.** Le `matcher` du
+  `proxy.ts` du starter laisse passer tout fichier `.png/.jpg/.webp…` sans code d'accès : une image
+  derrière le mot de passe (capture, document) se range hors de `public/` et se sert par une route
+  (`route.ts` qui vérifie l'accès puis lit le fichier), avec `outputFileTracingIncludes` pour que
+  Vercel embarque les fichiers.
