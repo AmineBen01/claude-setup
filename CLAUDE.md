@@ -57,7 +57,7 @@ le disent). Une ligne sans date est durable.
   générique. Voir plus bas.
 - **Carrière** : `amineben` (mon site et mes CV, qui lisent le flux public de HQ), `job` (Job HQ,
   une install pour moi et une pour mon père Lahcen).
-- **Outils privés, faits depuis le starter** : `vestiaire` (ma garde-robe), `muslim-lantern`
+- **Outils privés, faits depuis le starter** : `muslim-lantern`
   (repo `dawah-map`).
 - **Autres outils à moi** : `quran-tracker` (suis-je dans les temps sur ma mémorisation),
   `foc-final` (Commandingo, examens de la Formation au commandement).
@@ -69,7 +69,8 @@ le disent). Une ligne sans date est durable.
   (anciennes versions de Qiyam).
 - **En sommeil** (plus utilisés, rien en ligne ; demande avant d'y toucher) : `alif-app`,
   `stands-neuchatel`, `neurodeck`, `vmc-trainer` et `briefing` (faits pour SPHAIR,
-  10 novembre 2026 ; plus utilisés depuis le 11 novembre 2026). Un projet qui passe ici sort
+  10 novembre 2026 ; plus utilisés depuis le 11 novembre 2026), `vestiaire` (ma garde-robe, depuis le
+  11 novembre 2026). Un projet qui passe ici sort
   aussi de Vercel et de Neon (sauvegarde `pg_dump` d'abord dans son `backup/`, hors git) : il ne
   coûte rien. Le code reste sur GitHub.
 
