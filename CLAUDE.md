@@ -62,11 +62,13 @@ le disent). Une ligne sans date est durable.
 - **Autres outils à moi** : `quran-tracker` (suis-je dans les temps sur ma mémorisation),
   `foc-final` (Commandingo, examens de la Formation au commandement).
 - **Pour d'autres** : `instructions` (13 instructeurs, **son `.env.local` pointe sur la
-  production**), `ciao` (stands ontécoute.ch).
+  production**), `ciao` (stands ontécoute.ch). Sites de clients, en ligne mais sans travail en
+  cours (demande avant d'y toucher, ne jamais les mettre hors ligne) : `itstime-barber`
+  (www.itstime-barber.ch, salon de Lausanne, réservation Salonkee), `simpleje` (www.simpleje.ch).
 - **Retirés, ne pas y travailler** : `qiyam-hq` (fondu dans HQ), `app-qiyam` et `qiyam`
   (anciennes versions de Qiyam).
-- **En sommeil** (rien en cours ; demande avant d'y toucher) : `alif-app`, `itstime-barber`,
-  `simpleje`, `stands-neuchatel`, `neurodeck`, `vmc-trainer` et `briefing` (faits pour SPHAIR,
+- **En sommeil** (plus utilisés, rien en ligne ; demande avant d'y toucher) : `alif-app`,
+  `stands-neuchatel`, `neurodeck`, `vmc-trainer` et `briefing` (faits pour SPHAIR,
   10 novembre 2026 ; plus utilisés depuis le 11 novembre 2026).
 
 ## Ce qu'on vise : du logiciel de professionnel
