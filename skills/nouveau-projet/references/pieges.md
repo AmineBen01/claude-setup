@@ -516,6 +516,12 @@ pas en bash (guillemets).
   autre perdait son `refresh()` implicite : le remettre dans son enveloppe.
 - **Navigateur de test et limite de 5 connexions par minute** : donner à chaque contexte Playwright
   sa propre adresse (`extraHTTPHeaders: { "x-forwarded-for": "10.9.x.y" }`), comme les tests Vitest.
+- **L'attente dans claude.ai vient des tours d'outils, pas du serveur** (Apex, 11 novembre 2026 : base
+  ~16 ms, point d'accès 0,15 s, mais 3–4 lectures enchaînées avant la première réponse). Concevoir le
+  connecteur avec **une seule lecture de départ** (« brief » : tout ce qu'il faut pour répondre ou
+  planifier, compact, sans champs `null`, textes longs coupés en aperçu) et mettre le **guide dans les
+  `instructions` du serveur** (lues une fois à la connexion), pas dans le résultat d'un outil. Journaliser
+  chaque appel avec son outil et sa durée (`[mcp] tools/call get_brief 200 312 ms`) pour mesurer.
 
 ## Plusieurs portes vers le même produit
 
