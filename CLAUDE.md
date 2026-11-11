@@ -35,6 +35,12 @@ le dit. Un nouveau lien entre deux apps entre aussi dans le contrôle quotidien 
 session `~/.claude/hooks/check-drift.sh` signale un projet manquant ou un dossier disparu ; corrige
 la carte avant le reste.
 
+**Chaque projet a une fin d'usage connue.** Au cadrage d'un nouveau projet, demande-moi jusqu'à
+quand il servira (une date, un événement, ou « durable »). Un projet à durée limitée porte dans sa
+ligne `fin d'usage : AAAA-MM-JJ` ; passé ce jour, le hook le signale : demande-moi s'il continue
+(nouvelle date) ou s'il passe « En sommeil » (la ligne y déménage, la date disparaît, ses mémoires
+le disent). Une ligne sans date est durable.
+
 - **Qiyam** (`qiyam-app`) : l'app de révision du Coran (iOS Swift, Android Kotlin, un cœur de
   règles partagé, Supabase). Mon produit principal ; l'ordre de son travail vient du growth lead.
   Son site et son blog : `qiyam-website` (les articles arrivent de HQ, jamais à la main).
@@ -51,9 +57,8 @@ la carte avant le reste.
   générique. Voir plus bas.
 - **Carrière** : `amineben` (mon site et mes CV, qui lisent le flux public de HQ), `job` (Job HQ,
   une install pour moi et une pour mon père Lahcen).
-- **Outils privés, faits depuis le starter** : `vestiaire` (ma garde-robe), `vmc-trainer` et
-  `briefing` (https://briefing.amineben.ch, manuel TVT/RAG ; tous deux pour SPHAIR, 10 novembre
-  2026, et partagent le code de file hors ligne), `muslim-lantern` (repo `dawah-map`).
+- **Outils privés, faits depuis le starter** : `vestiaire` (ma garde-robe), `muslim-lantern`
+  (repo `dawah-map`).
 - **Autres outils à moi** : `quran-tracker` (suis-je dans les temps sur ma mémorisation),
   `foc-final` (Commandingo, examens de la Formation au commandement).
 - **Pour d'autres** : `instructions` (13 instructeurs, **son `.env.local` pointe sur la
@@ -61,7 +66,8 @@ la carte avant le reste.
 - **Retirés, ne pas y travailler** : `qiyam-hq` (fondu dans HQ), `app-qiyam` et `qiyam`
   (anciennes versions de Qiyam).
 - **En sommeil** (rien en cours ; demande avant d'y toucher) : `alif-app`, `itstime-barber`,
-  `simpleje`, `stands-neuchatel`, `neurodeck`.
+  `simpleje`, `stands-neuchatel`, `neurodeck`, `vmc-trainer` et `briefing` (faits pour SPHAIR,
+  10 novembre 2026 ; plus utilisés depuis le 11 novembre 2026).
 
 ## Ce qu'on vise : du logiciel de professionnel
 
@@ -169,8 +175,7 @@ exemple**. Je ne veux pas avoir à te montrer chaque occurrence une par une.
 3. **Puis dans mes autres projets, là où ça a du sens** : ceux qui ont le même système ou viennent
    du même code. Exemple : le blog de `qiyam-website` et celui d'Ironmile se ressemblent, donc un
    problème sur l'un est très probablement aussi sur l'autre. Pense de même au starter et aux apps
-   qui en sont parties, aux apps d'iOS et d'Android de Qiyam, aux deux installs de Job HQ, au code
-   de file hors ligne de `vmc-trainer` et `briefing`. Ne touche pas aux projets retirés ou en
+   qui en sont parties, aux apps d'iOS et d'Android de Qiyam, aux deux installs de Job HQ. Ne touche pas aux projets retirés ou en
    sommeil (voir la carte) : signale-les seulement.
 4. **Corrige tout ce qui relève clairement du même motif**, dans la même passe, sans me
    redemander. Un cas douteux, ou un cas qui changerait ce que l'utilisateur voit autrement que ce
