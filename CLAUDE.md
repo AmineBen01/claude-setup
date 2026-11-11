@@ -69,7 +69,9 @@ le disent). Une ligne sans date est durable.
   (anciennes versions de Qiyam).
 - **En sommeil** (plus utilisés, rien en ligne ; demande avant d'y toucher) : `alif-app`,
   `stands-neuchatel`, `neurodeck`, `vmc-trainer` et `briefing` (faits pour SPHAIR,
-  10 novembre 2026 ; plus utilisés depuis le 11 novembre 2026).
+  10 novembre 2026 ; plus utilisés depuis le 11 novembre 2026). Un projet qui passe ici sort
+  aussi de Vercel et de Neon (sauvegarde `pg_dump` d'abord dans son `backup/`, hors git) : il ne
+  coûte rien. Le code reste sur GitHub.
 
 ## Ce qu'on vise : du logiciel de professionnel
 
