@@ -33,7 +33,8 @@ qu'elle soit limpide :
 - **Ce qu'ils doivent pouvoir faire**, du point de vue de l'utilisateur ; ce qui compte le plus.
 - **Ce qui est à Amine seul** : le nom (il donne le repo, l'adresse `<nom>.vercel.app` et, pour une
   app, le bundle `app.<nom>`), le prix et ce qui reste gratuit s'il y a des paiements, l'échéance,
-  ce que la marque impose si elle existe.
+  ce que la marque impose si elle existe, et **jusqu'à quand le projet servira** (une date, un
+  événement, ou « durable ») : elle entre dans sa ligne de la carte (`fin d'usage : AAAA-MM-JJ`).
 - **Dépenses** : tout ce qui coûte (domaine, plan payant, clé d'API) se demande à chaque fois.
 - **Autorisations dont j'aurai besoin** : envoyer les secrets à Vercel, créer repo, base
   et projet Vercel ; pour une app : projet Expo, app dans App Store Connect, RevenueCat ; pour
@@ -94,7 +95,7 @@ et RevenueCat » pour une app).
    fiche du store : le test `legal.test.ts` échoue tant qu'il en reste), la section « Project » du
    `CLAUDE.md`, `docs/decisions.md` avec les **Décisions validées**. **Sa ligne dans la carte des
    projets** du CLAUDE.md global (« Mes projets »), avec ce qu'elle lit ou envoie à d'autres projets
-   (HQ, Apex…) : avant le premier push.
+   (HQ, Apex…) et sa fin d'usage si elle est limitée : avant le premier push.
 5. **L'identité** (étape 1 bis faite) : `brand/mark-*.svg` puis `node scripts/brand-assets.mjs`
    (toutes les icônes), toutes les valeurs dans `apps/web/app/globals.css` et `app/layout.tsx`, et
    `apps/mobile/src/lib/theme.ts` pour une app (clair et sombre), `brand/README.md`. **Le starter
