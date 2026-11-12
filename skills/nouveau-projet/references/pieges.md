@@ -711,7 +711,7 @@ pas en bash (guillemets).
   repo) échoue sans bruit là où il sert : Apex gardait un bloc sport sans nom quand Ironmile ne
   répondait pas ; HQ marquait « publié » un article commité, sans regarder le site. Tout nouveau
   lien entre dans le contrôle quotidien de HQ (`headquarters/lib/links.ts`, qui appelle aussi
-  `GET /api/hq/links` d'Apex) : une notification nomme ce qui a cassé.
+  `GET /api/hq/links` d'Apex et de Studio) : une notification nomme ce qui a cassé.
 
 - **Vu sur Briefing (9 nov 2026) : une image privée ne va pas dans `public/`.** Le `matcher` du
   `proxy.ts` du starter laisse passer tout fichier `.png/.jpg/.webp…` sans code d'accès : une image

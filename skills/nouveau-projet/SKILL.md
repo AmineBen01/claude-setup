@@ -38,7 +38,7 @@ qu'elle soit limpide :
 - **Dépenses** : tout ce qui coûte (domaine, plan payant, clé d'API) se demande à chaque fois.
 - **Autorisations dont j'aurai besoin** : envoyer les secrets à Vercel, créer repo, base
   et projet Vercel ; pour une app : projet Expo, app dans App Store Connect, RevenueCat ; pour
-  HQ : une modification du repo `headquarters`. Les demander maintenant, pas à la fin.
+  HQ et Studio : une modification des repos `headquarters` et `studio`. Les demander maintenant, pas à la fin.
 
 **Je décide ensuite, et je l'écris dans le plan avec la raison** (sans en faire des questions) :
 site / outil web ou app des stores (`--kind web|store` du starter), les modules du README du
@@ -123,9 +123,11 @@ et RevenueCat » pour une app).
    -hex 32)"`), puis dans Vercel depuis le trousseau : Vercel ne le rend jamais (piège « Vercel »).
    Crons : `vercel.json` (Pro), jamais GitHub Actions. Première mise en ligne par un push
    (`pnpm build` d'abord).
-9. **HQ** (module hq) : dans `~/Projects/headquarters`, l'app commence dans `lib/products.ts`
-   (suivre son `CLAUDE.md`) ; `db/hq-reader.sql` appliqué aux deux branches, mot de passe posé, la
-   chaîne de lecture donnée à HQ ; demandes approuvées et faits suivent alors l'app.
+9. **HQ et Studio** (module hq) : l'app commence dans `lib/products.ts` de `~/Projects/headquarters`
+   (ses chiffres, suivre son `CLAUDE.md`) et de `~/Projects/studio` (ses posts, son blog et ses
+   faits, depuis le 12 novembre 2026, suivre son `CLAUDE.md`) ; `db/hq-reader.sql` appliqué aux deux
+   branches, mot de passe posé, la chaîne de lecture donnée à HQ ; demandes approuvées et faits
+   suivent alors l'app.
 10. **App des stores** (module mobile) : projet Expo (`npx eas-cli init` dans `apps/mobile`, compte
     `amineben00`), `npx expo prebuild`, `pnpm ios` sur le simulateur principal, flow
     `m0-account.yaml` passé une fois. Paiements : RevenueCat (app, produits, clé Test Store dans

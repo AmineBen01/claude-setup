@@ -1,6 +1,6 @@
 # La file de Claude : Apex (le détail)
 
-Lu au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters` ou
+Lu au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters`, `studio` ou
 `apex` (voir le CLAUDE.md global).
 
 Décidé le 4 novembre 2026, « HQ décide, Apex planifie » ; une file par projet depuis le 6 novembre.
