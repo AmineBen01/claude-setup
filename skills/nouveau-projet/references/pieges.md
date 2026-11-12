@@ -18,6 +18,12 @@
   `useSyncExternalStore(() => () => {}, () => true, () => false)`, puis lire le stockage
   dans l'initialiseur de `useState`.
 - Après une action serveur qui modifie la page courante : `refresh()` de `next/cache`.
+- **Une action serveur qui lance une erreur perd son message en production** (Next le remplace
+  par un message générique). Un `catch` côté écran ne sait donc pas pourquoi : Apex affichait
+  « Check the connection » pour des notes trop longues (12 novembre 2026). Patron : l'action
+  rattrape les refus (zod, « introuvable ») et **renvoie** `{ refused: "la raison" }` ; l'écran
+  affiche cette raison, « hors ligne » seulement si `navigator.onLine === false`, sinon « ça n'est
+  pas passé ». Apex : `lib/refused.ts`, `act` dans `lib/actions.ts`, `lib/call.ts`.
 - Les route handlers `GET` qui lisent la base sont dynamiques d'office : rien à faire.
 - **Cache de build Turbopack** (`.next/cache/turbopack`, activé par défaut, conservé par
   Vercel) : il a déjà resservi un ancien `globals.css` (variables du thème absentes du CSS
