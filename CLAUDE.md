@@ -43,14 +43,20 @@ le disent). Une ligne sans date est durable.
 
 - **Qiyam** (`qiyam-app`) : l'app de révision du Coran (iOS Swift, Android Kotlin, un cœur de
   règles partagé, Supabase). Mon produit principal ; l'ordre de son travail vient du growth lead.
-  Son site et son blog : `qiyam-website` (les articles arrivent de HQ, jamais à la main).
+  Son site et son blog : `qiyam-website` (les articles arrivent de Studio, jamais à la main).
 - **Ironmile** (`ironmile`) : le coach course + muscu (app Expo + API Next.js sur Vercel, Neon).
   `ironmile-1.0.0` est un second dossier du même repo, sur la branche `release-1.0.0`.
   `ironmile-character` : les vidéos du personnage.
-- **HQ** (`headquarters`, https://hq.amineben.ch) : mes apps gérées comme des entreprises. Il lit
-  les chiffres de Qiyam et d'Ironmile, abrite le growth lead (ses demandes approuvées vont dans
-  Apex), l'écrivain, le studio et le blog de chaque app. Une app de plus s'y branche
-  (`lib/products.ts`).
+- **HQ** (`headquarters`, https://hq.amineben.ch) : mes apps gérées comme des entreprises, côté
+  chiffres et produit. Il lit les chiffres de Qiyam et d'Ironmile, abrite le growth lead (produit
+  seulement ; ses demandes approuvées vont dans Apex), sert le flux public de chiffres (amineben,
+  job) et relaie les notifications de Studio (`POST /api/notify`). Son contrôle quotidien lit les
+  liens d'Apex et de Studio. Une app de plus s'y branche (`lib/products.ts`).
+- **Studio** (`studio`, https://studio.amineben.ch, depuis le 12 novembre 2026) : tout ce qui sort
+  pour les apps : posts Instagram et TikTok (via Zernio), vidéos, blog de chaque site (il commite
+  les articles dans `qiyam-website` et `ironmile`), faits des apps (envoyés par `qiyam-app` et
+  `ironmile`), l'écrivain. Lit le flux de semaines d'Ironmile ; la pose run du Mac
+  (`ironmile-character`) y pousse ses figures. Une app de plus s'y branche (`lib/products.ts`).
 - **Apex** (`apex`, https://apex.amineben.ch) : mon planificateur et **ta file de travail** (une
   file par projet de code). Il lit la séance du jour d'Ironmile.
 - **Le starter** (`starter`) : la base de toute nouvelle app (mon « ShipFast »), Ironmile rendu
@@ -259,8 +265,8 @@ Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 ## La file de Claude : Apex
 
 Apex est ta **seule file de travail** (« HQ décide, Apex planifie », une file par projet de code).
-**Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters` ou
-`apex` → lire `~/.claude/docs/file-apex.md`** et le suivre : lire la file du repo, me l'annoncer,
+**Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters`,
+`studio` ou `apex` → lire `~/.claude/docs/file-apex.md`** et le suivre : lire la file du repo, me l'annoncer,
 organiser le travail (petits correctifs d'abord, puis les fonctionnalités par lots), marquer chaque
 chose « done » une fois livrée.
 
