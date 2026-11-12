@@ -50,12 +50,14 @@ le disent). Une ligne sans date est durable.
 - **HQ** (`headquarters`, https://hq.amineben.ch) : mes apps gérées comme des entreprises, côté
   chiffres et produit. Il lit les chiffres de Qiyam et d'Ironmile, abrite le growth lead (produit
   seulement ; ses demandes approuvées vont dans Apex), sert le flux public de chiffres (amineben,
-  job) et relaie les notifications de Studio (`POST /api/notify`). Son contrôle quotidien lit les
+  job), sert à Studio les chiffres de chaque app (`GET /api/studio/numbers`) et relaie ses
+  notifications (`POST /api/notify`). Son contrôle quotidien lit les
   liens d'Apex et de Studio. Une app de plus s'y branche (`lib/products.ts`).
 - **Studio** (`studio`, https://studio.amineben.ch, depuis le 12 novembre 2026) : tout ce qui sort
   pour les apps : posts Instagram et TikTok (via Zernio), vidéos, blog de chaque site (il commite
   les articles dans `qiyam-website` et `ironmile`), faits des apps (envoyés par `qiyam-app` et
-  `ironmile`), l'écrivain. Lit le flux de semaines d'Ironmile ; la pose run du Mac
+  `ironmile`), l'écrivain. Son marketer (routine du lundi) décide le contenu ; les posts d'Ironmile partent sans moi derrière
+  un éditeur Claude. Lit le flux de semaines d'Ironmile et les chiffres de HQ ; la pose run du Mac
   (`ironmile-character`) y pousse ses figures. Une app de plus s'y branche (`lib/products.ts`).
 - **Apex** (`apex`, https://apex.amineben.ch) : mon planificateur et **ta file de travail** (une
   file par projet de code). Il lit la séance du jour d'Ironmile.
