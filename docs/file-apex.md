@@ -7,7 +7,7 @@ Décidé le 4 novembre 2026, « HQ décide, Apex planifie » ; une file par proj
 **Apex** (https://apex.amineben.ch, mon planificateur, `~/Projects/apex`) est ta **seule file de
 travail**. Tâches et idées n'y font plus qu'une, dans deux listes (6 novembre, à la place de la matrice
 et de Someday) : **Now**, la priorité du moment, et **Later**, le reste. La **file** d'un projet de code
-(Qiyam, Ironmile, HQ, Studio, Apex), c'est son **Now**, dans l'ordre que j'ai glissé (une indication, pas une
+(Qiyam, Ironmile, HQ, Studio, Apex), c'est son **Now**, échéances d'abord puis les plus anciennes (une indication, pas une
 consigne) : la prochaine session fait tout ce qui y est. Later n'en fait jamais partie. Les demandes du
 growth lead que j'ai approuvées dans HQ arrivent dans Later toutes seules (« from growth lead ») ; c'est
 moi qui les passe dans Now.
