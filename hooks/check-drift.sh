@@ -12,6 +12,7 @@
 #  3. In an app made from the starter (a `.starter-version` file at its root, the starter commit it
 #     has caught up with): the starter's code changes since then.
 #  4. No project in the map is past its end of use (`fin d'usage : AAAA-MM-JJ` on its line).
+#  5. The setup's auto-push didn't refuse a secret, and its last push didn't fail.
 # A new check goes here, with a line above saying what it compares.
 
 input=$(cat)
@@ -68,6 +69,13 @@ while read -r line; do
   name=$(grep -oE '`[a-z0-9][a-z0-9.-]*`' <<<"$line" | head -1 | tr -d '`')
   problems+=("Le projet \`${name:-?}\` a passé sa fin d'usage ($end) : demande à Amine s'il continue (nouvelle date dans la carte) ou s'il passe « En sommeil » (déplace sa ligne, retire la date, mets ses mémoires à jour).")
 done < <(grep -E "fin d'usage : [0-9]{4}-[0-9]{2}-[0-9]{2}" <<<"$map")
+
+# 5. The setup's auto-push (push-setup.sh) refused a secret, or its last push failed: cloud
+#    sessions no longer get the setup's changes.
+setup_hooks="$HOME/.claude/hooks"
+[ -f "$setup_hooks/push-setup.blocked" ] && problems+=("push-setup.sh a refusé un commit de ~/.claude : $(cat "$setup_hooks/push-setup.blocked") Retire le secret du fichier, puis le prochain appel d'outil pousse.")
+last_push=$(grep -E ' (pushed|push FAILED)' "$setup_hooks/push-setup.log" 2>/dev/null | tail -1)
+[[ "$last_push" == *"push FAILED"* ]] && problems+=("Le dernier push de ~/.claude a échoué ($last_push) : lis la fin de ~/.claude/hooks/push-setup.log et règle-le.")
 
 [ ${#problems[@]} -eq 0 ] && exit 0
 echo "Dérive détectée par ~/.claude/hooks/check-drift.sh, à traiter avant le reste de la session :"
