@@ -311,6 +311,10 @@ règles) : c'est de la complexité inutile. Pour corriger quelque chose, j'ouvre
 session Claude dans le cloud depuis mon téléphone. Retiré du studio et de Qiyam HQ le
 17 octobre 2026.
 
+**Une exception : Studio** (décidé le 13 novembre 2026). Diriger le contenu y est le produit : mes
+notes sur un post (entourer ce qui cloche) lancent la routine « Studio: apply notes », et chaque
+app a sa page de style book que j'édite. Ça ne s'étend à aucune autre app.
+
 ## Sous-agents : seulement si le gain est net
 
 Dans le doute, fais le travail toi-même ; jamais d'agent pour une petite tâche. **Avant d'utiliser
