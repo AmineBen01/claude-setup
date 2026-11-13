@@ -87,7 +87,7 @@
       "mcp__claude_ai_Notion__notion-delete-comment"
     ]
   },
-  "model": "fable",
+  "model": "opus",
   "hooks": {
     "SessionEnd": [
       {
