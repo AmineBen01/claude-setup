@@ -43,7 +43,6 @@
       "Bash(vercel:*)",
       "Bash(curl:*)",
       "Bash(lsof:*)",
-      "Bash(pkill -f next:*)",
       "Bash(sleep:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
