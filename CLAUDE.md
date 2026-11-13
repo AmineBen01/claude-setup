@@ -268,7 +268,8 @@ Exception connue : `ai-job-search`, jamais de push (fork d'un repo public).
 
 Apex est ta **seule file de travail** (« HQ décide, Apex planifie », une file par projet de code).
 **Au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters`,
-`studio` ou `apex` → lire `~/.claude/docs/file-apex.md`** et le suivre : lire la file du repo, me l'annoncer,
+`studio`, `apex`, `job`, `amineben`, ou sur le setup et le travail transversal (`~/Projects`, `~/.claude`, `starter`, `ops` : file
+`claude-setup`) → lire `~/.claude/docs/file-apex.md`** et le suivre : lire la file du repo, me l'annoncer,
 organiser le travail (petits correctifs d'abord, puis les fonctionnalités par lots), marquer chaque
 chose « done » une fois livrée.
 

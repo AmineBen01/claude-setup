@@ -1,7 +1,13 @@
 # La file de Claude : Apex (le détail)
 
-Lu au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters`, `studio` ou
-`apex` (voir le CLAUDE.md global).
+Lu au début d'une session de travail sur `qiyam-app`, `qiyam-website`, `ironmile`, `headquarters`, `studio`,
+`apex`, `job` ou `amineben`, et pour le setup et le travail transversal : une session lancée dans `~/Projects`,
+`~/.claude`, `starter` ou `ops` lit la file `claude-setup` (projet « Claude setup », créé le 13 novembre 2026)
+(voir le CLAUDE.md global).
+
+**La revue du 13 novembre 2026** a rempli les files (38 to-dos, chacune autonome) : quand une note cite un
+identifiant de constat (X-1, HQ-3, QA-2…), le détail est dans `~/Projects/review-2026-11/` (`findings.md`,
+`plan.md`, `reports/`) s'il est là ; les lignes citées datent du 13 novembre, à relire avant de corriger.
 
 Décidé le 4 novembre 2026, « HQ décide, Apex planifie » ; une file par projet depuis le 6 novembre.
 **Apex** (https://apex.amineben.ch, mon planificateur, `~/Projects/apex`) est ta **seule file de
