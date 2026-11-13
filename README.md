@@ -39,7 +39,9 @@ ici arrive dans les nouvelles sessions en quelques minutes. `cloud/manifest.txt`
 fichiers copiés) est régénéré par `hooks/push-setup.sh` (versionné) avant chaque commit.
 **Push automatique** (depuis le 22 octobre 2026) : `hooks/push-setup.sh`, lancé par Claude Code après
 chaque modification de fichier ou commande et en fin de session, commite et pousse tout fichier versionné
-qui a changé (push en arrière-plan, journal dans `hooks/push-setup.log`). Rien à faire à la main. Toute
+qui a changé (push en arrière-plan, journal dans `hooks/push-setup.log`). Rien à faire à la main.
+Il refuse de commiter une ligne qui ressemble à un secret (clé, jeton, URL de base avec mot de passe) :
+`check-drift.sh` le signale au début de la session suivante, comme un push qui a échoué. Toute
 skill maison est versionnée d'office ; seules les synchronisées et les externes sont exclues (`.gitignore`).
 Limite : chaque session repart de l'instantané de l'environnement (refait environ chaque semaine,
 ou quand on modifie le script d'installation). Une modification de la **logique** de `cloud/sync.sh`
