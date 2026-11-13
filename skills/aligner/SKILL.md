@@ -43,7 +43,8 @@ reprendre les mots du fait.
 **Qiyam**
 - qiyamapp.com (`../qiyam-website`) : `app/page.tsx`, `app/android/page.tsx`, `app/llms.txt`,
   `app/layout.tsx` (description), `components/blog/BlogCTA.tsx`, et les articles
-  `content/blog/*.md` qui parlent de l'app (tag « App Features » et toute mention de Qiyam).
+  `content/blog/*.md` qui parlent de l'app (tag « App Features » et toute mention de Qiyam ; à
+  lire ici, à corriger dans Studio, voir § 3).
 - Les fiches : `docs/marketing/APP-STORE-LISTING.md`, `PLAY-STORE-LISTING.md`, les pages
   « Nouveautés » (`spec/whats-new.json`) de la version en cours.
 - Studio (`../studio`) : `writer/voice.md`, `writer/series/inside-qiyam.md`, les `shows` et `facts` des captures
@@ -68,8 +69,12 @@ s'il sert son argument (sinon, rien à faire, ou une demande si une section manq
   `qiyam-website`, `hq`, `studio`), `kind` `feature` ou `fix`, `title`, `body` (quoi, où, d'après quels faits),
   `why` (le changement qui l'a rendu nécessaire). Amine approuve ; la session suivante sur ce dépôt
   la construit, avec ses questions.
-- Un article de blog dont l'idée reste vraie mais un détail a changé : corriger le détail. Un
-  article bâti sur ce qui n'est plus vrai : demande.
+- Un article de blog dont l'idée reste vraie mais un détail a changé : corriger le détail **dans
+  Studio, jamais dans le dépôt du site** (Studio écrit et commite les articles ; un fichier corrigé
+  dans `content/blog/` est écrasé à la publication suivante). La voie : une réécriture de l'article
+  (`rewriteOf`, skill `write-articles` de `../studio`, « Rewriting an article already on the site »),
+  qu'Amine approuve dans la Review de l'app. Un article bâti sur ce qui n'est plus vrai : une
+  demande (`target` `studio`).
 - Ne jamais écrire une affirmation qu'aucun fait ne soutient, ni un prix ou une durée d'essai pour
   Qiyam. Ne jamais construire une phrase en mettant des faits bout à bout (`fact("a") + fact("b")`
   dans une page, ou leur texte recopié) : les chiffres se lisent dans le code, les phrases s'écrivent.

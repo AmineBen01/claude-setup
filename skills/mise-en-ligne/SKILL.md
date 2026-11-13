@@ -28,7 +28,8 @@ Avant de pousser le code qui en dépend :
 - les migrations doivent être additives (ajouter une colonne nullable, une table) pour
   que l'ancienne version du site continue de marcher pendant le déploiement ;
 - appliquer la migration sur la branche `main` de Neon : récupérer sa chaîne de
-  connexion via le MCP Neon (`get_connection_string`, branche main) et lancer
+  connexion dans l'élément du trousseau que nomme le CLAUDE.md du projet (ex. `apex-db-prod`),
+  sinon via le MCP Neon (`get_connection_string`, branche main), et lancer
   `pnpm db:migrate` avec `DATABASE_URL` passée en variable de la commande, **sans
   l'afficher** ;
 - **jamais** de valeur de production prise dans `.env.local`, qui pointe sur la base dev.
