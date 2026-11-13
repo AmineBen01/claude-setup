@@ -24,4 +24,5 @@
 # Logs and locks of the hooks
 /hooks/*.log
 /hooks/.push-setup.lock/
+/hooks/push-setup.blocked
 /skills/.trash/
