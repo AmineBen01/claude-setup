@@ -314,6 +314,20 @@ pas en bash (guillemets).
   build de dev.
 - **`Panel` ne mettait pas de trait entre les lignes d'un `.map()` suivi d'une autre ligne** : les
   enfants se lisent avec `Children.toArray` (aplatis), pas `Array.isArray`.
+- **Widgets et Live Activities (expo-widgets), vu sur Ironmile le 13 novembre 2026** : un `Text`
+  minuteur (`timerInterval`) prend toute la largeur qu'on lui laisse : dans l'île compacte, le temps
+  flottait au milieu. Le fixer à son bord : `frame({ width, alignment: 'trailing' })` +
+  `multilineTextAlignment('trailing')`. L'île dynamique est toujours noire : ses couleurs sont celles
+  du thème sombre, jamais celles du thème du téléphone (un bleu foncé sur noir était illisible).
+  L'extension ne lit ni les polices ni les images de l'app : dessiner le logo avec des `Rectangle`.
+  Une barre de progression du minuteur : `ProgressView timerInterval`.
+- **Un minuteur ne vit pas dans un écran** : s'il tient dans le `useState` de l'écran, le quitter
+  (aller voir l'accueil) l'arrête, avec sa notification et sa Live Activity (Ironmile, 13 novembre
+  2026). Le garder dans un petit magasin de module (`useSyncExternalStore`) qui possède aussi la
+  notification et l'activité ; sur iOS 26, `NativeTabs.BottomAccessory` le montre au-dessus des onglets.
+- **Les icônes se dessinent, elles ne se tapent pas** : ✓ › ‹ → en texte font amateur (taille et
+  graisse qui ne suivent pas, alignement approximatif). `expo-symbols` (SF Symbols, avec leur
+  équivalent Material sur Android) dans l'app, lucide sur le web.
 
 ## Données de santé (Apple Health, Health Connect) — vu sur Ironmile, 4 novembre 2026
 
