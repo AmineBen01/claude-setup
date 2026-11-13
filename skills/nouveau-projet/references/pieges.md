@@ -69,8 +69,9 @@
 - **Haut de la `sidebar` shadcn** (défaut répété sur deux projets) : le `SidebarTrigger` mis dans
   l'en-tête de la page laisse un trait (`Separator`) bizarre et sort le bouton de la barre ; un
   logo `img` dans un `SidebarMenuButton` est écrasé en largeur une fois replié (`size-8! p-2!`) ;
-  `SidebarMenu` en `gap-0` colle le gris du survol à celui de l'entrée active. Utiliser
-  `references/modeles/sidebar-top.tsx` et `gap-0.5`.
+  `SidebarMenu` en `gap-0` colle le gris du survol à celui de l'entrée active. Pour un projet qui
+  garde cette barre : `gap-0.5`, et `references/modeles/sidebar-top.tsx` comme exemple du haut (il
+  appartient à l'ancien style, archivé : en reprendre la mécanique, pas le look).
 - **`sidebar` shadcn** : son panneau mobile, décidé dans le navigateur, casse l'hydratation
   d'une barre latérale streamée (ne jamais l'utiliser, le téléphone a des onglets) ; son
   `SidebarInset` est un `<main>`, imbriqué dans celui de chaque page : en faire une `<div>`.
@@ -114,7 +115,8 @@
   supprimer.
 - **`drizzle-kit migrate` peut échouer en silence** (code de sortie 1, seuls les NOTICE s'affichent,
   aucune migration appliquée) : faire de `pnpm db:migrate` un petit script `tsx db/migrate.ts` avec
-  le `migrate()` de `drizzle-orm/postgres-js/migrator`, qui affiche l'erreur SQL (modèle : Qiyam HQ).
+  le `migrate()` de `drizzle-orm/node-postgres/migrator` et `pg`, qui affiche l'erreur SQL (modèle :
+  `~/Projects/starter/apps/web/db/migrate.ts`, déjà dans chaque app faite depuis le starter).
 - **Un rôle créé par l'API Neon (MCP `create_postgres_role`, console) est membre de
   `neon_superuser`** : il lit et écrit tout, et on ne peut pas le lui retirer en SQL. Pour un
   utilisateur restreint (lecture seule, analyste) : `create role … login password '…'` en SQL,
@@ -614,7 +616,8 @@ pas en bash (guillemets).
   Le `?next=` de la page d'accès se résout avec `new URL(next, origine factice)` : un simple test
   `startsWith("//")` laisse passer `/\t/evil.com` (le navigateur retire tabulations et retours).
   Exclure du `matcher` tout fichier que le service worker met en cache (`offline.html`), sinon il
-  garde la page d'accès à la place. Modèle : `~/Projects/vmc-trainer/apps/web/lib/vmc/access.ts`.
+  garde la page d'accès à la place. Modèle (projet en sommeil, à lire sans y toucher) :
+  `~/Projects/vmc-trainer/apps/web/lib/vmc/access.ts`.
 - **Mesurer un temps de réaction** : prendre l'instant d'affichage dans un `useLayoutEffect` au
   moment où l'élément est posé, pas dans un `requestAnimationFrame` (il peut tomber bien plus tard,
   les temps mesurés étaient faux de ~100 ms). Ignorer `e.repeat` sur les touches de réponse.
@@ -757,7 +760,7 @@ pas en bash (guillemets).
   `GET /api/hq/links` d'Apex et de Studio) : une notification nomme ce qui a cassé.
 
 - **Vu sur Briefing (9 nov 2026) : une image privée ne va pas dans `public/`.** Le `matcher` du
-  `proxy.ts` du starter laisse passer tout fichier `.png/.jpg/.webp…` sans code d'accès : une image
+  `proxy.ts` à code d'accès (celui de Briefing et de VMC Trainer ; le starter n'en a pas) laisse passer tout fichier `.png/.jpg/.webp…` sans code d'accès : une image
   derrière le mot de passe (capture, document) se range hors de `public/` et se sert par une route
   (`route.ts` qui vérifie l'accès puis lit le fichier), avec `outputFileTracingIncludes` pour que
   Vercel embarque les fichiers.
