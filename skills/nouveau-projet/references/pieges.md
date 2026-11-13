@@ -764,3 +764,11 @@ pas en bash (guillemets).
   derrière le mot de passe (capture, document) se range hors de `public/` et se sert par une route
   (`route.ts` qui vérifie l'accès puis lit le fichier), avec `outputFileTracingIncludes` pour que
   Vercel embarque les fichiers.
+
+- **Chromium sur Vercel (@sparticuz/chromium) : jamais deux lancements en parallèle.** La
+  bibliothèque décompresse Chromium dans /tmp au premier appel et le déclare prêt dès que le fichier
+  existe : deux `executablePath()` simultanés sur une instance neuve (Vercel en sert plusieurs à la
+  fois) lancent un binaire à moitié écrit, « spawn ETXTBSY ». Mémoriser la promesse d'`executablePath`
+  au niveau du module, un navigateur pour plusieurs pages, et réessayer une fois sur ETXTBSY. Plus
+  largement : une erreur passagère (réseau, délai, 5xx) se réessaie toute seule avant de prévenir
+  (Studio, `lib/render/shoot.ts` et `lib/retry.ts`, 13 novembre 2026).
