@@ -63,10 +63,13 @@ le disent). Une ligne sans date est durable.
   file par projet de code). Il lit la séance du jour d'Ironmile.
 - **Le starter** (`starter`) : la base de toute nouvelle app (mon « ShipFast »), Ironmile rendu
   générique. Voir plus bas.
-- **Carrière** : `amineben` (mon site et mes CV, qui lisent le flux public de HQ), `job` (Job HQ,
-  une install pour moi et une pour mon père Lahcen).
-- **Outils privés, faits depuis le starter** : `muslim-lantern`
-  (repo `dawah-map`).
+- **Ops** (`ops`, depuis le 13 novembre 2026) : ce qu'aucune app ne porte seule. Aujourd'hui le
+  contrôle des chemins cités par les notes de Claude (`node scripts/check-doc-paths.mjs`, muet quand
+  tout existe) ; puis les sauvegardes chiffrées (B1) et la surveillance de HQ depuis l'extérieur.
+- **Carrière** : `amineben` (mon site et mes CV, qui lisent le flux public de HQ), `job` (repo
+  `job-hq` ; Job HQ, une install pour moi et une pour mon père Lahcen).
+- **Outils privés** : `muslim-lantern` (repo `dawah-map` ; antérieur au starter : Auth.js, sans
+  `.starter-version`).
 - **Autres outils à moi** : `quran-tracker` (suis-je dans les temps sur ma mémorisation),
   `foc-final` (Commandingo, examens de la Formation au commandement).
 - **Pour d'autres** : `instructions` (13 instructeurs, **son `.env.local` pointe sur la
