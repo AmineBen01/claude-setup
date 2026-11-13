@@ -150,6 +150,16 @@
   comme dans l'exemple de la doc : le lire comme tel. Le script de `@vercel/analytics` se charge depuis un chemin au hasard
   (`/<hash>/script.js`, puis `POST /<hash>/view`), pas `/_vercel/insights` : chercher ça pour
   vérifier qu'une visite part.
+- **En-têtes de sécurité : le bloc du starter, sur chaque app** (revue du 13 novembre 2026 : seul
+  HSTS partait, la page de consentement OAuth d'Apex pouvait être encadrée). `headers()` de
+  `next.config.ts`, premier élément `source: "/:path*"` : `X-Content-Type-Options: nosniff`,
+  `Referrer-Policy: strict-origin-when-cross-origin` (`no-referrer` pour une page dont l'adresse
+  porte un jeton), `Content-Security-Policy: frame-ancestors 'none'`, `Permissions-Policy` tout
+  coupé. **Quand deux entrées posent la même clé sur un chemin, la dernière gagne** : les exceptions
+  (l'aperçu de blog que Studio encadre) viennent après. Vérifier en ligne avec `curl -sI`.
+- **`shadcn` va dans `devDependencies`** : c'est une CLI, l'app n'en importe que
+  `shadcn/tailwind.css` au build ; en `dependencies` elle ajoute 8 à 25 lignes à
+  `pnpm audit --prod`. Vercel installe les devDependencies pour le build.
 
 ## Tâches planifiées
 
