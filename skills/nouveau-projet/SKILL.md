@@ -106,6 +106,9 @@ et RevenueCat » pour une app).
    fonctions, pas un look : thème Clair / Sombre / Auto, écrans de comptes, site, blog, cadre du
    tableau de bord, composants shadcn. **Tout se restyle et se recompose selon la direction choisie**,
    y compris la navigation, le tableau de bord et les pages d'arrivée, à partir de la carte des tâches.
+   **Pour une app, la barre d'onglets aussi** : icônes dessinées depuis la marque (`brand/tabs/*.svg`,
+   `node scripts/tab-icons.mjs`), police des libellés et couleur de l'onglet actif ; le build refuse
+   les icônes système.
 7. **GitHub** : `gh repo create AmineBen01/<nom> --private --source . --push`. Module hq : secret
    `FACTS_TOKEN` (`security find-generic-password -s hq-facts-token -w | gh secret set
    FACTS_TOKEN`).

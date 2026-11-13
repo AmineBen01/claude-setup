@@ -325,6 +325,13 @@ pas en bash (guillemets).
   (aller voir l'accueil) l'arrête, avec sa notification et sa Live Activity (Ironmile, 13 novembre
   2026). Le garder dans un petit magasin de module (`useSyncExternalStore`) qui possède aussi la
   notification et l'activité ; sur iOS 26, `NativeTabs.BottomAccessory` le montre au-dessus des onglets.
+- **La barre d'onglets fait partie de l'identité** (Ironmile, 13 novembre 2026 : Amine la trouvait
+  « trop par défaut », restée soleil / calendrier / graphique / personne en encre depuis le starter,
+  alors que tout le reste avait pris la marque). La garder native (Liquid Glass, `minimizeBehavior`,
+  accessoire) mais lui donner les icônes de la marque (`brand/tabs/*.svg` →
+  `node scripts/tab-icons.mjs` → `src={require(...)}` avec `renderingMode="template"`), la police de
+  marque dans `labelStyle` et la couleur d'action pour l'onglet actif. Le build du starter refuse
+  désormais des icônes `sf=` dans `(tabs)/_layout.tsx`. Même chose pour la barre du bas de la version web.
 - **Les icônes se dessinent, elles ne se tapent pas** : ✓ › ‹ → en texte font amateur (taille et
   graisse qui ne suivent pas, alignement approximatif). `expo-symbols` (SF Symbols, avec leur
   équivalent Material sur Android) dans l'app, lucide sur le web.
