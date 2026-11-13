@@ -321,6 +321,12 @@ pas en bash (guillemets).
   du thème sombre, jamais celles du thème du téléphone (un bleu foncé sur noir était illisible).
   L'extension ne lit ni les polices ni les images de l'app : dessiner le logo avec des `Rectangle`.
   Une barre de progression du minuteur : `ProgressView timerInterval`.
+- **Live Activity d'expo-widgets 58 : `env.colorScheme` vaut toujours « light »** (prouvé sur Ironmile le
+  13 novembre 2026, iPhone en sombre, carte blanche) : la bibliothèque lit l'environnement au niveau du
+  `Widget`, hors de la vue. Ne pas s'en servir pour l'écran verrouillé : texte en couleurs adaptatives
+  (`{ type: 'hierarchical', style: 'primary' | 'secondary' }`), pas d'`activityBackgroundTint` (fond du
+  système), un accent lisible sur les deux fonds (≥ 3:1 en grand texte) ; un mode clair ou sombre choisi
+  dans l'app se transmet dans les props. Les widgets de l'écran d'accueil, eux, reçoivent la bonne valeur.
 - **Un minuteur ne vit pas dans un écran** : s'il tient dans le `useState` de l'écran, le quitter
   (aller voir l'accueil) l'arrête, avec sa notification et sa Live Activity (Ironmile, 13 novembre
   2026). Le garder dans un petit magasin de module (`useSyncExternalStore`) qui possède aussi la
