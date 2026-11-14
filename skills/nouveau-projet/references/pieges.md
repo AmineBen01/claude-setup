@@ -914,4 +914,8 @@ pas en bash (guillemets).
   lister à côté de la règle d'origine, ou lire la source.
 - **Un hook pre-push qui lance les tests iOS** démarre un simulateur : le dire à un agent qui ne
   doit pas y toucher.
+- **Deno cherche `deno.json` depuis le dossier où il tourne**, pas depuis les fichiers de test : un
+  `deno.json` par dossier ne vaut que si les tests partent de ce dossier (ou `--config`). Un
+  `package.json` dans un dossier parent (le dossier personnel) le bascule en mode node_modules sans
+  rien dire et casse les imports `npm:`.
 
