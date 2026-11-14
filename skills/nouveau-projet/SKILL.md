@@ -115,7 +115,9 @@ et RevenueCat » pour une app).
    les icônes système.
 7. **GitHub** : `gh repo create AmineBen01/<nom> --private --source . --push`. Module hq : secret
    `FACTS_TOKEN` (`security find-generic-password -s hq-facts-token -w | gh secret set
-   FACTS_TOKEN`).
+   FACTS_TOKEN`). La CI du starter (`.github/workflows/ci.yml`) teste chaque push sur la branche
+   dev : secret `DEV_DATABASE_URL` (`grep '^DATABASE_URL=' apps/web/.env.local | cut -d= -f2- | gh
+   secret set DEV_DATABASE_URL`, jamais affiché).
 8. **Vercel** (équipe sur Pro) : `vercel link --yes --project <nom>` depuis `apps/web`, **Root
    Directory = `apps/web`** sur le projet, `vercel git connect --yes`, région `fra1`
    (`vercel.json`). Variables de production sans les afficher (`vercel env add NOM production <
