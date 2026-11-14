@@ -91,8 +91,9 @@ et RevenueCat » pour une app).
    site, `IP_HASH_SALT` (`openssl rand -hex 32` chacun), `BETTER_AUTH_URL` et `APP_URL` =
    `http://localhost:3010`.
    `pnpm db:generate` (les migrations naissent dans le projet : elles dépendent des modules),
-   puis `pnpm db:migrate` sur dev **et** sur production (chaîne passée sur la commande).
-   `pnpm test` doit passer.
+   puis `pnpm db:migrate` sur dev. La production se migre toute seule : le build de Vercel lance
+   les tests purs, migre, puis construit (`buildCommand` de `vercel.json`, depuis le 14 novembre
+   2026). `pnpm test` doit passer.
 4. **Ce que l'app dit d'elle** : `apps/web/lib/product/app.ts` (la phrase, les plateformes),
    `lib/product/facts.ts` (ses faits, ses règles), chaque `[FILL: …]` (pages légales, blog, bio,
    fiche du store : le test `legal.test.ts` échoue tant qu'il en reste), la section « Project » du

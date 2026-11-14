@@ -841,3 +841,33 @@ pas en bash (guillemets).
   site sans base, ~2 min pour le starter (expo + base dev) ; le job d'audit du lundi ~1 min.
 - **Un test qui lit un repo voisin** (`../studio/docs/blog-fixtures`) est sauté sur Vercel et en CI
   (un seul repo cloné) : il ne protège que les sessions du Mac.
+
+## Agents, routines et données personnelles (run du 14 novembre 2026)
+
+- **Un agent `claude -p` sans personne devant** reçoit des règles par chemin (`Read(//<dossier de
+  travail>/**)`, pareil pour Glob, Grep, Edit) avec `--permission-mode dontAsk`, jamais un `Read` nu
+  ni `--add-dir` d'un repo qui contient `.env.local`. La preuve : les mêmes drapeaux sans `--chrome`,
+  et lui demander de lire `~/.zshrc` (Job HQ, `scripts/portal-box.ts`).
+- **Les documents d'une personne (faits, certificats) vivent dans la base de son install, jamais
+  dans git.** D'abord les envoyer, ensuite changer les lecteurs : deux commits, aucun envoi sans sa
+  pièce jointe. Avec le pilote HTTP de Neon, un fichier binaire se range en texte base64.
+- **Une table de réglages clé/valeur qui porte aussi de gros textes** se lit par clés connues,
+  jamais en entier.
+- **Quand le build de chaque install lance les tests avec sa propre config**, les fixtures lisent
+  le profil actif : sinon le déploiement d'une install casse en silence (Job HQ, install de Lahcen,
+  14 novembre 2026).
+- **Une récompense revient dans le résultat de l'action serveur** : elle ne peut alors jamais se
+  jouer à un chargement de page.
+- **Dans un markdown lu par un agent, la fin d'un heredoc commence en colonne 0**, même dans une
+  liste, sinon le shell ne la voit jamais.
+- **Une liste qui coupe un texte ne laisse jamais une fenêtre d'édition enregistrer le texte
+  coupé** : charger la valeur entière par son id, n'envoyer le champ qu'une fois chargé (Apex).
+- **Schéma d'environnement et tests** : une variable que les tests changent d'un test à l'autre
+  reste lue dans `process.env` à l'appel, pas dans `env.NOM` lu une fois à l'import.
+- **`vercel env pull` masque les valeurs sensibles** : on ne peut pas comparer la production à un
+  nouveau schéma d'environnement avant de pousser ; le build s'arrête en nommant la variable et
+  l'ancienne version reste en ligne.
+- **Contrôle au navigateur sur plusieurs tailles** : Better Auth limite les connexions ; se
+  connecter une fois et réutiliser `storageState`. Après avoir supprimé une page essayée sous
+  `next dev`, `next build` échoue sur `.next/dev/types` : `rm -rf .next/dev`.
+
