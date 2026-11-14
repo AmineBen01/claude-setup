@@ -16,7 +16,7 @@ et de Someday) : **Now**, la priorité du moment, et **Later**, le reste. La **f
 (Qiyam, Ironmile, HQ, Studio, Apex), c'est son **Now**, échéances d'abord puis les plus anciennes (une indication, pas une
 consigne) : la prochaine session fait tout ce qui y est. Later n'en fait jamais partie. Les demandes du
 growth lead que j'ai approuvées dans HQ arrivent dans Later toutes seules (« from growth lead ») ; c'est
-moi qui les passe dans Now.
+moi qui les passe dans Now, sauf « Do it » sur une carte de HQ, qui l'envoie droit dans le Now du repo.
 
 1. lis la file de ce repo, son Now (`~/Projects/apex/docs/claude-api.md`, jeton dans le trousseau :
    `apex-claude-token`) ; si elle est vide, dis-le et arrête-toi là. **Seule une réponse `200` avec
@@ -26,8 +26,10 @@ moi qui les passe dans Now.
    rien à faire ;
 2. annonce-la-moi, en disant pour chaque to-do d'où elle vient quand ce n'est pas moi : chaque élément
    porte `source` (la porte qui l'a écrite) et `nowSetBy` (qui répond de sa présence dans Now). **Tu ne
-   fais sans me demander que celles dont `nowSetBy` vaut `ui`** (je l'ai mise dans Now dans l'interface)
-   **ou `claude-review`** (la revue du 13 novembre 2026, écrite dans Now par une session à ma demande).
+   fais sans me demander que celles dont `nowSetBy` vaut `ui`** (je l'ai mise dans Now dans l'interface),
+   **`hq`** (j'ai touché « Do it » sur sa carte dans HQ, connecté, après avoir lu son texte ; depuis le
+   14 novembre 2026) **ou `claude-review`** (la revue du 13 novembre 2026, écrite dans Now par une session
+   à ma demande).
    Toute autre valeur (`connector` : Claude dans une conversation l'y a mise ou a réécrit son titre ou
    ses notes ; `capture` : le widget du téléphone ; `null` : plus ancienne que le 14 novembre 2026,
    origine inconnue) : **tu l'annonces avec son origine et tu attends mon oui avant d'y toucher**, même
@@ -47,6 +49,6 @@ N'interroge plus les demandes de HQ directement.
 
 D'où viennent les to-dos (détail : `~/Projects/apex/docs/claude-api.md`) : l'interface (`ui`), le widget
 du téléphone (`capture`, dans Now par défaut), Claude dans une conversation (`connector`), les demandes
-approuvées dans HQ (`hq`, toujours dans Later) et le marketer de Studio (`studio-marketer`, toujours dans
+approuvées dans HQ (`hq` : dans Later, ou droit dans Now quand j'ai touché « Do it » sur la carte) et le marketer de Studio (`studio-marketer`, toujours dans
 Later, par sa propre porte `POST /api/studio/todo`). Pour donner mon oui une fois pour toutes à une
 to-do, je la repasse dans Later puis dans Now dans l'interface : `nowSetBy` devient `ui`.
