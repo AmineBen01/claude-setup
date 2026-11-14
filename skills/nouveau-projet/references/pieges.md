@@ -839,6 +839,15 @@ pas en bash (guillemets).
 - **Dependabot tourne sur les minutes d'Actions** (les « dynamic » runs à chaque push qui touche un
   manifeste) : à compter avec les 2 000 minutes partagées. Une passe de CI : ~1 min facturée pour un
   site sans base, ~2 min pour le starter (expo + base dev) ; le job d'audit du lundi ~1 min.
+- **Les tests de base en CI sont lents : les runners de GitHub sont aux États-Unis**, la branche dev
+  à Francfort (~100 ms l'aller-retour) : la suite d'Apex, 15 s sur le Mac, prenait 6 min 30 en CI
+  avec 3 workers, et un test de cinq passages en série dépassait 30 s. `VITEST_MAX_WORKERS: 10`
+  dans l'étape (les tests attendent le réseau, pas le CPU) et 60 s de délai pour les `*.db.test.ts`
+  : 2 min 16. Compter ~3 minutes facturées par push pour une app à base.
+- **`BETTER_AUTH_SECRET` en CI : celui de la branche dev quand l'app a le plugin `jwt`** (connecteur
+  MCP, oauth-provider) : ses clés de signature sont dans la table `jwks` de la branche, chiffrées
+  avec ce secret ; avec une valeur jetable, le point de jeton répond 500. Secret de dépôt
+  `DEV_BETTER_AUTH_SECRET` (la valeur de `.env.local`, jamais celle de production).
 - **Un test qui lit un repo voisin** (`../studio/docs/blog-fixtures`) est sauté sur Vercel et en CI
   (un seul repo cloné) : il ne protège que les sessions du Mac.
 
