@@ -85,8 +85,11 @@ et RevenueCat » pour une app).
    `node scripts/new-app.mjs --name "<Nom>" --kind web|store [--with …] [--without …]
    [--domain …] --dev-endpoint <ep-dev>` crée `~/Projects/<nom>`, avec ses modules, renommé, et
    son `CLAUDE.md`. Puis dans le projet : `git init -b main`, `pnpm install`.
-3. **Base** : `apps/web/.env.local` → chaîne de la branche **dev**, `BETTER_AUTH_SECRET`
-   (`openssl rand -hex 32`), `BETTER_AUTH_URL` et `APP_URL` = `http://localhost:3010`.
+3. **Base** : `apps/web/.env.local` → ce que `apps/web/.env.example` liste sans `#` (la liste des
+   variables de l'app, écrite depuis `lib/env-schema.ts` ; le build et le serveur s'arrêtent sur une
+   variable absente en la nommant) : chaîne de la branche **dev**, `BETTER_AUTH_SECRET` et, module
+   site, `IP_HASH_SALT` (`openssl rand -hex 32` chacun), `BETTER_AUTH_URL` et `APP_URL` =
+   `http://localhost:3010`.
    `pnpm db:generate` (les migrations naissent dans le projet : elles dépendent des modules),
    puis `pnpm db:migrate` sur dev **et** sur production (chaîne passée sur la commande).
    `pnpm test` doit passer.
@@ -117,8 +120,9 @@ et RevenueCat » pour une app).
    (`vercel.json`). Variables de production sans les afficher (`vercel env add NOM production <
    <(commande)`) : `DATABASE_URL` (production), et selon les modules `BETTER_AUTH_SECRET`,
    `BETTER_AUTH_URL` et `APP_URL` (**le domaine public**, jamais `*.vercel.app` : piège « Better
-   Auth »), `RESEND_API_KEY`, `EMAIL_FROM`, `CRON_SECRET`,
-   `REVENUECAT_SECRET_KEY`, `REVENUECAT_WEBHOOK_SECRET`, et si la connexion Google est voulue
+   Auth »), `RESEND_API_KEY`, `EMAIL_FROM`, `IP_HASH_SALT` (module site, sa propre valeur), `CRON_SECRET`,
+   `REVENUECAT_SECRET_KEY`, `REVENUECAT_WEBHOOK_SECRET` (`.env.example` : tout ce qui est sans `#` ou
+   marqué « Required in production », sinon le build de production s'arrête), et si la connexion Google est voulue
    `AUTH_GOOGLE_ID` et `AUTH_GOOGLE_SECRET` (piège « Better Auth »), plus `AUTH_ALLOWED_EMAIL`
    (adresses séparées par des virgules) pour un outil privé à une personne. Un secret que je génère et que j'aurai à
    réutiliser depuis le Mac (`CRON_SECRET` pour appeler une route de maintenance…) va **d'abord dans
