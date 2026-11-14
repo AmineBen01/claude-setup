@@ -870,4 +870,16 @@ pas en bash (guillemets).
 - **Contrôle au navigateur sur plusieurs tailles** : Better Auth limite les connexions ; se
   connecter une fois et réutiliser `storageState`. Après avoir supprimé une page essayée sous
   `next dev`, `next build` échoue sur `.next/dev/types` : `rm -rf .next/dev`.
+- **Un changement d'état est un seul UPDATE conditionnel** (`where status in (…)`, `returning`), jamais
+  lire puis écrire ; « un seul par créneau » se garantit par un index unique partiel (Studio, B9).
+- **Créer quelque chose chez un service externe** : écrire une clé d'idempotence sur la ligne avant
+  l'appel, l'envoyer (`Idempotency-Key`), ne la réutiliser que pour un contenu identique.
+- **Une route de cron** : chaque étape dans son propre try (`runSteps`), `maxDuration`, une ligne JSON
+  par passage ; une étape en échec répond 500 en la nommant, après que les autres ont tourné.
+- **Chaque composant serveur qui lit des données appelle `requireOwner()`** ; les exclusions du
+  matcher du proxy sont ancrées (`dossier/`, `fichier$`).
+- **PGlite + les migrations de l'app** : des tests en vrai SQL, en mémoire, sans base à créer.
+- **Verrou pip avec hashes** : le compiler sur la même image que le job (`uv pip compile
+  --index-strategy unsafe-best-match`). **macOS n'a pas de commande `timeout`** : une boucle
+  d'attente qui s'en sert ne vérifie rien.
 
