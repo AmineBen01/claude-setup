@@ -65,6 +65,7 @@
       "Bash(vercel rm:*)",
       "Bash(vercel project rm:*)",
       "Bash(vercel project remove:*)",
+      "Bash(vercel env rm:*)",
       "Bash(vercel domains rm:*)",
       "mcp__claude_ai_Neon__delete_project",
       "mcp__claude_ai_Neon__delete_branch",
