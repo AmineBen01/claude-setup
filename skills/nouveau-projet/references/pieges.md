@@ -772,3 +772,42 @@ pas en bash (guillemets).
   au niveau du module, un navigateur pour plusieurs pages, et réessayer une fois sur ETXTBSY. Plus
   largement : une erreur passagère (réseau, délai, 5xx) se réessaie toute seule avant de prévenir
   (Studio, `lib/render/shoot.ts` et `lib/retry.ts`, 13 novembre 2026).
+
+## Le starter et ses copies (revue du 13 novembre 2026)
+
+- **Un correctif de sécurité fait dans une app ne voyage pas tout seul.** Le contrôle d'origine
+  d'Ironmile (28 octobre) manquait encore au starter et à Apex seize jours après. La liste des
+  commits du starter ne le montrait pas : `check-drift.sh` compare maintenant **le contenu** des
+  fichiers qu'une app ne modifie pas (`SAME` dans `starter/scripts/drift.mjs` : `lib/session.ts`,
+  `lib/http.ts`, `lib/env.ts`, `db/index.ts`…) avec ce que le starter produit pour elle ;
+  `node scripts/drift.mjs ../<app> --show <chemin>` donne le fichier à reprendre. Ce qu'une app
+  ajoute à ces fichiers va dans un fichier à elle (une garde à jeton : sa fonction, bâtie sur
+  `bearerIs` de `lib/session.ts`), sinon la ligne de dérive revient à chaque session.
+- **Session par cookie : une écriture venue d'un autre site est refusée (403), en plus de
+  `SameSite=Lax`.** `requireUserId` compare l'en-tête `Origin` d'une requête non GET à l'adresse de
+  l'app (celle de la requête, `BETTER_AUTH_URL`, `APP_URL`, le schéma de l'app native) ; sans
+  `Origin` (app native, script) ça passe. Un test l'envoie avec `https://evil.example`, `null` et
+  `<site>.evil.example`, puis vérifie que rien n'a changé. Une nouvelle adresse publique (domaine
+  ajouté) entre dans `APP_URL`, sinon ses formulaires répondent 403.
+- **Variables d'environnement : déclarées, lues une fois, nommées quand elles manquent.**
+  `lib/env-schema.ts` (un schéma zod par module), `lib/env.ts` lu à l'import ; le code lit
+  `env.NOM`, jamais `process.env.NOM`. Trois pièges rencontrés en l'écrivant :
+  - `instrumentation.ts` (`register`) arrête un serveur qui démarre, **mais ne tourne pas au
+    build** : pour arrêter le build, `import "@/lib/env"` dans `app/layout.tsx`. Il faut les deux.
+  - « exigé en production » se lit sur `VERCEL_ENV === "production"`, pas sur `NODE_ENV` (tout
+    `next build` local est en `production`) ni sur `VERCEL` (`vercel env pull` l'écrit dans
+    `.env.local`) ; et les variables ne sont posées que pour l'environnement Production.
+  - Un test qui pose une variable en tête de fichier (`process.env.X ??= …`) arrive trop tard dès
+    que l'environnement est lu à l'import (les `import` sont remontés) : `vi.hoisted(() => { … })`.
+- **`z.url()` accepte `localhost:3010`** (une URL de schéma « localhost ») : pour une adresse de
+  site, `z.url({ protocol: /^https?$/ })`.
+- **Un sel par usage** : le hachage d'IP de la liste d'attente prenait `BETTER_AUTH_SECRET ?? ""`,
+  donc aucun sel dans une app sans comptes (un SHA-256 d'IPv4 se retrouve par énumération). Sa
+  propre variable, obligatoire (`IP_HASH_SALT`).
+- **Un nom en deux mots donne un slug à tiret, qui n'est pas un identifiant** : `acme_annual` en
+  clé d'objet nue devenait `two-words_annual` (erreur de syntaxe). Dans le starter, tout ce qui
+  porte `acme` dans du code est une chaîne entre guillemets ; `check:modules` génère une app
+  « Two Words ». `new-app.mjs` refuse un nom avec apostrophe ou guillemet (il atterrit dans du
+  TypeScript, du JSON, du YAML et du shell) : l'écrire sans, puis le corriger à la main là où on le
+  lit. Il refuse aussi un starter avec des changements non commités (`.starter-version` nommerait un
+  commit qui ne contient pas les fichiers de l'app).
