@@ -927,4 +927,8 @@ pas en bash (guillemets).
   `fetch` toute adresse qui n'est pas la cible.
 - **Metro (Expo, monorepo) sert des bundles périmés** après l'ajout d'un fichier : `--clear` avant
   un contrôle sur simulateur.
+- **Le curseur d'une copie incrémentale** ne s'enregistre qu'en cas de succès (dans la ligne du
+  passage lui-même) et se borne à l'heure de début lue sur l'horloge de la source, moins un
+  recouvrement : sinon un rattrapage où toutes les lignes portent le même tampon est relu en entier
+  à chaque passage (HQ, 14 novembre 2026).
 
