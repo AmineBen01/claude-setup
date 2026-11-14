@@ -9,8 +9,11 @@
 #     description still exists.
 #  2. No memory (~/.claude/projects/*/memory/*.md) is past its `expires:` date: what it describes
 #     may have changed, so the session re-checks it, then updates it (new date) or deletes it.
-#  3. In an app made from the starter (a `.starter-version` file at its root, the starter commit it
-#     has caught up with): the starter's code changes since then.
+#  3. In an app made from the starter (a `.starter-version` file at its root: the starter commit it
+#     has caught up with, then optional `key: value` lines such as Ironmile's `map: apps/web=apps/api`):
+#     the files an app never edits are compared by content with what the starter makes for that app
+#     today, and everything else is the list of starter commits since that version, whole. The
+#     comparison itself is the starter's `scripts/drift.mjs` (it holds the list of files).
 #  4. No project in the map is past its end of use (`fin d'usage : AAAA-MM-JJ` on its line).
 #  5. The setup's auto-push didn't refuse a secret, and its last push didn't fail.
 # A new check goes here, with a line above saying what it compares.
@@ -48,17 +51,26 @@ for f in "$HOME"/.claude/projects/*/memory/*.md; do
   [ -n "$exp" ] && [[ "$exp" < "$today" ]] && problems+=("La mémoire $(basename "$f") a expiré le $exp : revérifie ce qu'elle dit, puis mets-la à jour (nouvelle date \`expires\`) ou supprime-la (et sa ligne dans MEMORY.md).")
 done
 
-# 3. Starter changes the app in this session hasn't reviewed yet.
+# 3. What the app of this session no longer has in common with the starter.
 starter="$projects/starter"
 dir="$cwd"
 while [ -n "$dir" ] && [ "$dir" != "/" ] && [ "$dir" != "$projects" ] && [ ! -f "$dir/.starter-version" ]; do dir=$(dirname "$dir"); done
-if [ -f "$dir/.starter-version" ] && [ "$dir" != "$starter" ] && [ -d "$starter/.git" ]; then
-  since=$(tr -d '[:space:]' <"$dir/.starter-version")
-  changes=$(git -C "$starter" log --format='  %h %s' "$since..HEAD" -- . ':!README.md' ':!CLAUDE.md' ':!CLAUDE.template.md' ':!claude-template' ':!scripts/new-app.mjs' ':!scripts/check-modules.mjs' 2>/dev/null | cut -c1-150)
-  if [ -n "$changes" ]; then
-    problems+=("Le starter a changé depuis la version que $(basename "$dir") a rattrapée (.starter-version) :
-$(head -12 <<<"$changes")
-  Propose à Amine ceux qui valent pour cette app (en une ligne chacun), applique ce qu'il accepte, puis écris $(git -C "$starter" rev-parse --short HEAD) (le commit revu) dans .starter-version.")
+if [ -f "$dir/.starter-version" ] && [ "$dir" != "$starter" ] && [ -f "$starter/scripts/drift.mjs" ]; then
+  app=$(basename "$dir")
+  if ! command -v node >/dev/null; then
+    problems+=("Impossible de comparer $app au starter : \`node\` n'est pas dans le PATH de ce hook.")
+  else
+    drift=$(node "$starter/scripts/drift.mjs" "$dir" 2>&1)
+    files=$(sed -nE 's/^differs (.*)/  \1 (contenu différent)/p; s/^missing (.*)/  \1 (absent)/p' <<<"$drift")
+    commits=$(sed -nE 's/^commit +(.*)/  \1/p' <<<"$drift" | cut -c1-150)
+    other=$(grep -vE '^(differs|missing|commit) ' <<<"$drift" | sed -E 's/^problem //')
+    [ -n "$files" ] && problems+=("$app s'écarte du starter sur des fichiers qu'une app ne modifie pas (comparés à ce que le starter produit aujourd'hui pour elle) :
+$files
+  Reprends chacun tel que le starter le donne (\`node scripts/drift.mjs ../$app --show <chemin>\` dans ~/Projects/starter) ; ce que l'app y avait ajouté va dans un fichier à elle. Si c'est le starter qui a tort, corrige d'abord le starter.")
+    [ -n "$commits" ] && problems+=("Le starter a changé depuis la version que $app a rattrapée (.starter-version), en dehors de ces fichiers :
+$commits
+  Propose à Amine ceux qui valent pour cette app (en une ligne chacun), applique ce qu'il accepte, puis écris $(git -C "$starter" rev-parse --short HEAD) (le commit revu) sur la première ligne de .starter-version.")
+    [ -n "$other" ] && problems+=("La comparaison de $app avec le starter n'a pas pu se faire : $other")
   fi
 fi
 
