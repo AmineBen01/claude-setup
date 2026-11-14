@@ -918,4 +918,13 @@ pas en bash (guillemets).
   `deno.json` par dossier ne vaut que si les tests partent de ce dossier (ou `--config`). Un
   `package.json` dans un dossier parent (le dossier personnel) le bascule en mode node_modules sans
   rien dire et casse les imports `npm:`.
+- **Une file hors ligne garde visibles les écritures refusées** (une liste à part, « Réessayer » /
+  « Abandonner »), écrit son fichier en deux copies tour à tour et marque chaque écriture de son
+  compte (Ironmile, B7).
+- **Simuler le chevauchement de deux passages d'un cron** : simuler la lecture périmée (mock du
+  « est-ce dû ? »), pas une course entre deux vrais appels.
+- **Remplacer `fetch` dans vitest casse le pilote HTTP de Neon** : laisser passer vers le vrai
+  `fetch` toute adresse qui n'est pas la cible.
+- **Metro (Expo, monorepo) sert des bundles périmés** après l'ajout d'un fichier : `--clear` avant
+  un contrôle sur simulateur.
 
