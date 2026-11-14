@@ -945,4 +945,12 @@ pas en bash (guillemets).
 - **Un workflow déclenché par `push` exécute le YAML de la branche poussée** : un workflow de garde
   copie son vérificateur depuis `main` avant de sortir la branche. Un push fait avec `GITHUB_TOKEN`
   déclenche bien le déploiement de production de Vercel ; une avance rapide garde l'auteur humain.
+- **View transitions** : un élément nommé se peint au-dessus des barres collantes ou fixes ; donner
+  au cadre (en-tête, onglets) son propre `view-transition-name`, `z-index: 1` sur son groupe et
+  l'ancienne image cachée. Pour ouvrir ou replier, pas de fondu croisé : ancienne image `display:
+  none`, nouvelle `height: auto`, `overflow: hidden` sur la paire.
+- **Une capture `fullPage` de Playwright dessine les barres fixes au milieu de la page** : juger une
+  mise en page sur des captures de la fenêtre.
+- **Un travail planifié « le jour choisi »** veut dire « à partir de l'heure choisie, jusqu'à ce que
+  ce soit fait », avec rattrapage, jamais « ce jour de la semaine seulement ».
 
