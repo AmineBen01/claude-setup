@@ -882,4 +882,13 @@ pas en bash (guillemets).
 - **Verrou pip avec hashes** : le compiler sur la même image que le job (`uv pip compile
   --index-strategy unsafe-best-match`). **macOS n'a pas de commande `timeout`** : une boucle
   d'attente qui s'en sert ne vérifie rien.
+- **Le fondu entre écrans sous `cacheComponents`** : le `ScreenMotion` du starter lit `usePathname` /
+  `useSearchParams` dans un layout, ce qui fait échouer le build sur les routes dynamiques (« URL data
+  outside Suspense »). Dans une app à `cacheComponents` (HQ), un `template.tsx` par niveau : il se
+  remonte à chaque changement de segment, sans lire l'URL.
+- **Le dernier élément d'une liste qui s'en va** n'a pas d'animation de sortie si la liste est
+  remplacée par l'état vide : garder le `<ul>` monté (`empty:hidden`) et rendre l'état vide à côté.
+- **Une migration Drizzle en production sans chaîne à l'écran** : par le MCP Neon, en une transaction,
+  avec la ligne de `drizzle.__drizzle_migrations` (hash = sha256 du fichier .sql, `created_at` = le
+  `when` du journal). Depuis B3 (14 novembre 2026), le build de production migre lui-même.
 
