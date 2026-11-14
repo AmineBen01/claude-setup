@@ -953,4 +953,10 @@ pas en bash (guillemets).
   mise en page sur des captures de la fenêtre.
 - **Un travail planifié « le jour choisi »** veut dire « à partir de l'heure choisie, jusqu'à ce que
   ce soit fait », avec rattrapage, jamais « ce jour de la semaine seulement ».
+- **Le secret d'un webhook va dans un en-tête ou un jeton signé, jamais dans l'URL** : les pages de
+  réglages et les journaux de requêtes gardent les URL. Pour changer l'authentification d'un webhook
+  sans rien perdre : accepter les deux preuves, journaliser laquelle a porté chaque requête, changer
+  l'émetteur, retirer l'ancienne dans une étape séparée. Pub/Sub OIDC : toujours une audience
+  explicite (par défaut c'est l'URL avec sa requête) ; garder les clés JWKS selon `Cache-Control`
+  et limiter le rechargement qu'un `kid` inconnu déclenche.
 
