@@ -891,4 +891,18 @@ pas en bash (guillemets).
 - **Une migration Drizzle en production sans chaîne à l'écran** : par le MCP Neon, en une transaction,
   avec la ligne de `drizzle.__drizzle_migrations` (hash = sha256 du fichier .sql, `created_at` = le
   `when` du journal). Depuis B3 (14 novembre 2026), le build de production migre lui-même.
+- **« Ce qui a changé depuis »** se lit sur une colonne posée par le serveur (trigger, heure de la
+  transaction, à la milliseconde), jamais sur l'`updated_at` de l'appareil. Le lecteur garde un
+  recouvrement ; les suppressions ne laissent pas de trace : garder un passage complet (Qiyam, B5).
+- **Ajouter une colonne à une grosse table** : un défaut constant ou `now()` ne réécrit pas la table
+  (le prouver par le relfilenode) ; `lock_timeout`, instructions rejouables, index `concurrently`
+  dans leur propre fichier.
+- **Un lanceur de tests SQL qui ne prend aucune adresse de base** (il monte son Postgres jetable et
+  rejoue les migrations) ne peut pas toucher la production.
+- **Une limite de taille vient du pire cas du contrat**, pas des données du jour ; un plafond est un
+  débit (par heure), pour qu'un refus soit rejoué et non perdu.
+- **Une règle recopiée dans un autre repo dérive** (HQ recopiait la règle Premium de Qiyam) : la
+  lister à côté de la règle d'origine, ou lire la source.
+- **Un hook pre-push qui lance les tests iOS** démarre un simulateur : le dire à un agent qui ne
+  doit pas y toucher.
 
