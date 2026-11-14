@@ -811,3 +811,33 @@ pas en bash (guillemets).
   TypeScript, du JSON, du YAML et du shell) : l'écrire sans, puis le corriger à la main là où on le
   lit. Il refuse aussi un starter avec des changements non commités (`.starter-version` nommerait un
   commit qui ne contient pas les fichiers de l'app).
+
+## Tests et CI : chaque push vérifié (B3, 14 novembre 2026)
+
+- **Deux sortes de tests, dites par le nom** : `*.db.test.ts` touche la base (branche Neon dev,
+  `test/db-guard.ts` en `setupFiles` du projet vitest « db ») ; tout autre test est pur et reçoit
+  une adresse qui ne mène nulle part (`test/no-database.ts`, hôte `.invalid`). Le build de Vercel
+  lance les purs (`pnpm test:pure`, `buildCommand` de `vercel.json`) alors que `DATABASE_URL` y est
+  celle de production : un test de base mal nommé y échoue aussitôt au lieu d'écrire en production.
+  Un garde importé fichier par fichier s'oublie : `setupFiles`.
+- **`buildCommand` : `pnpm test:pure && if [ "$VERCEL_ENV" = production ]; then pnpm db:migrate;
+  fi && pnpm build`.** Tests d'abord (un test rouge ne migre rien), migration ensuite (une migration
+  ratée arrête le build), `next build` en dernier ; l'ancienne version reste en ligne dans les deux
+  cas. Les migrations restent additives : l'ancienne version tourne sur le nouveau schéma pendant
+  le build. Plus de « migrer avant de pousser ».
+- **Vérifier l'`Install Command` du projet Vercel** : amineben et qiyam-website avaient `npm
+  install` (vieux réglage), qui ignore `pnpm-lock.yaml` : la production tournait sur d'autres
+  versions que celles testées, et l'installation prenait 54 s au lieu de 7. `"installCommand":
+  "pnpm install --frozen-lockfile"` dans `vercel.json` l'emporte sur le réglage.
+- **`engines.node` dans `package.json` l'emporte sur la version Node du projet Vercel** (le build
+  l'écrit en avertissement, et vide son cache une fois) ; `actions/setup-node` le lit avec
+  `node-version-file: package.json`. Une seule source pour le Mac, la CI et Vercel.
+- **L'option `--exclude` de vitest ne descend pas dans `test.projects`** : pour écarter un test d'un
+  projet depuis la ligne de commande, `-t '^(?!nom du describe )'`.
+- **Une CI avec Prettier échoue sur un test écrit sans le format** : un test rouge « exprès » pour
+  prouver la CI doit passer le lint, sinon c'est le lint qui rougit, pas le test.
+- **Dependabot tourne sur les minutes d'Actions** (les « dynamic » runs à chaque push qui touche un
+  manifeste) : à compter avec les 2 000 minutes partagées. Une passe de CI : ~1 min facturée pour un
+  site sans base, ~2 min pour le starter (expo + base dev) ; le job d'audit du lundi ~1 min.
+- **Un test qui lit un repo voisin** (`../studio/docs/blog-fixtures`) est sauté sur Vercel et en CI
+  (un seul repo cloné) : il ne protège que les sessions du Mac.
