@@ -848,6 +848,12 @@ pas en bash (guillemets).
   MCP, oauth-provider) : ses clés de signature sont dans la table `jwks` de la branche, chiffrées
   avec ce secret ; avec une valeur jetable, le point de jeton répond 500. Secret de dépôt
   `DEV_BETTER_AUTH_SECRET` (la valeur de `.env.local`, jamais celle de production).
+- **Le build de Vercel tient toutes les chaînes de connexion de production**, pas seulement
+  `DATABASE_URL` (HQ : la lecture de Qiyam, le rôle qui écrit ses droits, la lecture d'Ironmile) :
+  `test/no-database.ts` remplace toute valeur `postgres://` de l'environnement avant un test pur.
+- **Une branche Neon hérite des rôles de son parent avec les mêmes mots de passe** : l'URL de la
+  branche dev mise en secret GitHub porte très probablement le mot de passe de production (seul
+  l'hôte change). Mieux : un rôle créé sur la branche dev seulement, pour la CI.
 - **Un test qui lit un repo voisin** (`../studio/docs/blog-fixtures`) est sauté sur Vercel et en CI
   (un seul repo cloné) : il ne protège que les sessions du Mac.
 
