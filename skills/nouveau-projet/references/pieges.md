@@ -931,4 +931,12 @@ pas en bash (guillemets).
   passage lui-même) et se borne à l'heure de début lue sur l'horloge de la source, moins un
   recouvrement : sinon un rattrapage où toutes les lignes portent le même tampon est relu en entier
   à chaque passage (HQ, 14 novembre 2026).
+- **La boîte d'un `claude -p` sans surveillance, complète** : `--permission-mode dontAsk
+  --setting-sources "" --disable-slash-commands --tools <liste>` ; une règle Bash exacte doit
+  correspondre aux arguments que les instructions passent (tester les commandes du runbook contre
+  les règles). Jamais de `git` ni de lanceur de tests dans la boîte si l'agent peut écrire du code
+  que ces commandes exécutent : le script les lance après lui, sur des fichiers gardés (pose run).
+- **Un workflow déclenché par `push` exécute le YAML de la branche poussée** : un workflow de garde
+  copie son vérificateur depuis `main` avant de sortir la branche. Un push fait avec `GITHUB_TOKEN`
+  déclenche bien le déploiement de production de Vercel ; une avance rapide garde l'auteur humain.
 
